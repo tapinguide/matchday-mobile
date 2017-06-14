@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape-grn</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="26.6223768%" y1="1714.28571%" x2="50%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#18EFC6" offset="0%"></stop>
+            <stop stop-color="#18D0EF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="layout3-copy-3" transform="translate(-345.000000, -672.000000)" fill="url(#linearGradient-1)">
+            <polygon id="Shape-grn" points="355.6 672 351 676.6 346.4 672 345 673.4 351 679.4 357 673.4"></polygon>
+        </g>
+    </g>
+</svg>
