@@ -1,5 +1,9 @@
 {
   "expo": {
-    "sdkVersion": "17.0.0"
+    "sdkVersion": "17.0.0",
+    "name": "Tapin Guide",
+    "slug": "tapin-guide",
+    "description": "A short description of what your app is and why it is great.",
+    "icon": "./assets/images/logo.png"
   }
 }

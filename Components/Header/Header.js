@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet, Text } from 'react-native';
 
 export default class Header extends Component{
     render(){
         return (
-                <Image 
-                    style={styles.logo}
-                    source={require('./Images/logo.png')} />
+            <View style={styles.headerContainer}>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-  logo: {
-      width: 125,
-      height: 40
-  }
+    headerContainer: {
+        height:20,
+        
+        flexDirection: 'row',
+    }
 });
 
