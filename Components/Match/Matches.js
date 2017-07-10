@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View } from 'react-native';
+import { ActivityIndicator, ListView, Text, View, NetInfo } from 'react-native';
 
 import Match from './Match';
 
@@ -16,7 +16,6 @@ export default class Matches extends Component {
       () => this.tick(),
       5000
     );
-    this.tick();
   }
   
   componentWillUnmount() {

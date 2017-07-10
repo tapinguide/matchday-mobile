@@ -3,11 +3,8 @@ import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView } f
 import HTMLView from 'react-native-htmlview';
 import Panel from '../Panel/Panel';
 import Event from '../Event/Event';
-
 import moment from 'moment';
-
 import seconds from './images/secs.gif';
-
 
 export default class InProgressMatch extends Component {
   render() {

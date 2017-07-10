@@ -1,9 +1,17 @@
 {
   "expo": {
     "sdkVersion": "17.0.0",
-    "name": "Tapin Guide",
-    "slug": "tapin-guide",
-    "description": "A short description of what your app is and why it is great.",
-    "icon": "./assets/images/logo.png"
+    "name": "Tap In Guide",
+    "slug": "tap-in-guide",
+    "description": "The Vital Matches.",
+    "icon": "./assets/images/logo.png",
+    "version": ".1.0",
+    "ios": {
+      "bundleIdentifier": "com.tapinguide.matchday"
+    },
+    "android": {
+      "package": "com.tapinguide.matchday"
+    },
+    "orientation": "portrait"
   }
 }

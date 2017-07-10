@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
-
+import Event from '../Event/Event';
+import Panel from '../Panel/Panel';
 
 export default class CompletedMatch extends Component {
   render() {
@@ -19,6 +20,18 @@ export default class CompletedMatch extends Component {
     else if(match.postMatchDetails){
       postMatchDetails = match.postMatchDetails
     }
+
+    var events = [];
+    match.events.forEach(function(event, index) {
+      if(index > 0){
+        events.push(<View key={index + '-' + event.id}><View style={{width: 3,height: 22, marginRight: 'auto', marginLeft: 'auto', backgroundColor: '#bdbdbd'}} key={event.id + index}></View><Event event={event} key={event.id} /></View>);
+      }
+      else
+      {
+        events.push(<Event event={event} key={event.id} />);
+      }
+            
+    });
 
     //For some reason the HTMLView component needs to have the content wrapped otherwise it will add a line break for
     //each tag.
@@ -60,7 +73,7 @@ export default class CompletedMatch extends Component {
                   }}>{match.homeClubScore}</Text>
                   <Image 
                     style={{width: 40, height: 40}}
-                    source={{uri: 'http://matchday.tapinguide.com/media/crests/ars.png'}} />
+                    source={{uri: match.homeClub.crest}} />
                     <Text style={{
                         fontFamily: 'poppins-semi-bold', 
                         fontWeight: '600',
@@ -68,7 +81,7 @@ export default class CompletedMatch extends Component {
                       }}>FT</Text>
                   <Image 
                     style={{width: 40, height: 40}}
-                    source={{uri: 'http://matchday.tapinguide.com/media/crests/che.png'}} />
+                    source={{uri: match.visitorClub.crest}} />
                   <Text style={{
                         fontSize: 20,
                         fontWeight: '700',
@@ -80,11 +93,14 @@ export default class CompletedMatch extends Component {
                   flex:1,
                   alignItems:'center'
                   }}>
-                  <View style={{width:'84%', marginBottom:30}}>
+                  <View style={{width:'84%'}}>
                     <HTMLView
                       value={htmlContent} 
                       stylesheet={styles}
                       />
+                       <Panel title="" underlayColor="#f5f5f5">
+                        {events}
+                      </Panel>
                   </View>
                 </View>
           </View>

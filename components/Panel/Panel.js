@@ -31,7 +31,8 @@ export default class Panel extends Component{
         Animated.spring(    
             this.state.animation,
             {
-                toValue: finalValue
+                toValue: finalValue,
+                bounciness: 0
             }
         ).start(); 
     }
@@ -56,26 +57,22 @@ export default class Panel extends Component{
         }
 
         return ( 
-        
-            <Animated.View 
-                style={[styles.container,{height: this.state.animation}]}>
-                    <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
-                        <Text style={styles.title}>{this.state.title}</Text>
-                        <TouchableHighlight 
-                            style={styles.button} 
-                            onPress={this.toggle.bind(this)}
-                            underlayColor={underlayColor}>
-                            <Image
-                                style={styles.buttonImage}
-                                source={icon}
-                            ></Image>
-                        </TouchableHighlight>
+            <Animated.View style={[styles.container,{height: this.state.animation}]}>
+                <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
+                    <TouchableHighlight hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
+                        style={styles.button} 
+                        onPress={this.toggle.bind(this)}
+                        underlayColor={underlayColor}>
+                        <Image
+                            style={styles.buttonImage}
+                            source={icon}>
+                        </Image>
+                    </TouchableHighlight>
                 </View>
                 
                 <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}> 
                     {this.props.children}
                 </View>
-
             </Animated.View>
         );
     }
@@ -85,8 +82,13 @@ var styles = StyleSheet.create({
     container   : {
         overflow:'hidden'
     },
+    button: {
+        paddingTop:15,
+        paddingBottom:10
+    },
     titleContainer : {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     title       : {
         flex    : 1,
