@@ -16,6 +16,8 @@ export default class Matches extends Component {
       () => this.tick(),
       5000
     );
+
+    this.tick();
   }
   
   componentWillUnmount() {
@@ -24,9 +26,7 @@ export default class Matches extends Component {
 
 tick() {
    var _this = this;
-
-   //var matchesUrl = 'http://localhost:8000/api/activematches/?format=json';
-    var matchesUrl = 'http://matchday.tapinguide.com/api/activematches';
+   var matchesUrl = 'http://matchday.tapinguide.com/api/activematches';
     return fetch(matchesUrl)
       .then((response) => response.json())
       .then((responseJson) => {

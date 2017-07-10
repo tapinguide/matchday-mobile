@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
 import Header from './components/Header/Header';
 import Matches from './components/Match/Matches';
 import { Font } from 'expo';
+import { ConnectivityRenderer } from 'react-native-offline';
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -20,7 +21,11 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Header />  
         <ScrollView>
-          <Matches />
+           <ConnectivityRenderer>
+            {isConnected => (isConnected ? (<Matches />) 
+            : (<Text>Downloading images is disabled since you are offline</Text>)
+            )}
+          </ConnectivityRenderer>
         </ScrollView>
       </View>
     );
