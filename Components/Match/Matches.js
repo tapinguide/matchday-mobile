@@ -26,7 +26,7 @@ export default class Matches extends Component {
 
 tick() {
    var _this = this;
-   var matchesUrl = 'http://matchday.tapinguide.com/api/activematches';
+   var matchesUrl = 'https://www.tapinguide.com/api/activematches';
     return fetch(matchesUrl)
       .then((response) => response.json())
       .then((responseJson) => {
