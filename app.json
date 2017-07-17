@@ -3,7 +3,7 @@
     "sdkVersion": "17.0.0",
     "name": "Tap In Guide",
     "slug": "tap-in-guide",
-    "description": "The Vital Matches.",
+    "description": "Tap In is a simple dashboard guide to world football’s most essential matches. All the daily info you need to know to stay on top of the beautiful game.",
     "icon": "./assets/images/logo.png",
     "version": ".1.0",
     "ios": {

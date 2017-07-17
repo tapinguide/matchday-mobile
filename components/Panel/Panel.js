@@ -64,7 +64,6 @@ export default class Panel extends Component{
                         onPress={this.toggle.bind(this)}
                         underlayColor={underlayColor}>
                         <Image
-                            style={styles.buttonImage}
                             source={icon}>
                         </Image>
                     </TouchableHighlight>
