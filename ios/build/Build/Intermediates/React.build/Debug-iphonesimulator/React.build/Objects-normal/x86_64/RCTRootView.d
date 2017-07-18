@@ -1,0 +1,34 @@
+dependencies: \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTRootView.m \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTRootView.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTRootViewDelegate.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTRootViewInternal.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTKeyCommands.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTTouchHandler.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Modules/RCTUIManager.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/RCTViewManager.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/UIView+React.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/RCTComponent.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Views/RCTView.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Base/RCTRootContentView.h \
+  /Users/Alex/Sites/TapIn/matchdayclient-native/node_modules/react-native/React/Profiler/RCTProfile.h
