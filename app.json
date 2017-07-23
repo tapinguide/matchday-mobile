@@ -12,6 +12,10 @@
     "android": {
       "package": "com.tapinguide.matchday"
     },
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "loading": {
+      "icon": "./assets/images/logo.png",
+      "backgroundColor": "#f0f0f0"
+    }
   }
 }

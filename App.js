@@ -7,7 +7,6 @@ import NoData from './components/NoData/NoData';
 
 import { Font } from 'expo';
 import { ConnectivityRenderer } from 'react-native-offline';
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +23,11 @@ export default class App extends React.Component {
       'poppins-semi-bold': require('./assets/fonts/Poppins-SemiBold.ttf'),
     });
 
-    this.setState({ fontLoaded: true });
+   
+    this.setState(
+      { 
+        fontLoaded: true
+      });
   }
 
   render() {
