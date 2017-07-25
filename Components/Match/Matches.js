@@ -30,7 +30,7 @@ export default class Matches extends Component {
 
     this.updateListView();
   }
-  
+
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
@@ -63,7 +63,7 @@ updateListView() {
 
   _renderFooter(){
     var links = this.state.links;
-    
+
     var mustRead;
     var mustWatch;
     for(var i = 0, numResults = links.length; i < numResults; i++){
@@ -93,14 +93,9 @@ updateListView() {
     }
 
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
-        <ListView
-          initialListSize={10}
-          dataSource={this.state.matches}
-          renderRow={this._renderRow}
-          renderFooter={this._renderFooter.bind(this)}
-        />
-      </View>
+      <View style={{flex: 1, paddingTop: 20}}>
+          <Loading />
+        </View>
     );
   }
 }
