@@ -93,9 +93,14 @@ updateListView() {
     }
 
     return (
-      <View style={{flex: 1, paddingTop: 20}}>
-          <Loading />
-        </View>
+      <View style={{flex: 1, flexDirection: 'column'}}>
+        <ListView
+          initialListSize={10}
+          dataSource={this.state.matches}
+          renderRow={this._renderRow}
+          renderFooter={this._renderFooter.bind(this)}
+        />
+      </View>
     );
   }
 }
