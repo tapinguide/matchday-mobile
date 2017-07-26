@@ -30,7 +30,7 @@ export default class Matches extends Component {
 
     this.updateListView();
   }
-  
+
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
@@ -63,7 +63,7 @@ updateListView() {
 
   _renderFooter(){
     var links = this.state.links;
-    
+
     var mustRead;
     var mustWatch;
     for(var i = 0, numResults = links.length; i < numResults; i++){
