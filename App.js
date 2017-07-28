@@ -6,7 +6,7 @@ import Matches from './components/Match/Matches';
 import NoData from './components/NoData/NoData';
 
 import { Font } from 'expo';
-import { ConnectivityRenderer } from 'react-native-offline';
+//import { ConnectivityRenderer } from 'react-native-offline';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -38,13 +38,7 @@ export default class App extends React.Component {
           <View style={styles.container}>
         <Header />  
         <ScrollView>
-           <ConnectivityRenderer>
-            {isConnected => (isConnected ? (
               <Matches />
-              ) 
-            : (<NoData />)
-            )}
-          </ConnectivityRenderer>
         </ScrollView>
       </View>
         ) : null
