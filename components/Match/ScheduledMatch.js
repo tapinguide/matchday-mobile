@@ -5,8 +5,9 @@ import moment from 'moment';
 
 export default class ScheduledMatch extends Component {
   render() {
-    
+
     var match = this.props.match;
+    var matchIndex = this.props.matchIndex;
     var preMatchDetails = match.preMatchDetails;
     var matchDate = moment.utc(match.matchTime).local().format('ddd M/D h:mma').toUpperCase();
 
@@ -14,11 +15,14 @@ export default class ScheduledMatch extends Component {
     return (
          <View style={styles.match}>
               <View style={styles.contentContainer}>
-                <Image source={require('./images/rectangle.png')} style={styles.numberbg}>
-                </Image>
+                <View style={styles.matchNumberContainer}>
+                  <Text style={styles.matchNumber}>{matchIndex}</Text>
+                  <Image source={require('./images/rectangle.png')} style={styles.numberbg}>
+                  </Image>
+                </View>
                 <View style={styles.crestContainer}>
                   <View style={styles.homeCrest}>
-                    <Image 
+                    <Image
                       style={{width: 40, height: 40}}
                       source={{uri: match.homeClub.crest }} />
                   </View>
@@ -26,7 +30,7 @@ export default class ScheduledMatch extends Component {
                       <Text style={styles.vs}>vs</Text>
                   </View>
                   <View styles={styles.awayCrest}>
-                    <Image 
+                    <Image
                       style={{width: 40, height: 40}}
                       source={{uri: match.visitorClub.crest}} />
                   </View>
@@ -65,12 +69,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20
   },
-  numberbg: {
-    height: 35,
-    width:32,
-    position: "absolute", 
-    top: 0, left: 0
-  },
   crestContainer: {
     flex: 1,
     flexDirection: 'column',
@@ -104,5 +102,23 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
     fontWeight: '300'
+  },
+  matchNumberContainer: {
+    top: -20
+  },
+  numberbg: {
+    height: 35,
+    width:32,
+    position: "absolute",
+    top: 0, left: 0,
+    zIndex: 1
+  },
+  matchNumber: {
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    color: '#FFFFFF',
+    fontWeight: '700',
+    position: 'absolute',
+    top: 3, left: 4,
+    zIndex: 2
   }
 })

@@ -8,14 +8,14 @@ import seconds from './images/secs.gif';
 
 export default class InProgressMatch extends Component {
   render() {
-    
     var match = this.props.match;
+    var matchIndex = this.props.matchIndex
     var sortedEvents = match.events.sort((a,b) => {
       return a.id - b.id
     }).reverse();
-    
+
     var secondsStyle = {height: 12, backgroundPosition: "center top", backgroundRepeat: "no-repeat", backgroundImage: "url(" + seconds + ")"};
-   
+
     var postMatchDetails = match.preMatchDetails;
     if(match.inMatchDetails){
       postMatchDetails = match.inMatchDetails;
@@ -33,31 +33,28 @@ export default class InProgressMatch extends Component {
       {
         events.push(<Event event={event} key={event.id} />);
       }
-            
+
     });
     //For some reason the HTMLView component needs to have the content wrapped otherwise it will add a line break for
     //each tag.
     var htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
     return (
-         <View style={{
-           flex: 1,
-          backgroundColor: '#fff',
-          paddingBottom: 0,
-          borderRightWidth:0,
-          borderRightColor: '#e7e7e7',
-          borderBottomWidth: 1,
-          borderBottomColor: '#e7e7e7',
-          borderLeftWidth: 0,
-          borderLeftColor: '#e7e7e7',
-         }}>
-                <Image 
-                  source={require('./images/rectangle.png')} 
-                  style={{
-                    height: 35,
-                    width:32,
-                    position: "absolute", 
-                    top: 0, left: 0
-                  }}/>
+      <View style={{
+        flex: 1,
+        backgroundColor: '#fff',
+        paddingBottom: 0,
+        borderRightWidth:0,
+        borderRightColor: '#e7e7e7',
+        borderBottomWidth: 1,
+        borderBottomColor: '#e7e7e7',
+        borderLeftWidth: 0,
+        borderLeftColor: '#e7e7e7',
+      }}>
+        <View style={styles.matchNumberContainer}>
+          <Text style={styles.matchNumber}>{matchIndex}</Text>
+          <Image source={require('./images/rectangle.png')} style={styles.numberbg}>
+          </Image>
+        </View>
                 <View style={{
                   flex: 1,
                   flexDirection: 'row',
@@ -66,14 +63,14 @@ export default class InProgressMatch extends Component {
                   paddingTop: 20,
                   paddingBottom:20,
                   paddingRight: 40,
-                  paddingLeft:40                  
+                  paddingLeft:40
                 }}>
                   <Text style={{
                         fontSize: 20,
                         fontWeight: '700',
                         fontFamily: 'poppins-semi-bold'
                   }}>{match.homeClubScore}</Text>
-                  <Image 
+                  <Image
                     style={{width: 40, height: 40}}
                     source={{uri: match.homeClub.crest}} />
                   <View style={{
@@ -82,7 +79,7 @@ export default class InProgressMatch extends Component {
                     <Text style={{fontFamily: 'poppins-regular', fontSize: 14}}>{match.timer}'</Text>
                     <Image source={seconds} style={{height:12, width:20}}/>
                   </View>
-                  <Image 
+                  <Image
                     style={{width: 40, height: 40}}
                     source={{uri: match.visitorClub.crest}} />
                   <Text style={{
@@ -98,7 +95,7 @@ export default class InProgressMatch extends Component {
                   }}>
                   <View style={{width:'84%'}}>
                     <HTMLView
-                      value={htmlContent} 
+                      value={htmlContent}
                       stylesheet={styles}
                       />
                       <Panel title="" underlayColor="#fff">
@@ -118,5 +115,23 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
     fontWeight: '300'
+  },
+  matchNumberContainer: {
+
+  },
+  numberbg: {
+    height: 35,
+    width:32,
+    position: "absolute",
+    top: 0, left: 0,
+    zIndex: 1
+  },
+  matchNumber: {
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    color: '#FFFFFF',
+    fontWeight: '700',
+    position: 'absolute',
+    top: 3, left: 4,
+    zIndex: 2
   }
 })
