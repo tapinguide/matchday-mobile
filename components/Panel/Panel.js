@@ -5,18 +5,30 @@ export default class Panel extends Component{
     constructor(props){
         super(props);
 
-        this.icons = { 
+        this.icons = {
             'up'    : require('./images/shapegreenup.png'),
             'down'  : require('./images/shapegreendown.png')
         };
 
         this.state = {
             title       : props.title,
-            expanded    : false,
+            expanded    : this.props.panelExpanded,
             animation   : new Animated.Value()
         };
 
         this.underlayColor = this.props.underlayColor;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let currentExpandedState = this.getExpandedState();
+
+        if (nextProps.expanded != currentExpandedState) {
+            this.toggle();
+        }
+    }
+
+    getExpandedState() {
+        return this.state.expanded;
     }
 
     toggle(){
@@ -24,17 +36,17 @@ export default class Panel extends Component{
             finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
 
         this.setState({
-            expanded : !this.state.expanded  
+            expanded : !this.state.expanded
         });
 
-        this.state.animation.setValue(initialValue); 
-        Animated.spring(    
+        this.state.animation.setValue(initialValue);
+        Animated.spring(
             this.state.animation,
             {
                 toValue: finalValue,
                 bounciness: 0
             }
-        ).start(); 
+        ).start();
     }
 
     _setMaxHeight(event){
@@ -53,14 +65,15 @@ export default class Panel extends Component{
         let icon = this.icons['down'];
         let underlayColor = this.underlayColor;
         if(this.state.expanded){
-            icon = this.icons['up']; 
+            icon = this.icons['up'];
         }
 
-        return ( 
+        return (
             <Animated.View style={[styles.container,{height: this.state.animation}]}>
                 <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
-                    <TouchableHighlight hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
-                        style={styles.button} 
+                    <TouchableHighlight
+                        hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
+                        style={styles.button}
                         onPress={this.toggle.bind(this)}
                         underlayColor={underlayColor}>
                         <Image
@@ -68,8 +81,8 @@ export default class Panel extends Component{
                         </Image>
                     </TouchableHighlight>
                 </View>
-                
-                <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}> 
+
+                <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}>
                     {this.props.children}
                 </View>
             </Animated.View>

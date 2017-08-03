@@ -11,7 +11,7 @@ export default class Match extends Component {
     var index = this.props.matchIndex;
 
     var returnMatch;
-    if(status === 'In Progress'){
+    if(status === 'Scheduled'){
         returnMatch = <InProgressMatch match={matchObject} key={matchObject.id} matchIndex={index} />
     }
     else if(status === 'Scheduled'){
