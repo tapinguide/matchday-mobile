@@ -4,7 +4,6 @@ import { ActivityIndicator, ListView, Text, View, NetInfo } from 'react-native';
 import Match from './Match';
 import Link from '../Link/Link';
 import Loading from '../Loading/Loading';
-import Footer from '../Footer/Footer';
 
 import mustReadIcon from '../Link/images/mustread.png';
 import mustWatchIcon from '../Link/images/mustwatch.png';
@@ -107,7 +106,6 @@ updateListView() {
           renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
           renderFooter={this._renderFooter.bind(this)}
         />
-        <Footer />
       </View>
     );
   }

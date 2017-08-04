@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
-import { Image, View, StyleSheet, Text, TouchableHighlight, Linking } from 'react-native';
+import {
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View
+} from 'react-native';
 
 import facebookLogo from './images/facebook-logo.png';
 import twitterLogo from './images/twitter-logo.png';
 
 class Footer extends Component{
+  constructor(props) {
+    super(props);
+  }
   handlePress(url){
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  }
+  handleAboutPress = () => {
+    console.log('social icon was clicked');
+    this.props.navigation.navigate('About');
   }
   render(){
 
     return (
       <View style={styles.footerContainer}>
-        <Text style={styles.footerLink}>
+
+        <Text
+          onPress={() => this.handleAboutPress()}
+          style={styles.footerLink}>
           About
         </Text>
         <Text

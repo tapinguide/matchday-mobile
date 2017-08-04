@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Text, View, Image, StyleSheet, } from 'react-native';
 
 import noconnection from './images/noconnection.png';
-import tapinlogo from '../../assets/images/logo_full.png';
+import tapinlogo from '../../../assets/images/logo_full.png';
 
 export default class NoData extends Component {
 
@@ -25,7 +25,7 @@ export default class NoData extends Component {
                         fontWeight: '600'
                     }}>No data, yo. Please check your Internet settings and try again. </Text>
                 </View>
-            </View> 
+            </View>
         );
        }
 }
