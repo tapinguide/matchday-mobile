@@ -8,19 +8,19 @@ export default class Match extends Component {
   render() {
     var matchObject = this.props.match;
     var status = matchObject.status.description;
-    var index = this.props.index;
+    var index = this.props.matchIndex;
 
     var returnMatch;
-    if(status === 'In Progress'){
+    if(status === 'andSelf()'){
         returnMatch = <InProgressMatch match={matchObject} key={matchObject.id} matchIndex={index} />
     }
-    else if(status === 'Scheduled'){
+    else if(status === 'andSelf()'){
         returnMatch = <ScheduledMatch match={matchObject} key={matchObject.id} matchIndex={index} />
     }
-    else if(status === 'FT'){
+    else if(status === 'Scheduled'){
         returnMatch = <CompletedMatch match={matchObject} key={matchObject.id} matchIndex={index} />
     }
-    
+
     return (
         <View>
          {returnMatch}

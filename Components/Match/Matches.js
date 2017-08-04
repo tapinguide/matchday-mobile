@@ -18,6 +18,7 @@ export default class Matches extends Component {
             rowHasChanged: (row1, row2) => row1 !== row2,
           }),
       matches: [],
+      matchIndex: 0,
       isLoading: true
     }
   }
@@ -40,7 +41,7 @@ updateListView() {
   MatchService.getMatches().then(function(matches){
     var ds = _this.state.dataSource.cloneWithRows(matches);
       _this.setState({
-        matches: ds,
+        matches: ds
       });
     }).then(()=>{
         MatchService.getLinks().then(function(links){
@@ -57,8 +58,13 @@ updateListView() {
         }).done();
   }
 
-  _renderRow(rowData){
-    return <Match match={rowData} key={rowData.id} matchIndex='1' />;
+  getMatchIndex() {
+    return this.state.matchIndex;
+  }
+
+  _renderRow(rowData, sectionID, rowID){
+    let index = parseInt(rowID) + 1;
+    return <Match match={rowData} key={rowData.id} matchIndex={index} />;
   }
 
   _renderFooter(){
@@ -97,7 +103,7 @@ updateListView() {
         <ListView
           initialListSize={10}
           dataSource={this.state.matches}
-          renderRow={this._renderRow}
+          renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
           renderFooter={this._renderFooter.bind(this)}
         />
       </View>
