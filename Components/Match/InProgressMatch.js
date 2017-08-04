@@ -15,7 +15,7 @@ export default class InProgressMatch extends Component {
       };
   }
   _onPressButton = () => {
-
+    console.log('panel expanded pre update: ', this.state.panelExpanded);
     this.setState(
       {
         panelExpanded: !this.state.panelExpanded

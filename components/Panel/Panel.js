@@ -22,7 +22,7 @@ export default class Panel extends Component{
     componentWillReceiveProps(nextProps) {
         let currentExpandedState = this.getExpandedState();
 
-        if (nextProps.expanded != currentExpandedState) {
+        if (nextProps.panelExpanded != currentExpandedState) {
             this.toggle();
         }
     }
@@ -71,15 +71,13 @@ export default class Panel extends Component{
         return (
             <Animated.View style={[styles.container,{height: this.state.animation}]}>
                 <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
-                    <TouchableHighlight
-                        hitSlop={{top: 20, bottom: 20, left: 50, right: 50}}
-                        style={styles.button}
-                        onPress={this.toggle.bind(this)}
+                    <View
+                        style={styles.toggleIcon}
                         underlayColor={underlayColor}>
                         <Image
                             source={icon}>
                         </Image>
-                    </TouchableHighlight>
+                    </View>
                 </View>
 
                 <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}>
@@ -94,7 +92,7 @@ var styles = StyleSheet.create({
     container   : {
         overflow:'hidden'
     },
-    button: {
+    toggleIcon: {
         paddingTop:15,
         paddingBottom:10
     },

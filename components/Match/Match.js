@@ -11,13 +11,13 @@ export default class Match extends Component {
     var index = this.props.matchIndex;
 
     var returnMatch;
-    if(status === 'Scheduled'){
+    if(status === 'andSelf()'){
         returnMatch = <InProgressMatch match={matchObject} key={matchObject.id} matchIndex={index} />
     }
-    else if(status === 'Scheduled'){
+    else if(status === 'andSelf()'){
         returnMatch = <ScheduledMatch match={matchObject} key={matchObject.id} matchIndex={index} />
     }
-    else if(status === 'FT'){
+    else if(status === 'Scheduled'){
         returnMatch = <CompletedMatch match={matchObject} key={matchObject.id} matchIndex={index} />
     }
 
