@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import { width, height, totalSize } from 'react-native-dimension';
+
 import Header from '../../components/Header/Header';
 
 import tapinLogo from './images/logo_full.png';
@@ -19,6 +21,7 @@ import clint from './images/clint.png';
 import curt from './images/curt.png';
 import mike from './images/mike.png';
 import exit from './images/exit.png';
+import twitterBtn from './images/twitter_button.png';
 
 
 export default class About extends React.Component {
@@ -82,27 +85,63 @@ export default class About extends React.Component {
                 source={curt}
                 style={styles.teamPhoto}
               />
-              <Text style={styles.paragraph}>
-                <Text style={styles.strong}>Curt Baker</Text> Defensive Midfielder. Strategist. Hoping for another Friendly Fires album.
-              </Text>
+              <View style={styles.teamMemberBio}>
+                <TouchableHighlight
+                  activeOpacity={0.9}
+                  underlayColor={'#FFFFFF'}
+                  onPress={() => this.handleLinkPress('https://twitter.com/curtyb')}
+                >
+                  <Image
+                    source={twitterBtn}
+                    style={styles.twitterBtn}
+                  />
+                </TouchableHighlight>
+                <Text style={styles.paragraph, styles.teamMemberBioText}>
+                  <Text style={styles.strong}>Curt Baker</Text> Defensive Midfielder. Strategist. Hoping for another Friendly Fires album.
+                </Text>
+              </View>
             </View>
             <View style={styles.teamMemberContainer}>
               <Image
                 source={mike}
                 style={styles.teamPhoto}
               />
-              <Text style={styles.paragraph}>
-                <Text style={styles.strong}>Mike Arney</Text> Design, UX and a bit of Front-end development. Nerd.. which is fine. Dad of Jámes.
-              </Text>
+              <View style={styles.teamMemberBio}>
+                <TouchableHighlight
+                  activeOpacity={0.9}
+                  underlayColor={'#FFFFFF'}
+                  onPress={() => this.handleLinkPress('https://twitter.com/mike_arney')}
+                >
+                  <Image
+                    source={twitterBtn}
+                    style={styles.twitterBtn}
+                  />
+                </TouchableHighlight>
+                <Text style={styles.paragraph, styles.teamMemberBioText}>
+                  <Text style={styles.strong}>Mike Arney</Text> Design, UX and a bit of Front-end development. Nerd.. which is fine. Dad of Jámes.
+                </Text>
+              </View>
             </View>
             <View style={styles.teamMemberContainer}>
               <Image
                 source={clint}
                 style={styles.teamPhoto}
               />
-              <Text style={styles.paragraph}>
-                <Text style={styles.strong}>Clint McMahon</Text>  Code, soccer, Seinfeld quotes, yadda yadda yadda.
-              </Text>
+              <View style={styles.teamMemberBio}>
+                <TouchableHighlight
+                  activeOpacity={0.9}
+                  underlayColor={'#FFFFFF'}
+                  onPress={() => this.handleLinkPress('https://twitter.com/minnepixel')}
+                >
+                  <Image
+                    source={twitterBtn}
+                    style={styles.twitterBtn}
+                  />
+                </TouchableHighlight>
+                <Text style={styles.paragraph, styles.teamMemberBioText}>
+                  <Text style={styles.strong}>Clint McMahon</Text>  Code, soccer, Seinfeld quotes, yadda yadda yadda.
+                </Text>
+              </View>
             </View>
             <Text style={styles.paragraph}>
               <Text
@@ -193,5 +232,19 @@ const styles = StyleSheet.create({
   },
   teamMemberContainer: {
     marginBottom: 30
+  },
+  teamMemberBio: {
+    flex: 1,
+    flexDirection: 'row',
+    width: width(100)
+  },
+  teamMemberBioText: {
+    width: 265
+  },
+  twitterBtn: {
+    height: 30,
+    width: 30,
+    marginRight: 15,
+    marginTop: 3
   }
 })
