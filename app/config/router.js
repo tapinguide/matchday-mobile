@@ -2,8 +2,8 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 // import { Icon } from 'react-native-elements';
 
-import Home from '../screens/Home';
-import About from '../screens/About';
+import Home from '../screens/home/Home';
+import About from '../screens/about/About';
 
 export const Root = StackNavigator({
   Home: {

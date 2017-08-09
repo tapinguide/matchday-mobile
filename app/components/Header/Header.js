@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
-import { Image, View, StyleSheet, Text } from 'react-native';
+import {
+  Image,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 
 class Header extends Component{
     render(){
         return (
-            <View style={styles.headerContainer}>
-            </View>
+          <View style={styles.statusBarContainer}>
+             <StatusBar barStyle="light-content"/>
+          </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    headerContainer: {
-        height:20,
-
-        flexDirection: 'row',
-    }
+  statusBarContainer: {
+    height:20,
+    backgroundColor: '#1B1E2C'
+  }
 });
 
 export default Header;

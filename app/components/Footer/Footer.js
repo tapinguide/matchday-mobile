@@ -33,7 +33,7 @@ class Footer extends Component{
         </Text>
         <View style={styles.socialIcons}>
           <TouchableHighlight
-            onPress={() => this.handlePress('https://facebook.com/')}
+            onPress={() => this.handlePress('https://www.facebook.com/tapindesign')}
             underlayColor='#F0F0F0'
           >
             <Image
@@ -42,7 +42,7 @@ class Footer extends Component{
             />
           </TouchableHighlight>
           <TouchableHighlight
-            onPress={() => this.handlePress('https://twitter.com/')}
+            onPress={() => this.handlePress('https://twitter.com/tapinguide')}
             underlayColor='#F0F0F0'
           >
             <Image
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 20,
+    paddingBottom: 20,
     paddingLeft: 30,
     paddingRight: 30
   },
@@ -78,13 +78,15 @@ const styles = StyleSheet.create({
   },
 
   socialIconFacebook: {
-    height: 35,
-    width: 35
+    height: 30,
+    width: 30
   },
 
   socialIconTwitter: {
-    height: 35,
-    width: 41.447
+    height: 24,
+    width: 28.420800004,
+    marginLeft: 15,
+    marginTop: 3
   }
 });
 

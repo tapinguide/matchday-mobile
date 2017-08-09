@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, ScrollView, Text, View, NetInfo } from 'react-native';
+import {
+  ActivityIndicator,
+  ListView,
+  NetInfo,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import Match from './Match';
 import Link from '../Link/Link';
 import Loading from '../Loading/Loading';
+import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 import mustReadIcon from '../Link/images/mustread.png';
@@ -94,12 +104,15 @@ updateListView() {
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
+          <StatusBar hidden={true} />
           <Loading />
         </View>
       );
     }
 
     return (
+      <View style={{flex: 1, flexDirection: 'column'}}>
+        <Header />
       <ScrollView style={{flex: 1, flexDirection: 'column'}}>
         <ListView
           initialListSize={10}
@@ -109,6 +122,14 @@ updateListView() {
         />
         <Footer navigation={this.props.navigation}/>
       </ScrollView>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+    statusBarContainer: {
+      height:20,
+      backgroundColor: '#1B1E2C'
+    }
+});
