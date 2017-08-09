@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions, Button, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, Button } from 'react-native';
 
 import Header from '../components/Header/Header';
 
@@ -23,10 +23,9 @@ export default class About extends React.Component {
     return (
 
       <View style={styles.container}>
-      <StatusBar
-           backgroundColor="blue"
-           barStyle="light-content"
-         />
+      <View style={styles.statusBar}>
+
+      </View>
       <Text>
         As football fanatics, we felt overwhelmed trying to keep up with the beautiful game. So, we created the latest version of Tap In, a soccer calendar with context to help fans easily get the scoop on what happened in the world’s biggest matches, what’s coming up, and why it all matters.
       </Text>
@@ -42,4 +41,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f0f0'  },
+  statusBar: {
+    height: 20,
+    backgroundColor: "#f0f0f0",
+  }
 })
