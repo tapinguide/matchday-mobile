@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
 
 import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
 import Matches from '../components/Match/Matches';
 import NoData from '../components/NoData/NoData';
 
@@ -31,11 +30,6 @@ export default class Home extends React.Component {
       });
   } // End componentDidMount()
 
-  onClickMe = () => {
-    console.log('click me was clicked');
-    this.props.navigation.navigate('About');
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -43,10 +37,9 @@ export default class Home extends React.Component {
         this.state.fontLoaded ? (
           <View style={styles.container}>
         <Header />
-        <ScrollView>
-          <Matches />
-          <Footer navigation={this.props.navigation}/>
-        </ScrollView>
+        <View style={styles.container}>
+          <Matches navigation={this.props.navigation}/>
+        </View>
       </View>
         ) : null
       }
@@ -59,5 +52,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f0f0'  },
-
 })

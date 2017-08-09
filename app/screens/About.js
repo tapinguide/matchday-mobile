@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, Button, StatusBar } from 'react-native';
 
 import Header from '../components/Header/Header';
 
@@ -21,8 +21,15 @@ export default class About extends React.Component {
 
   render() {
     return (
+
       <View style={styles.container}>
-      <Text> About Page </Text>
+      <StatusBar
+           backgroundColor="blue"
+           barStyle="light-content"
+         />
+      <Text>
+        As football fanatics, we felt overwhelmed trying to keep up with the beautiful game. So, we created the latest version of Tap In, a soccer calendar with context to help fans easily get the scoop on what happened in the world’s biggest matches, what’s coming up, and why it all matters.
+      </Text>
       <Text
         onPress={() => this.onClickMe()}
       > Click to go back home </Text>

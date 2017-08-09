@@ -19,7 +19,6 @@ class Footer extends Component{
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
   handleAboutPress = () => {
-    console.log('social icon was clicked');
     this.props.navigation.navigate('About');
   }
   render(){
@@ -31,11 +30,6 @@ class Footer extends Component{
           onPress={() => this.handleAboutPress()}
           style={styles.footerLink}>
           About
-        </Text>
-        <Text
-          onPress={() => Linking.openURL('http://google.com')}
-          style={styles.footerLink}>
-          Contact
         </Text>
         <View style={styles.socialIcons}>
           <TouchableHighlight
