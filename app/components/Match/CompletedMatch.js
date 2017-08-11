@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
 
   },
   numberbg: {
-    height: 35,
-    width:32,
+    height: 48,
+    width: 43,
     position: "absolute",
     top: 0, left: 0,
     zIndex: 1
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '700',
     position: 'absolute',
-    top: 3, left: 4,
+    top: 6, left: 6,
     zIndex: 2
   }
 })
