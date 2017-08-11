@@ -74,7 +74,7 @@ updateListView() {
   }
 
   _renderRow(rowData, sectionID, rowID){
-    let index = parseInt(rowID) + 1;
+    let index = parseInt(rowID);
     return <Match match={rowData} key={rowData.id} matchIndex={index} />;
   }
 
