@@ -23,9 +23,9 @@ export default class App extends React.Component {
       'poppins-semi-bold': require('./assets/fonts/Poppins-SemiBold.ttf'),
     });
 
-   
+
     this.setState(
-      { 
+      {
         fontLoaded: true
       });
   }
@@ -36,7 +36,7 @@ export default class App extends React.Component {
       {
         this.state.fontLoaded ? (
           <View style={styles.container}>
-        <Header />  
+        <Header />
         <ScrollView>
               <Matches />
         </ScrollView>
