@@ -4,32 +4,39 @@ export default class MatchService
 {
   static getMatches(){
    var _this = this;
-   var matchesUrl = 'https://www.tapinguide.com/api/activematches?format=json';
+   var matchesUrl = 'https://api.tapinguide.demo.nordicdev.io/api/activematches/';
 
    return fetch(matchesUrl)
       .then((response) => response.json())
-      .then((results) => {
+      .then((matches) => {
         var notCompleted = [];
         var completed = [];
-          for(var i = 0, numResults = results.length; i < numResults; i++){
-              if(results[i].status.description.toLowerCase() === "ft" || results[i].status.description.toLowerCase() === "aet"){
-                completed.push(results[i]);
-              }
-              else{
-                notCompleted.push(results[i]);
-              }
+        for(var i = 0, numResults = matches.length; i < numResults; i++){
+          if(matches[i].status.description.toLowerCase() === "ft" 
+            || matches[i].status.description.toLowerCase() === "aet" 
+            || matches[i].status.description.toLowerCase() === "pen."
+            || matches[i].status.description.toLowerCase() === "cancl."){
+            completed.push(matches[i]);
           }
+          else{
+            notCompleted.push(matches[i]);
+          }
+      }
 
-          completed.sort(function(a,b){
-            return new Date(b.matchTime) - new Date(a.matchTime);
-          });
+      notCompleted.sort(function(a,b){
+         return new Date(b.matchTime) - new Date(a.matchTime) || a.id - b.id;
+      }).reverse();
 
-          return notCompleted.concat(completed);
+      completed.sort(function(a,b){
+        return new Date(b.matchTime) - new Date(a.matchTime) || a.id - b.id;
+      });
+
+           return notCompleted.concat(completed);
       });
   }
 
   static getLinks(){
-    var linksUrl = 'https://www.tapinguide.com/api/links/?format=json'
+    var linksUrl = 'https://api.tapinguide.demo.nordicdev.io/api/links/'
     
     return fetch(linksUrl)
         .then((response) => response.json())
