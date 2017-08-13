@@ -111,7 +111,7 @@ export default class CompletedMatch extends Component {
               value={htmlContent}
               stylesheet={styles}
               />
-            <Panel title="" underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
+            <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
               {events}
             </Panel>
           </View>
