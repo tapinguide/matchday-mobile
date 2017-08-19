@@ -86,7 +86,7 @@ export default class CompletedMatch extends Component {
           }}>{match.homeClubScore}</Text>
           <Image
             style={{width: 40, height: 40}}
-            source={{uri: match.homeClub.crest}} />
+            source={{uri: match.homeClub.crest.replace("http://", "https://")}} />
           <Text style={{
               fontFamily: 'poppins-semi-bold',
               fontWeight: '600',
@@ -94,7 +94,7 @@ export default class CompletedMatch extends Component {
             }}>FT</Text>
           <Image
             style={{width: 40, height: 40}}
-            source={{uri: match.visitorClub.crest}} />
+            source={{uri: match.visitorClub.crest.replace("http://", "https://")}} />
           <Text style={{
             fontSize: 20,
             fontWeight: '700',

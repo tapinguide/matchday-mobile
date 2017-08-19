@@ -7,10 +7,10 @@ export default class Goal extends React.Component {
         var event = this.props.event;
         var minute = parseInt(event.minute, 10) + parseInt(event.extraMinute, 10);
         var player = event.player;
-        var clubCrestUrl = event.club.crest;
+        var clubCrestUrl = event.club.crest.replace("http://", "https://");;
    
-        var homeTeam = event.match.homeClub.name;
-        var awayTeam = event.match.visitorClub.name;
+        var homeTeamShortName = event.match.homeClub.shortName;
+        var awayTeamShortName = event.match.visitorClub.shortName;
         var homeTeamSubScore = 0;
         var awayTeamSubScore = 0;
         var result;
@@ -19,7 +19,7 @@ export default class Goal extends React.Component {
         awayTeamSubScore = result[1];
 
         var cardSide;
-        if(event.eventTeamName === homeTeam){
+        if(event.eventTeamName === event.match.homeClub.name){
             cardSide = (
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'stretch', height: 70}}>
                     <View style={{marginBottom: 1, marginLeft: 10, paddingTop: 0, justifyContent: 'center', alignItems: 'center'}}>
@@ -27,7 +27,7 @@ export default class Goal extends React.Component {
 				    </View>
 			        <View style={{marginBottom: 1, marginLeft: 15, marginRight:'auto', paddingTop: 0, justifyContent: 'center', alignItems: 'flex-start'}}>
                         <Text style={{width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17,fontWeight: '600'}}>{player}</Text>
-                        <Text>{homeTeam} ({homeTeamSubScore}) {awayTeam} ({awayTeamSubScore})</Text>
+                        <Text>{homeTeamShortName} ({homeTeamSubScore}) {awayTeamShortName} ({awayTeamSubScore})</Text>
 			        </View>
                 </View>
             )
@@ -38,7 +38,7 @@ export default class Goal extends React.Component {
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'stretch', height: 70}}>
 			        <View style={{marginBottom: 1, marginLeft: 'auto', marginRight:15, paddingTop: 0, justifyContent: 'center', alignItems: 'flex-end'}}>
                         <Text style={{width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17,fontWeight: '600'}}>{player}</Text>
-                        <Text>{homeTeam} ({homeTeamSubScore}) {awayTeam} ({awayTeamSubScore})</Text>
+                        <Text>{homeTeamShortName} ({homeTeamSubScore}) {awayTeamShortName} ({awayTeamSubScore})</Text>
 			        </View>
 					<View style={{marginBottom: 1, marginRight: 10, paddingTop: 0, justifyContent: 'center', alignItems: 'center'}}>
 					    <Image style={{width: 40, height: 40}} source={{uri: clubCrestUrl }} />

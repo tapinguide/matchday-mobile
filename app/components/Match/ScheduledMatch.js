@@ -24,7 +24,7 @@ export default class ScheduledMatch extends Component {
                   <View style={styles.homeCrest}>
                     <Image
                       style={{width: 40, height: 40}}
-                      source={{uri: match.homeClub.crest }} />
+                      source={{uri: match.homeClub.crest.replace("http://", "https://") }} />
                   </View>
                   <View>
                       <Text style={styles.vs}>vs</Text>
@@ -32,7 +32,7 @@ export default class ScheduledMatch extends Component {
                   <View styles={styles.awayCrest}>
                     <Image
                       style={{width: 40, height: 40}}
-                      source={{uri: match.visitorClub.crest}} />
+                      source={{uri: match.visitorClub.crest.replace("http://", "https://")}} />
                   </View>
                 </View>
                 <View style={styles.infoContainer}>
