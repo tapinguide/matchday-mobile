@@ -7,7 +7,7 @@ export default class YellowCard extends React.Component {
         var event = this.props.event;
         var minute = parseInt(event.minute, 10) + parseInt(event.extraMinute, 10);
         var player = event.player;
-        var clubCrestUrl = event.club.crest;
+        var clubCrestUrl = event.club.crest.replace("http://", "https://");
         var homeTeam = event.match.homeClub.name;
         var awayTeam = event.match.visitorClub.name;
         var homeTeamSubScore = 0;

@@ -8,7 +8,7 @@ export default class Substitute extends React.Component {
         var minute = parseInt(event.minute, 10) + parseInt(event.extraMinute, 10);
         var player = event.player;
         var assist = event.assist;
-        var clubCrestUrl = event.club.crest;
+        var clubCrestUrl = event.club.crest.replace("http://", "https://");
         var homeTeam = event.match.homeClub.name;
         var awayTeam = event.match.visitorClub.name;
         var homeTeamSubScore = 0;
