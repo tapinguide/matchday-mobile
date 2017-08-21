@@ -41,6 +41,12 @@ export default class InProgressMatch extends Component {
 
     var events = [];
     match.events.forEach(function(event, index) {
+      if(event.eventType === "yellowcard" 
+        || event.eventType === "yellowred" 
+        || event.eventType === "redcard" 
+        || event.eventType === "subst" 
+        || event.eventType === "goal")
+    {
       if(index > 0){
         events.push(<View key={index + '-' + event.id}><View style={{width: 3,height: 22, marginRight: 'auto', marginLeft: 'auto', backgroundColor: '#bdbdbd'}} key={event.id + index}></View><Event event={event} key={event.id} /></View>);
       }
@@ -48,7 +54,7 @@ export default class InProgressMatch extends Component {
       {
         events.push(<Event event={event} key={event.id} />);
       }
-
+    }
     });
     //For some reason the HTMLView component needs to have the content wrapped otherwise it will add a line break for
     //each tag.

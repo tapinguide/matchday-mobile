@@ -13,6 +13,13 @@ export default class YellowCard extends React.Component {
         var homeTeamSubScore = 0;
         var awayTeamSubScore = 0;
         var cardSide;
+        var cardType = require('./images/card.png');
+        var cardText = 'Yellow Card';
+
+        if(event.eventType === 'yellowred'){
+            cardType = require('./images/yellowred.png');
+            cardText = 'Second Yellow Card';
+        }
 
         if(event.eventTeamName === homeTeam){
             cardSide = (
@@ -54,7 +61,7 @@ export default class YellowCard extends React.Component {
                         style={{
                             height: 20
                         }}
-                        source={require('./images/card.png')}  />
+                        source={cardType}  />
                     </View>
                     <View style={{width: '80%'}}>
                         <Text style={{
@@ -62,7 +69,7 @@ export default class YellowCard extends React.Component {
                             fontFamily: 'poppins-semi-bold',
                             color: '#fff',
                             fontWeight: '700'  
-                        }}>Yellow Card</Text>
+                        }}>{cardText}</Text>
                     </View>
                     <View>
                         <Text style={{
