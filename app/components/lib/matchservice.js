@@ -5,7 +5,7 @@ export default class MatchService
   static getMatches(){
    var _this = this;
    var matchesUrl = 'https://api.tapinguide.demo.nordicdev.io/api/activematches/';
-
+   
    return fetch(matchesUrl)
       .then((response) => response.json())
       .then((matches) => {

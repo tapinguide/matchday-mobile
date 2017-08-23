@@ -22,7 +22,25 @@ export default class InProgressMatch extends Component {
       }
     );
   }
-  render() {
+
+  getTimelineEvents(events)
+  {
+    if(events.length === 0){
+     return (
+        <Text style={{
+          fontFamily: 'poppins-regular',
+          paddingLeft:0,
+          fontSize: 12,
+          lineHeight: 18,
+          fontWeight: '300'
+        }}>Live match data to come</Text>
+      );
+    }
+    else{
+      return events;
+    }
+  }
+    render() {
     var match = this.props.match;
     var matchIndex = this.props.matchIndex
     var sortedEvents = match.events.sort((a,b) => {
@@ -125,7 +143,7 @@ export default class InProgressMatch extends Component {
                 stylesheet={styles}
                 />
             <Panel title="" underlayColor="#fff" panelExpanded={this.state.panelExpanded}>
-              {events}
+              {this.getTimelineEvents(events)}
             </Panel>
           </View>
         </View>
