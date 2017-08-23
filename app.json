@@ -1,6 +1,6 @@
 {
   "expo": {
-    "sdkVersion": "19.0.0",
+    "sdkVersion": "20.0.0",
     "name": "Tap In Guide",
     "slug": "tap-in-guide",
     "description": "Tap In is a simple dashboard guide to world football’s most essential matches. All the daily info you need to know to stay on top of the beautiful game.",
@@ -11,8 +11,8 @@
     },
     "android": {
       "package": "com.tapinguide.matchday",
-      "versionCode": 3,
-      "permissions": [ ]
+      "versionCode": 4,
+      "permissions": []
     },
     "orientation": "portrait",
     "loading": {
