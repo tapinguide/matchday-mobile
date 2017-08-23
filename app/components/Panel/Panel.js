@@ -16,7 +16,7 @@ export default class Panel extends Component{
         };
 
         this.state = {
-            expanded    : this.props.panelExpanded
+            expanded : this.props.panelExpanded
         };
 
         this.underlayColor = this.props.underlayColor;
@@ -43,6 +43,7 @@ export default class Panel extends Component{
     render(){
         let icon = this.icons['down'];
         let underlayColor = this.underlayColor;
+        
         if(this.state.expanded){
             icon = this.icons['up'];
         }

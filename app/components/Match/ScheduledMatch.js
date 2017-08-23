@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView } from 'react-native';
+import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView,TouchableHighlight } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
+import Panel from '../Panel/Panel';
 
 export default class ScheduledMatch extends Component {
+    constructor(props){
+      super(props);
+
+      this.state = {
+          panelExpanded    : false
+      };
+  }
+  _onPressButton = () => {
+
+    this.setState(
+      {
+        panelExpanded: !this.state.panelExpanded
+      }
+    );
+  }
   render() {
 
     var match = this.props.match;
@@ -13,6 +29,7 @@ export default class ScheduledMatch extends Component {
 
     var htmlContent = "<htmlcontent>" + preMatchDetails + "</htmlcontent>";
     return (
+      <TouchableHighlight onPress={() => this._onPressButton()}>
          <View style={styles.match}>
               <View style={styles.contentContainer}>
                 <View style={styles.matchNumberContainer}>
@@ -42,10 +59,22 @@ export default class ScheduledMatch extends Component {
                     <HTMLView
                         value={htmlContent}
                         stylesheet={styles}
-                        />
+                    />
                 </View>
               </View>
+              <View>
+                <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
+                  <Text style={{
+                    fontFamily: 'poppins-regular',
+                    paddingLeft:35,
+                    fontSize: 12,
+                    lineHeight: 18,
+                    fontWeight: '300'
+                  }}>Live match data to come</Text>
+                </Panel>
+              </View>
           </View>
+        </TouchableHighlight>
     );
   }
 }
@@ -67,7 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 0
   },
   crestContainer: {
     flex: 1,
