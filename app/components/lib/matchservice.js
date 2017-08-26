@@ -5,6 +5,7 @@ export default class MatchService
   static getMatches(){
    var _this = this;
    var matchesUrl = 'https://api.tapinguide.com/api/activematches/';
+   //var matchesUrl = 'http://localhost:8000/api/activematches';
    
    return fetch(matchesUrl)
       .then((response) => response.json())

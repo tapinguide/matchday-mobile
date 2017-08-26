@@ -11,7 +11,7 @@ export default class InProgressMatch extends Component {
       super(props);
 
       this.state = {
-          panelExpanded    : false
+          panelExpanded: false
       };
   }
   _onPressButton = () => {
@@ -40,7 +40,22 @@ export default class InProgressMatch extends Component {
       return events;
     }
   }
-    render() {
+
+  getMatchTime(match){
+    if(match.status.description === "HT"){
+      return (<Text style={{fontFamily: 'poppins-regular', fontSize: 14}}>HT</Text>);
+    }
+    else
+      {
+        return (
+              <View>
+                <Text style={{fontFamily: 'poppins-regular', fontSize: 14}}>{match.timer}'</Text>
+                <Image source={seconds} style={{height:12, width:20}}/>
+              </View>
+              );
+      }
+  }
+  render() {
     var match = this.props.match;
     var matchIndex = this.props.matchIndex
     var sortedEvents = match.events.sort((a,b) => {
@@ -123,8 +138,7 @@ export default class InProgressMatch extends Component {
           <View style={{
                   flexDirection: 'column',
                   alignItems: 'center'}}>
-            <Text style={{fontFamily: 'poppins-regular', fontSize: 14}}>{match.timer}'</Text>
-            <Image source={seconds} style={{height:12, width:20}}/>
+            {this.getMatchTime(match)}
           </View>
           <View>
           <Image
