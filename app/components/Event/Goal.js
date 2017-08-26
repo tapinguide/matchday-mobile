@@ -7,7 +7,7 @@ export default class Goal extends React.Component {
         var event = this.props.event;
         var minute = parseInt(event.minute, 10) + parseInt(event.extraMinute, 10);
         var player = event.player;
-        var clubCrestUrl = event.club.crest.replace("http://", "https://");;
+        var clubCrestUrl = event.club.crest;
    
         var homeTeamShortName = event.match.homeClub.shortName;
         var awayTeamShortName = event.match.visitorClub.shortName;

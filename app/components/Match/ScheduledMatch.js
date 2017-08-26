@@ -41,15 +41,17 @@ export default class ScheduledMatch extends Component {
                   <View style={styles.homeCrest}>
                     <Image
                       style={{width: 40, height: 40}}
-                      source={{uri: match.homeClub.crest.replace("http://", "https://") }} />
+                      source={{uri: match.homeClub.crest }} />
+                      <Text style={styles.shortName}>{match.homeClub.shortName}</Text>
                   </View>
                   <View>
-                      <Text style={styles.vs}>vs</Text>
+                      <Text style={styles.vs}></Text>
                   </View>
                   <View styles={styles.awayCrest}>
                     <Image
                       style={{width: 40, height: 40}}
-                      source={{uri: match.visitorClub.crest.replace("http://", "https://")}} />
+                      source={{uri: match.visitorClub.crest}} />
+                      <Text style={styles.shortName}>{match.visitorClub.shortName}</Text>
                   </View>
                 </View>
                 <View style={styles.infoContainer}>
@@ -149,5 +151,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 6, left: 6,
     zIndex: 2
+  },
+  shortName: {
+    color: '#757575',
+    fontFamily: 'poppins-regular',
+    fontSize: 11,
+    letterSpacing: 1,
+    lineHeight: 18,
+    textAlign: 'center',
+    paddingTop: 5,
+    fontWeight: '400'
   }
 })

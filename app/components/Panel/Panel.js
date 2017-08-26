@@ -3,7 +3,7 @@ import {StyleSheet,
         Text,
         View,
         Image,
-        TouchableHighlight,Animated} from 'react-native';
+        TouchableHighlight} from 'react-native';
 import Expand from 'react-native-simple-expand';
 
 export default class Panel extends Component{

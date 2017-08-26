@@ -90,17 +90,23 @@ export default class CompletedMatch extends Component {
             fontWeight: '700',
             fontFamily: 'poppins-semi-bold'
           }}>{match.homeClubScore}</Text>
+          <View>
           <Image
             style={{width: 40, height: 40}}
-            source={{uri: match.homeClub.crest.replace("http://", "https://")}} />
+            source={{uri: match.homeClub.crest}} />
+            <Text style={styles.shortName}>{match.homeClub.shortName}</Text>
+          </View>
           <Text style={{
               fontFamily: 'poppins-semi-bold',
               fontWeight: '600',
               fontSize: 14
             }}>FT</Text>
+            <View>
           <Image
             style={{width: 40, height: 40}}
-            source={{uri: match.visitorClub.crest.replace("http://", "https://")}} />
+            source={{uri: match.visitorClub.crest}} />
+            <Text style={styles.shortName}>{match.visitorClub.shortName}</Text>
+          </View>
           <Text style={{
             fontSize: 20,
             fontWeight: '700',
@@ -153,5 +159,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 6, left: 6,
     zIndex: 2
+  },
+  shortName: {
+    color: '#757575',
+    fontFamily: 'poppins-regular',
+    fontSize: 11,
+    letterSpacing: 1,
+    lineHeight: 18,
+    textAlign: 'center',
+    paddingTop: 5,
+    fontWeight: '400'
   }
 })
