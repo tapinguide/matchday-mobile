@@ -12,17 +12,17 @@ export default class Match extends Component {
 
     var returnMatch;
     if(status === 'In Progress' || status === 'HT'){
-        returnMatch = <InProgressMatch match={matchObject} key={matchObject.id} matchIndex={index} />
+        returnMatch = <InProgressMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue} />
     }
     else if(status === 'Scheduled' || status === 'Post.'){
-        returnMatch = <ScheduledMatch match={matchObject} key={matchObject.id} matchIndex={index} />
+        returnMatch = <ScheduledMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue}/>
     }
     else if(status === 'FT'
         || status === "AET" 
         || status === "Pen."
         || status === "Awarded"
         || status === "Cancl."){
-        returnMatch = <CompletedMatch match={matchObject} key={matchObject.id} matchIndex={index} />
+        returnMatch = <CompletedMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue} />
     }
 
     return (

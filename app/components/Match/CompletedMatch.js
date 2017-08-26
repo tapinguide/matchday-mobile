@@ -8,22 +8,51 @@ import Panel from '../Panel/Panel';
 export default class CompletedMatch extends Component {
   constructor(props){
       super(props);
-
       this.state = {
-          panelExpanded    : false
+          panelExpanded: false
       };
   }
-  _onPressButton = () => {
 
+  _onPressButton = () => {
     this.setState(
       {
         panelExpanded: !this.state.panelExpanded
       }
     );
   }
-  render() {
+
+  getTVVenueDetails(tvDetails, venue){
+    
+    if(tvDetails != null && venue != null && tvDetails.length > 0 && venue.length > 0)
+      {
+          return (
+              <tv-venue>
+                  <View style={styles.tvVenue}>
+                      <Text style={styles.tvLabel}>TV: </Text><Text style={styles.tvText}>{tvDetails}</Text>
+                  </View>
+                  <View style={styles.tvVenue}>
+                      <Text style={styles.tvLabel}>Venue: </Text><Text style={styles.tvText}>{venue}</Text>
+                  </View>
+              </tv-venue>
+          )
+      }
+      else if(tvDetails != null && tvDetails.length > 0){
+          return <View style={styles.tvVenue}><Text style={styles.tvLabel}>TV: </Text><Text style={styles.tvText}>{tvDetails}</Text></View> 
+      }
+      else if(venue != null && venue.length > 0){
+          return <View style={styles.tvVenue}><Text style={styles.tvLabel}>Venue: </Text><Text style={styles.tvText}>{venue}</Text></View>
+      }
+      else{
+          return <View></View>
+      }
+    
+}
+render() {
     var match = this.props.match;
     var matchIndex = this.props.matchIndex;
+    var tvDetails = this.props.tvDetails;
+    var venue = this.props.venue;
+
     var sortedEvents = match.events.sort((a,b) => {
       return a.id - b.id
     }).reverse();
@@ -124,6 +153,7 @@ export default class CompletedMatch extends Component {
               stylesheet={styles}
               />
             <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
+              {this.getTVVenueDetails(tvDetails, venue)}  
               {events}
             </Panel>
           </View>
@@ -169,5 +199,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5,
     fontWeight: '400'
+  },
+  tvVenue: {
+    paddingBottom: 10,
+    paddingLeft: 0   
+  },
+  tvText: {
+    fontFamily: 'poppins-regular',
+    fontSize: 12,
+    fontWeight: '300',
+    lineHeight: 18
+  },
+  tvLabel: {
+    fontFamily: 'poppins-bold',
+    fontSize: 12,
+    fontWeight: '700',
+    lineHeight: 18
   }
 })

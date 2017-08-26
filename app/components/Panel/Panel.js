@@ -11,12 +11,12 @@ export default class Panel extends Component{
         super(props);
 
         this.icons = {
-            'up'    : require('./images/shapegreenup.png'),
-            'down'  : require('./images/shapegreendown.png')
+            'up': require('./images/shapegreenup.png'),
+            'down': require('./images/shapegreendown.png')
         };
 
         this.state = {
-            expanded : this.props.panelExpanded
+            expanded: this.props.panelExpanded
         };
 
         this.underlayColor = this.props.underlayColor;
