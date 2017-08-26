@@ -61,7 +61,7 @@ export default class About extends React.Component {
               About
             </Text>
             <Text style={styles.intro}>
-              As football fanatics, we felt overwhelmed trying to keep up with the beautiful game. So, we created the latest version of Tap In, a soccer calendar with context to help fans easily get the scoop on what happened in the world’s biggest matches, what’s coming up, and why it all matters.
+              There's more coverage of the beautiful game than ever, but even as football fanatics, we found ourselves having trouble keeping up. So, we created the latest version of Tap In. It’s a soccer calendar with context that helps fans follow global soccer’s essential matches. Quick previews to get you prepped for the weekend, live match data, and match recaps with highlights.
             </Text>
             <Text style={styles.paragraph}>
               We’d love to hear what you think and what would make Tap In better. Drop us a line:
@@ -74,7 +74,7 @@ export default class About extends React.Component {
             <View style={styles.hr} />
             <Image source={tapinLogo} style={{width:154, height: 49, marginBottom: 20}} />
             <Text style={[styles.paragraph, {marginBottom: 34}]}>
-              Tap In Design is a digital product studio. We created the original Tap In Guide for the 2014 World Cup, receiving over 350,000 page views in one month. We’ve gone on to continue to evolve the Tap In product as well as collaborate with some of our favorite soccer media brands, including KICK and Howler Magazine. We’re always on the lookout for the next collaboration or project, get in touch:
+              Tap In Design is a digital product studio. We created the original Tap In Guide to help new soccer fans follow the 2014 World Cup. We’ve gone on to continue to evolve the Tap In product, as well as collaborate with some of our favorite soccer media brands, including KICK and Howler Magazine. We’re always on the lookout for the next collaboration or project, get in touch:
                 <Text
                   style={styles.hyperlink}
                   onPress={() => this.handleLinkPress('mailto:curt@tapinguide.com')}
