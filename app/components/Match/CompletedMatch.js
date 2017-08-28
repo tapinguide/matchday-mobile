@@ -28,19 +28,27 @@ export default class CompletedMatch extends Component {
           return (
               <tv-venue>
                   <View style={styles.tvVenue}>
-                      <Text style={styles.tvLabel}>TV: </Text><Text style={styles.tvText}>{tvDetails}</Text>
+                      <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
                   </View>
                   <View style={styles.tvVenue}>
-                      <Text style={styles.tvLabel}>Venue: </Text><Text style={styles.tvText}>{venue}</Text>
+                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
                   </View>
               </tv-venue>
           )
       }
       else if(tvDetails != null && tvDetails.length > 0){
-          return <View style={styles.tvVenue}><Text style={styles.tvLabel}>TV: </Text><Text style={styles.tvText}>{tvDetails}</Text></View> 
+          return (
+                  <View style={styles.tvVenue}>
+                    <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
+                  </View>
+                );
       }
       else if(venue != null && venue.length > 0){
-          return <View style={styles.tvVenue}><Text style={styles.tvLabel}>Venue: </Text><Text style={styles.tvText}>{venue}</Text></View>
+          return (
+                  <View style={styles.tvVenue}>
+                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
+                  </View>
+          )
       }
       else{
           return <View></View>
@@ -111,11 +119,11 @@ render() {
           alignItems: 'center',
           paddingTop: 20,
           paddingBottom:20,
-          paddingRight: 40,
-          paddingLeft:40
+          paddingRight: 60,
+          paddingLeft:60
         }}>
           <Text style={{
-            fontSize: 20,
+            fontSize: 32,
             fontWeight: '700',
             fontFamily: 'poppins-semi-bold'
           }}>{match.homeClubScore}</Text>
@@ -127,7 +135,6 @@ render() {
           </View>
           <Text style={{
               fontFamily: 'poppins-semi-bold',
-              fontWeight: '600',
               fontSize: 14
             }}>FT</Text>
             <View>
@@ -137,8 +144,7 @@ render() {
             <Text style={styles.shortName}>{match.visitorClub.shortName}</Text>
           </View>
           <Text style={{
-            fontSize: 20,
-            fontWeight: '700',
+            fontSize: 32,
             fontFamily: 'poppins-semi-bold'
           }}>{match.visitorClubScore}</Text>
         </View>
@@ -201,19 +207,19 @@ const styles = StyleSheet.create({
     fontWeight: '400'
   },
   tvVenue: {
-    paddingBottom: 10,
-    paddingLeft: 0   
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: '#F6F6F6',
+    padding: 6,
+    marginBottom: 8
   },
   tvText: {
     fontFamily: 'poppins-regular',
-    fontSize: 12,
-    fontWeight: '300',
-    lineHeight: 18
-  },
-  tvLabel: {
-    fontFamily: 'poppins-bold',
-    fontSize: 12,
-    fontWeight: '700',
-    lineHeight: 18
+    fontSize: 11,
+    lineHeight: 18,
+    letterSpacing: 1,
+    paddingLeft: 8
   }
 })

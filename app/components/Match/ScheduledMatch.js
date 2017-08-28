@@ -23,27 +23,36 @@ export default class ScheduledMatch extends Component {
   getTVVenueDetails(tvDetails, venue){
 
     if(tvDetails != null && venue != null && tvDetails.length > 0 && venue.length > 0)
-    {
-        return (
-            <tv-venue>
-                <View style={styles.tvVenue}>
-                    <Text style={styles.tvLabel}>TV: </Text><Text style={styles.tvText}>{tvDetails}</Text>
-                </View>
-                <View style={styles.tvVenue}>
-                    <Text style={styles.tvLabel}>Venue: </Text><Text style={styles.tvText}>{venue}</Text>
-                </View>
-            </tv-venue>
-        )
-    }
-    else if(tvDetails != null && tvDetails.length > 0){
-        return <View style={styles.tvVenue}><Text style={styles.tvLabel}>TV: </Text><Text style={styles.tvText}>{tvDetails}</Text></View> 
-    }
-    else if(venue != null && venue.length > 0){
-        return <View style={styles.tvVenue}><Text style={styles.tvLabel}>Venue: </Text><Text style={styles.tvText}>{venue}</Text></View>
-    }
-    else{
-        return <View></View>
-    }
+      {
+          return (
+              <tv-venue>
+                  <View style={styles.tvVenue}>
+                      <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
+                  </View>
+                  <View style={styles.tvVenue}>
+                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
+                  </View>
+              </tv-venue>
+          )
+      }
+      else if(tvDetails != null && tvDetails.length > 0){
+          return (
+                  <View style={styles.tvVenue}>
+                    <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
+                  </View>
+                );
+      }
+      else if(venue != null && venue.length > 0){
+          return (
+                  <View style={styles.tvVenue}>
+                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
+                  </View>
+          )
+      }
+      else{
+          return <View></View>
+      }
+    
     
 }
   render() {
@@ -137,7 +146,6 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins-regular',
     color: '#000',
     fontSize: 10,
-    fontWeight: '500',
     letterSpacing: 2,
     paddingBottom: 7
   },
@@ -155,7 +163,6 @@ const styles = StyleSheet.create({
     paddingTop: 7,
     fontSize: 12,
     lineHeight: 18,
-    fontWeight: '300'
   },
   matchNumberContainer: {
     top: -20
@@ -170,7 +177,6 @@ const styles = StyleSheet.create({
   matchNumber: {
     backgroundColor: 'rgba(255, 255, 255, 0)',
     color: '#FFFFFF',
-    fontWeight: '700',
     position: 'absolute',
     top: 6, left: 6,
     zIndex: 2
@@ -196,16 +202,20 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 35   
   },
+  tvVenue: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: '#F6F6F6',
+    padding: 6,
+    marginBottom: 8
+  },
   tvText: {
     fontFamily: 'poppins-regular',
-    fontSize: 12,
-    fontWeight: '300',
-    lineHeight: 18
-  },
-  tvLabel: {
-    fontFamily: 'poppins-bold',
-    fontSize: 12,
-    fontWeight: '700',
-    lineHeight: 18
+    fontSize: 11,
+    lineHeight: 18,
+    letterSpacing: 1,
+    paddingLeft: 8
   }
 })

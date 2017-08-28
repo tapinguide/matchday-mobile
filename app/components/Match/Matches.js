@@ -114,15 +114,15 @@ updateListView() {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <Header />
-      <ScrollView style={{flex: 1, flexDirection: 'column'}}>
-        <ListView
-          initialListSize={10}
-          dataSource={this.state.matches}
-          renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
-          renderFooter={this._renderFooter.bind(this)}
-        />
-        <Footer navigation={this.props.navigation}/>
-      </ScrollView>
+        <ScrollView style={{flex: 1, flexDirection: 'column'}}>
+          <ListView
+            initialListSize={10}
+            dataSource={this.state.matches}
+            renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
+            renderFooter={this._renderFooter.bind(this)}
+          />
+          <Footer navigation={this.props.navigation}/>
+        </ScrollView>
       </View>
     );
   }
