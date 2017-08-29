@@ -47,6 +47,10 @@ export default class Matches extends Component {
     clearInterval(this.timerID);
   }
 
+  handleScroll = (event) => {
+   console.log(event.nativeEvent.contentOffset.y);
+  }
+
 updateListView() {
   var _this = this;
   MatchService.getMatches().then(function(matches){
@@ -74,9 +78,9 @@ updateListView() {
   }
 
   _renderRow(rowData, sectionID, rowID){
-  
+
     let index = parseInt(rowID) + 1;
-    return <Match match={rowData} key={rowData.id} matchIndex={index} />;
+    return <Match match={rowData} key={rowData.id} matchIndex={index} handleMatchPress={() => this.handleMatchPress()}/>;
   }
 
   _renderFooter(){
@@ -101,6 +105,10 @@ updateListView() {
           </View>
     );
   }
+
+  handleMatchPress = () => {
+    console.log('match pressed');
+  }
   render() {
     if (this.state.isLoading) {
       return (
@@ -114,7 +122,11 @@ updateListView() {
     return (
       <View style={{flex: 1, flexDirection: 'column'}}>
         <Header />
-        <ScrollView style={{flex: 1, flexDirection: 'column'}}>
+        <ScrollView
+          onScroll={this.handleScroll}
+          scrollEventThrottle={16}
+          style={{flex: 1, flexDirection: 'column'}}
+        >
           <ListView
             initialListSize={10}
             dataSource={this.state.matches}

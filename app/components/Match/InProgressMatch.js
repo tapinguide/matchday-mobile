@@ -57,7 +57,7 @@ export default class InProgressMatch extends Component {
   }
 
   getTVVenueDetails(tvDetails, venue){
-    
+
     if(tvDetails != null && venue != null && tvDetails.length > 0 && venue.length > 0)
       {
           return (
@@ -109,12 +109,12 @@ render() {
     }
 
     var events = [];
-    match.events.forEach(function(event, index) 
+    match.events.forEach(function(event, index)
     {
-      if(event.eventType === "yellowcard" 
-        || event.eventType === "yellowred" 
-        || event.eventType === "redcard" 
-        || event.eventType === "subst" 
+      if(event.eventType === "yellowcard"
+        || event.eventType === "yellowred"
+        || event.eventType === "redcard"
+        || event.eventType === "subst"
         || event.eventType === "goal")
       {
         if(index > 0){
@@ -126,12 +126,15 @@ render() {
         }
       }
     });
-    
+
     //For some reason the HTMLView component needs to have the content wrapped otherwise it will add a line break for
     //each tag.
     var htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
     return (
-    <TouchableHighlight onPress={() => this._onPressButton()}>
+    <TouchableHighlight
+      onPress={() => this._onPressButton()}
+      activeOpacity={1}
+    >
       <View style={{
         flex: 1,
         backgroundColor: '#fff',
@@ -199,7 +202,7 @@ render() {
                 stylesheet={styles}
                 />
             <Panel title="" underlayColor="#fff" panelExpanded={this.state.panelExpanded}>
-              {this.getTVVenueDetails(tvDetails, venue)}  
+              {this.getTVVenueDetails(tvDetails, venue)}
               {this.getTimelineEvents(events)}
             </Panel>
           </View>
