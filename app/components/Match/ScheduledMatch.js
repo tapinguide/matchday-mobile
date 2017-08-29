@@ -52,8 +52,8 @@ export default class ScheduledMatch extends Component {
       else{
           return <View></View>
       }
-    
-    
+
+
 }
   render() {
 
@@ -66,7 +66,10 @@ export default class ScheduledMatch extends Component {
 
     var htmlContent = "<htmlcontent>" + preMatchDetails + "</htmlcontent>";
     return (
-      <TouchableHighlight onPress={() => this._onPressButton()}>
+      <TouchableHighlight
+        onPress={() => this._onPressButton()}
+        activeOpacity={1}
+      >
          <View style={styles.match}>
               <View style={styles.contentContainer}>
                 <View style={styles.matchNumberContainer}>
@@ -200,7 +203,7 @@ const styles = StyleSheet.create({
   },
   tvVenue: {
     paddingBottom: 10,
-    paddingLeft: 35   
+    paddingLeft: 35
   },
   tvVenue: {
     flex: 1,

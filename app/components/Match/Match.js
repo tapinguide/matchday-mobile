@@ -6,23 +6,24 @@ import CompletedMatch from './CompletedMatch';
 
 export default class Match extends Component {
   render() {
-    var matchObject = this.props.match;
-    var status = matchObject.status.description;
-    var index = this.props.matchIndex;
+    let matchObject = this.props.match;
+    let status = matchObject.status.description;
+    let index = this.props.matchIndex;
+    let blob = this.props.handleMatchPress;
 
     var returnMatch;
     if(status === 'In Progress' || status === 'HT'){
-        returnMatch = <InProgressMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue} />
+        returnMatch = <InProgressMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue} handleMatchPress={blob}/>
     }
     else if(status === 'Scheduled' || status === 'Post.'){
-        returnMatch = <ScheduledMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue}/>
+        returnMatch = <ScheduledMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue} handleMatchPress={blob}/>
     }
     else if(status === 'FT'
-        || status === "AET" 
+        || status === "AET"
         || status === "Pen."
         || status === "Awarded"
         || status === "Cancl."){
-        returnMatch = <CompletedMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue} />
+        returnMatch = <CompletedMatch match={matchObject} key={matchObject.id} matchIndex={index} tvDetails={matchObject.tvDetails} venue={matchObject.venue} handleMatchPress={blob}/>
     }
 
     return (

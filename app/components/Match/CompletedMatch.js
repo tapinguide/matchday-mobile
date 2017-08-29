@@ -13,7 +13,20 @@ export default class CompletedMatch extends Component {
       };
   }
 
-  _onPressButton = () => {
+  _onPressButton = (event) => {
+    this.props.handleMatchPress();
+
+    // Print component dimensions to console
+    this.refs.mycomponent.measure( (fx, fy, width, height, px, py) => {
+        // console.log('Component width is: ' + width)
+        // console.log('Component height is: ' + height)
+        // console.log('X offset to frame: ' + fx)
+        console.log('Y offset to frame: ' + fy)
+        // console.log('X offset to page: ' + px)
+        console.log('Y offset to page: ' + py)
+    })
+
+
     this.setState(
       {
         panelExpanded: !this.state.panelExpanded
@@ -21,8 +34,12 @@ export default class CompletedMatch extends Component {
     );
   }
 
+  onLayout = (event) => {
+    console.log('on layout: ', event.nativeEvent.layout);
+  }
+
   getTVVenueDetails(tvDetails, venue){
-    
+
     if(tvDetails != null && venue != null && tvDetails.length > 0 && venue.length > 0)
       {
           return (
@@ -53,13 +70,11 @@ export default class CompletedMatch extends Component {
       else{
           return <View></View>
       }
-    
+
 }
 render() {
-    var match = this.props.match;
-    var matchIndex = this.props.matchIndex;
-    var tvDetails = this.props.tvDetails;
-    var venue = this.props.venue;
+
+    let { match, matchIndex, tvDetails, venue } = this.props;
 
     var sortedEvents = match.events.sort((a,b) => {
       return a.id - b.id
@@ -75,10 +90,10 @@ render() {
 
     var events = [];
     match.events.forEach(function(event, index) {
-      if(event.eventType === "yellowcard" 
-        || event.eventType === "yellowred" 
-        || event.eventType === "redcard" 
-        || event.eventType === "subst" 
+      if(event.eventType === "yellowcard"
+        || event.eventType === "yellowred"
+        || event.eventType === "redcard"
+        || event.eventType === "subst"
         || event.eventType === "goal")
     {
       if(index > 0){
@@ -95,18 +110,26 @@ render() {
     //each tag.
     var htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
     return (
-      <TouchableHighlight onPress={() => this._onPressButton()}>
-        <View style={{
-          flex: 1,
-          backgroundColor: '#f5f5f5',
-          paddingBottom: 0,
-          borderRightWidth:0,
-          borderRightColor: '#e7e7e7',
-          borderBottomWidth: 1,
-          borderBottomColor: '#e7e7e7',
-          borderLeftWidth: 0,
-          borderLeftColor: '#e7e7e7',
-        }}>
+      <TouchableHighlight
+        onPress={() => this._onPressButton()}
+        // onPress={(event) => this.props.handleMatchPress(event)}
+        activeOpacity={1}
+        ref="mycomponent"
+      >
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: '#f5f5f5',
+            paddingBottom: 0,
+            borderRightWidth:0,
+            borderRightColor: '#e7e7e7',
+            borderBottomWidth: 1,
+            borderBottomColor: '#e7e7e7',
+            borderLeftWidth: 0,
+            borderLeftColor: '#e7e7e7',
+          }}
+          // onLayout = {this.onLayout}
+        >
         <View style={styles.matchNumberContainer}>
           <Text style={styles.matchNumber}>{matchIndex}</Text>
           <Image source={require('./images/rectangle.png')} style={styles.numberbg}>
@@ -159,7 +182,7 @@ render() {
               stylesheet={styles}
               />
             <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
-              {this.getTVVenueDetails(tvDetails, venue)}  
+              {this.getTVVenueDetails(tvDetails, venue)}
               {events}
             </Panel>
           </View>
