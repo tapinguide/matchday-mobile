@@ -218,23 +218,19 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins-regular',
     paddingTop: 7,
     fontSize: 12,
-    lineHeight: 18,
-    fontWeight: '300'
-  },
-  matchNumberContainer: {
-
+    lineHeight: 18
   },
   numberbg: {
     height: 48,
     width: 43,
     position: "absolute",
-    top: 0, left: 0,
+    top: 0, 
+    left: 0,
     zIndex: 1
   },
   matchNumber: {
     backgroundColor: 'rgba(255, 255, 255, 0)',
     color: '#FFFFFF',
-    fontWeight: '700',
     position: 'absolute',
     top: 6, left: 6,
     zIndex: 2
@@ -246,8 +242,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     lineHeight: 18,
     textAlign: 'center',
-    paddingTop: 5,
-    fontWeight: '400'
+    paddingTop: 5
   },
   tvVenue: {
     flex: 1,
@@ -256,7 +251,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#F6F6F6',
     padding: 6,
-    marginBottom: 8
+    marginBottom: 8,
+    marginLeft: 35,
+    marginRight: 35
   },
   tvText: {
     fontFamily: 'poppins-regular',

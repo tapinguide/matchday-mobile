@@ -25,14 +25,14 @@ export default class ScheduledMatch extends Component {
     if(tvDetails != null && venue != null && tvDetails.length > 0 && venue.length > 0)
       {
           return (
-              <tv-venue>
+              <View>
                   <View style={styles.tvVenue}>
                       <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
                   </View>
                   <View style={styles.tvVenue}>
                       <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
                   </View>
-              </tv-venue>
+              </View>
           )
       }
       else if(tvDetails != null && tvDetails.length > 0){
@@ -173,15 +173,17 @@ const styles = StyleSheet.create({
   numberbg: {
     height: 48,
     width: 43,
-    position: "absolute",
-    top: 0, left: 0,
+    position: 'absolute',
+    top: 0, 
+    left: 0,
     zIndex: 1
   },
   matchNumber: {
     backgroundColor: 'rgba(255, 255, 255, 0)',
     color: '#FFFFFF',
     position: 'absolute',
-    top: 6, left: 6,
+    top: 6, 
+    left: 6,
     zIndex: 2
   },
   shortName: {
@@ -191,19 +193,13 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     lineHeight: 18,
     textAlign: 'center',
-    paddingTop: 5,
-    fontWeight: '400'
+    paddingTop: 5
   },
   liveMatchData: {
     fontFamily: 'poppins-regular',
-    paddingLeft:35,
+    marginLeft:35,
     fontSize: 12,
-    lineHeight: 18,
-    fontWeight: '300'
-  },
-  tvVenue: {
-    paddingBottom: 10,
-    paddingLeft: 35
+    lineHeight: 18
   },
   tvVenue: {
     flex: 1,
@@ -212,7 +208,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#F6F6F6',
     padding: 6,
-    marginBottom: 8
+    marginBottom: 8,
+    marginLeft: 35,
+    marginRight: 35
   },
   tvText: {
     fontFamily: 'poppins-regular',
