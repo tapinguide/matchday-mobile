@@ -251,9 +251,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#F6F6F6',
     padding: 6,
-    marginBottom: 8,
-    marginLeft: 35,
-    marginRight: 35
+    marginBottom: 8
   },
   tvText: {
     fontFamily: 'poppins-regular',
