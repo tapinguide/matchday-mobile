@@ -26,8 +26,8 @@ export default class Substitute extends React.Component {
                         <Image style={{margin:5}} source={require('./images/suboff.png')}/>
 				    </View>
 			        <View style={{marginBottom: 1, marginLeft: 15, marginRight:'auto', padding: 0, justifyContent: 'center', alignItems: 'flex-start'}}>
-                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17,fontWeight: '600'}}>{player}</Text>
-                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17,fontWeight: '600'}}>{assist}</Text>
+                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17}}>{player}</Text>
+                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17}}>{assist}</Text>
 			        </View>
                 </View>
             )
@@ -37,8 +37,8 @@ export default class Substitute extends React.Component {
             cardSide = (
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'stretch', height: 70}}>
 			        <View style={{marginBottom: 1, marginLeft: 'auto', marginRight:15, paddingTop: 0, justifyContent: 'center', alignItems: 'flex-end'}}>
-                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17,fontWeight: '600'}}>{player}</Text>
-                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17,fontWeight: '600'}}>{assist}</Text>
+                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17}}>{player}</Text>
+                        <Text style={{margin:0,width: 'auto',fontFamily: 'poppins-semi-bold',fontSize: 17}}>{assist}</Text>
 			        </View>
 					<View style={{marginBottom: 1, marginRight: 0, paddingTop: 0, justifyContent: 'center', alignItems: 'center'}}>
 					    <Image style={{margin:5}} source={require('./images/subon.png')}/>
@@ -71,16 +71,14 @@ export default class Substitute extends React.Component {
                         <Text style={{
                             fontSize: 14,
                             fontFamily: 'poppins-semi-bold',
-                            color: '#fff',
-                            fontWeight: '700'  
+                            color: '#fff'
                         }}>Substitute</Text>
                     </View>
                     <View>
                         <Text style={{
                             fontSize: 14,
                             fontFamily: 'poppins-semi-bold',
-                            color: '#fff',
-                            fontWeight: '700'  
+                            color: '#fff' 
                         }}>{minute}'</Text>
                     </View>
                 </View>

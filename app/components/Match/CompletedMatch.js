@@ -150,12 +150,15 @@ render() {
             fontWeight: '700',
             fontFamily: 'poppins-semi-bold'
           }}>{match.homeClubScore}</Text>
-          <View>
-          <Image
-            style={{width: 40, height: 40}}
-            source={{uri: match.homeClub.crest}} />
-            <Text style={styles.shortName}>{match.homeClub.shortName}</Text>
-          </View>
+          <View style={{
+            justifyContent: 'space-around',
+          alignItems: 'center',
+          }}>
+            <Image
+              style={{width: 40, height: 40}}
+              source={{uri: match.homeClub.crest}} />
+              <Text style={styles.shortName}>{match.homeClub.shortName}</Text>
+            </View>
           <Text style={{
               fontFamily: 'poppins-semi-bold',
               fontSize: 14

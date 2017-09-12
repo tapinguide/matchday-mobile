@@ -98,8 +98,6 @@ render() {
       return a.id - b.id
     }).reverse();
 
-    var secondsStyle = {height: 12, backgroundPosition: "center top", backgroundRepeat: "no-repeat", backgroundImage: "url(" + seconds + ")"};
-
     var postMatchDetails = match.preMatchDetails;
     if(match.inMatchDetails){
       postMatchDetails = match.inMatchDetails;
@@ -193,8 +191,8 @@ render() {
         </View>
         <View
           style={{
-          flex:1,
-          alignItems:'center'
+            flex:1,
+            alignItems:'center'
           }}>
           <View style={{width:'84%'}}>
              <HTMLView

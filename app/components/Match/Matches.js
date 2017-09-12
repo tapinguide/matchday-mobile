@@ -15,6 +15,7 @@ import Link from '../Link/Link';
 import Loading from '../Loading/Loading';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import FadeInView from 'react-native-fade-in-view';
 
 import mustReadIcon from '../Link/images/mustread.png';
 import mustWatchIcon from '../Link/images/mustwatch.png';
@@ -120,7 +121,10 @@ updateListView() {
     }
 
     return (
-      <View style={{flex: 1, flexDirection: 'column'}}>
+      <FadeInView
+      duration={900}
+      style={{flex: 1, flexDirection: 'column'}}
+    >
         <Header />
         <ScrollView
           onScroll={this.handleScroll}
@@ -135,7 +139,7 @@ updateListView() {
           />
           <Footer navigation={this.props.navigation}/>
         </ScrollView>
-      </View>
+      </FadeInView>
     );
   }
 }
