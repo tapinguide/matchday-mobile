@@ -8,7 +8,6 @@ import {
   View
 } from 'react-native';
 
-import Header from '../../components/Header/Header';
 import Matches from '../../components/Match/Matches';
 import NoData from '../../components/NoData/NoData';
 
