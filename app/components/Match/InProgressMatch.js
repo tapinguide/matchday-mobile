@@ -3,6 +3,8 @@ import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView, To
 import HTMLView from 'react-native-htmlview';
 import Panel from '../Panel/Panel';
 import Event from '../Event/Event';
+import TVVenueDetails from './TVVenueDetails';
+
 import moment from 'moment';
 import seconds from './images/secs.gif';
 
@@ -56,39 +58,6 @@ export default class InProgressMatch extends Component {
       }
   }
 
-  getTVVenueDetails(tvDetails, venue){
-
-    if(tvDetails != null && venue != null && tvDetails.length > 0 && venue.length > 0)
-      {
-          return (
-              <tv-venue>
-                  <View style={styles.tvVenue}>
-                      <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
-                  </View>
-                  <View style={styles.tvVenue}>
-                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
-                  </View>
-              </tv-venue>
-          )
-      }
-      else if(tvDetails != null && tvDetails.length > 0){
-          return (
-                  <View style={styles.tvVenue}>
-                    <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
-                  </View>
-                );
-      }
-      else if(venue != null && venue.length > 0){
-          return (
-                  <View style={styles.tvVenue}>
-                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
-                  </View>
-          )
-      }
-      else{
-          return <View></View>
-      }
-}
 render() {
     var match = this.props.match;
     var matchIndex = this.props.matchIndex
@@ -200,7 +169,7 @@ render() {
                 stylesheet={styles}
                 />
             <Panel title="" underlayColor="#fff" panelExpanded={this.state.panelExpanded}>
-              {this.getTVVenueDetails(tvDetails, venue)}
+             
               {this.getTimelineEvents(events)}
             </Panel>
           </View>
@@ -241,21 +210,5 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     textAlign: 'center',
     paddingTop: 5
-  },
-  tvVenue: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: '#F6F6F6',
-    padding: 6,
-    marginBottom: 8
-  },
-  tvText: {
-    fontFamily: 'poppins-regular',
-    fontSize: 11,
-    lineHeight: 18,
-    letterSpacing: 1,
-    paddingLeft: 8
   }
 })

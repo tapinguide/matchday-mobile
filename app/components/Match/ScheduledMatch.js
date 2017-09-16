@@ -3,6 +3,7 @@ import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView,Tou
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 import Panel from '../Panel/Panel';
+import TVVenueDetails from './TVVenueDetails';
 
 export default class ScheduledMatch extends Component {
     constructor(props){
@@ -20,41 +21,6 @@ export default class ScheduledMatch extends Component {
     );
   }
 
-  getTVVenueDetails(tvDetails, venue){
-
-    if(tvDetails != null && venue != null && tvDetails.length > 0 && venue.length > 0)
-      {
-          return (
-              <View>
-                  <View style={styles.tvVenue}>
-                      <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
-                  </View>
-                  <View style={styles.tvVenue}>
-                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
-                  </View>
-              </View>
-          )
-      }
-      else if(tvDetails != null && tvDetails.length > 0){
-          return (
-                  <View style={styles.tvVenue}>
-                    <Image source={require('./images/TV.png')} /><Text style={styles.tvText}>{tvDetails.toUpperCase()}</Text>
-                  </View>
-                );
-      }
-      else if(venue != null && venue.length > 0){
-          return (
-                  <View style={styles.tvVenue}>
-                      <Image source={require('./images/pitch.png')} /><Text style={styles.tvText}>{venue.toUpperCase()}</Text>
-                  </View>
-          )
-      }
-      else{
-          return <View></View>
-      }
-
-
-}
   render() {
 
     var match = this.props.match;
@@ -104,9 +70,9 @@ export default class ScheduledMatch extends Component {
                     />
                 </View>
               </View>
-              <View>
+              <View style={styles.panel}>
                 <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
-                  {this.getTVVenueDetails(tvDetails, venue)}
+                  <TVVenueDetails tvDetails={tvDetails} venue={venue}/>
                   <Text style={styles.liveMatchData}>Live match data to come</Text>
                 </Panel>
               </View>
@@ -195,28 +161,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5
   },
+  panel: {
+    width:'80%',
+    marginLeft:35
+  },
   liveMatchData: {
     fontFamily: 'poppins-regular',
-    marginLeft:35,
     fontSize: 12,
     lineHeight: 18
-  },
-  tvVenue: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: '#F6F6F6',
-    padding: 6,
-    marginBottom: 8,
-    marginLeft: 35,
-    marginRight: 35
-  },
-  tvText: {
-    fontFamily: 'poppins-regular',
-    fontSize: 11,
-    lineHeight: 18,
-    letterSpacing: 1,
-    paddingLeft: 8
   }
 })
