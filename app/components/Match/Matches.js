@@ -9,11 +9,13 @@ import {
   Text,
   View,
 } from 'react-native';
+import moment from 'moment';
 
 import Match from './Match';
 import Link from '../Link/Link';
 import Loading from '../Loading/Loading';
-import Header from '../Header/Header';
+import HeaderBar from '../HeaderBar/HeaderBar';
+import MatchesHeader from '../MatchesHeader/MatchesHeader';
 import Footer from '../Footer/Footer';
 import FadeInView from 'react-native-fade-in-view';
 
@@ -49,7 +51,33 @@ export default class Matches extends Component {
   }
 
   handleScroll = (event) => {
-   console.log(event.nativeEvent.contentOffset.y);
+   // console.log(event.nativeEvent.contentOffset.y);
+  }
+
+
+  setMatchDateRange = () => {
+    var matches = JSON.parse(JSON.stringify(this.state.matches));
+    var sortedMatches = matches._dataBlob.s1;
+
+    sortedMatches.sort(function(a,b){
+      return new Date(a.matchTime) - new Date(b.matchTime);
+    });
+
+    var matchDateRange = ''
+    var firstMatchDate = moment.utc(sortedMatches[0].matchTime).local();
+    var lastMatchDate = moment.utc(sortedMatches[sortedMatches.length - 1].matchTime).local();
+
+    //check if the matches are in the same month; else display different months
+    if(firstMatchDate.month === lastMatchDate.month){
+      matchDateRange = firstMatchDate.format('MMMM D').toUpperCase() + '-' + lastMatchDate.local().format('D, YYYY').toUpperCase();
+    }
+    else{
+      matchDateRange = firstMatchDate.format('MMMM D').toUpperCase() + '-' + lastMatchDate.local().format('MMMM D, YYYY').toUpperCase();
+    }
+
+    this.setState({
+      matchDateRange: matchDateRange
+    });
   }
 
 updateListView() {
@@ -59,6 +87,7 @@ updateListView() {
       _this.setState({
         matches: ds
       });
+      _this.setMatchDateRange();
     }).then(()=>{
         MatchService.getLinks().then(function(links){
           _this.setState({
@@ -122,15 +151,16 @@ updateListView() {
 
     return (
       <FadeInView
-      duration={900}
-      style={{flex: 1, flexDirection: 'column'}}
-    >
-        <Header />
+        duration={900}
+        style={{flex: 1, flexDirection: 'column'}}
+      >
+        <HeaderBar />
         <ScrollView
           onScroll={this.handleScroll}
           scrollEventThrottle={16}
           style={{flex: 1, flexDirection: 'column'}}
         >
+          <MatchesHeader dateRange={this.state.matchDateRange}/>
           <ListView
             initialListSize={10}
             dataSource={this.state.matches}

@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 
-class Header extends Component{
+class HeaderBar extends Component{
     render(){
         return (
           <View style={styles.statusBarContainer}>
@@ -20,8 +20,8 @@ class Header extends Component{
 const styles = StyleSheet.create({
   statusBarContainer: {
     height:20,
-    backgroundColor: '#1B1E2C'
+    backgroundColor: '#08E5E3'
   }
 });
 
-export default Header;
+export default HeaderBar;

@@ -5,15 +5,15 @@ export default class MatchService
   static getMatches(){
    var _this = this;
    var matchesUrl = 'https://api.tapinguide.com/api/activematches/';
-   
+
    return fetch(matchesUrl)
       .then((response) => response.json())
       .then((matches) => {
         var notCompleted = [];
         var completed = [];
         for(var i = 0, numResults = matches.length; i < numResults; i++){
-          if(matches[i].status.description.toLowerCase() === "ft" 
-            || matches[i].status.description.toLowerCase() === "aet" 
+          if(matches[i].status.description.toLowerCase() === "ft"
+            || matches[i].status.description.toLowerCase() === "aet"
             || matches[i].status.description.toLowerCase() === "pen."
             || matches[i].status.description.toLowerCase() === "cancl."){
             completed.push(matches[i]);
@@ -44,4 +44,3 @@ export default class MatchService
         });
   }
 }
-    

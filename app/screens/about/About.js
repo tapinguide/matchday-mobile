@@ -14,7 +14,7 @@ import {
 
 import { width, height, totalSize } from 'react-native-dimension';
 
-import Header from '../../components/Header/Header';
+import HeaderBar from '../../components/HeaderBar/HeaderBar';
 
 import tapinLogo from './images/logo_full.png';
 import clint from './images/clint.jpg';
