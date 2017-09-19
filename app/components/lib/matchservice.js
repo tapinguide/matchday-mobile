@@ -4,8 +4,8 @@ export default class MatchService
 {
   static getMatches(){
    var _this = this;
-   // var matchesUrl = 'https://api.tapinguide.demo.nordicdev.io/api/activematches/';
-   var matchesUrl = 'https://api.tapinguide.com/api/activematches/';
+   var matchesUrl = 'https://api.tapinguide.demo.nordicdev.io/api/activematches/';
+   // var matchesUrl = 'https://api.tapinguide.com/api/activematches/';
 
    return fetch(matchesUrl)
       .then((response) => response.json())

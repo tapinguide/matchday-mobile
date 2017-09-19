@@ -56,7 +56,6 @@ export default class TVVenueDetails extends Component {
 
 const styles = StyleSheet.create({
     tvVenue: {
-      backgroundColor: 'red',
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
@@ -66,7 +65,8 @@ const styles = StyleSheet.create({
       marginBottom: 8
     },
     tvText: {
-      backgroundColor: 'red',
+      flex: 1,
+      flexDirection: 'column',
       fontFamily: 'poppins-regular',
       fontSize: 11,
       lineHeight: 18,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
       paddingLeft: 8
     },
     matchDetailContainer: {
-      backgroundColor: 'blue',
+      flex: 1,
       padding: 8,
     }
   })
