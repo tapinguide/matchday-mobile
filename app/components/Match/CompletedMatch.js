@@ -75,11 +75,16 @@ render() {
 
     //For some reason the HTMLView component needs to have the content wrapped otherwise it will add a line break for
     //each tag.
-    var htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
+    var htmlContent = '';
+    if(match.highlightsUrl) {
+      htmlContent = "<htmlcontent>" + '<a href="' + match.highlightsUrl + '" target="_blank">Highlights</a>. ' + postMatchDetails + "</htmlcontent>";
+    } else {
+      htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
+    }
+
     return (
       <TouchableHighlight
         onPress={() => this._onPressButton()}
-        // onPress={(event) => this.props.handleMatchPress(event)}
         activeOpacity={1}
         ref="mycomponent"
       >
@@ -174,7 +179,7 @@ const styles = StyleSheet.create({
     height: 48,
     width: 43,
     position: "absolute",
-    top: 0, 
+    top: 0,
     left: 0,
     zIndex: 1
   },
@@ -183,7 +188,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '700',
     position: 'absolute',
-    top: 6, 
+    top: 6,
     left: 6,
     zIndex: 2
   },
@@ -195,5 +200,5 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     textAlign: 'center',
     paddingTop: 5
-  }
+  },
 })
