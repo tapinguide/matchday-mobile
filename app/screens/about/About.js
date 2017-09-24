@@ -44,7 +44,7 @@ export default class About extends React.Component {
   render() {
     return (
       <View style={styles.aboutContainer}>
-        <Header />
+        <HeaderBar />
         <ScrollView>
           <View style={styles.content}>
             <TouchableHighlight
@@ -96,7 +96,7 @@ export default class About extends React.Component {
                     style={styles.twitterBtn}
                   />
                 </TouchableHighlight>
-                <Text style={styles.paragraph, styles.teamMemberBioText}>
+                <Text style={[styles.paragraph, styles.teamMemberBioText]}>
                   <Text style={styles.strong}>Curt Baker</Text> Defensive Midfielder. Strategist. Hoping for another Friendly Fires album.
                 </Text>
               </View>
@@ -117,7 +117,7 @@ export default class About extends React.Component {
                     style={styles.twitterBtn}
                   />
                 </TouchableHighlight>
-                <Text style={styles.paragraph, styles.teamMemberBioText}>
+                <Text style={[styles.paragraph, styles.teamMemberBioText]}>
                   <Text style={styles.strong}>Mike Arney</Text> Design, UX and a bit of Front-end development. Nerd.. which is fine. Dad of Jámes.
                 </Text>
               </View>
@@ -138,7 +138,7 @@ export default class About extends React.Component {
                     style={styles.twitterBtn}
                   />
                 </TouchableHighlight>
-                <Text style={styles.paragraph, styles.teamMemberBioText}>
+                <Text style={[styles.paragraph, styles.teamMemberBioText]}>
                   <Text style={styles.strong}>Clint McMahon</Text>  Code, soccer, Seinfeld quotes, yadda yadda yadda.
                 </Text>
               </View>

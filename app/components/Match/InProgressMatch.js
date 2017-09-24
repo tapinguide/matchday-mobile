@@ -169,7 +169,7 @@ render() {
                 stylesheet={styles}
                 />
             <Panel title="" underlayColor="#fff" panelExpanded={this.state.panelExpanded}>
-             
+              <TVVenueDetails tvDetails={tvDetails} venue={venue}/>
               {this.getTimelineEvents(events)}
             </Panel>
           </View>
