@@ -44,7 +44,7 @@ export default class About extends React.Component {
   render() {
     return (
       <View style={styles.aboutContainer}>
-        <Header />
+        <HeaderBar />
         <ScrollView>
           <View style={styles.content}>
             <TouchableHighlight
