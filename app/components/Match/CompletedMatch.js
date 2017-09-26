@@ -77,7 +77,7 @@ render() {
     //each tag.
     var htmlContent = '';
     if(match.highlightsUrl) {
-      htmlContent = "<htmlcontent>" + '<a href="' + match.highlightsUrl + '" target="_blank">Highlights</a>. ' + postMatchDetails + "</htmlcontent>";
+      htmlContent = "<htmlcontent>" + '<a href="' + match.highlightsUrl + '" style="color:#00c6e7;" target="_blank" rel="noopener">Highlights</a>. ' + postMatchDetails + "</htmlcontent>";
     } else {
       htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
     }
