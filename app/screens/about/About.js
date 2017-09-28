@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     marginTop: 35
   },
   hyperlink: {
-    color: '#18EFC6'
+    color: '#00c6e7'
   },
   teamPhoto: {
     height: 310,
