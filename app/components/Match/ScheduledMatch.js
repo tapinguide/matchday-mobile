@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   htmlcontent: {
     fontFamily: 'poppins-regular',
     paddingTop: 7,
-    fontSize: 12,
+    fontSize: 14,
     lineHeight: 18,
   },
   matchNumberContainer: {
@@ -169,5 +169,11 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins-regular',
     fontSize: 12,
     lineHeight: 18
+  },
+  b: {
+    fontFamily: 'poppins-bold'
+  },
+  strong: {
+    fontFamily: 'poppins-bold'
   }
 })

@@ -86,7 +86,7 @@ export default class Link extends Component {
 const styles = StyleSheet.create({
   htmlcontent: {
     fontFamily: 'poppins-regular',
-    paddingTop: 7,
+    paddingTop: 0,
     fontSize: 13,
     lineHeight: 18,
     fontWeight: '300'

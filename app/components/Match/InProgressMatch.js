@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   htmlcontent: {
     fontFamily: 'poppins-regular',
     paddingTop: 7,
-    fontSize: 12,
+    fontSize: 14,
     lineHeight: 18
   },
   numberbg: {
@@ -210,5 +210,11 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     textAlign: 'center',
     paddingTop: 5
+  },
+  b: {
+    fontFamily: 'poppins-bold'
+  },
+  strong: {
+    fontFamily: 'poppins-bold'
   }
 })
