@@ -12,22 +12,20 @@ import {
 import moment from 'moment';
 
 import Match from './Match';
-import Link from '../Link/Link';
+import MustReadWatch from '../MustReadWatch/MustReadWatch';
 import Loading from '../Loading/Loading';
 import HeaderBar from '../HeaderBar/HeaderBar';
 import MatchesHeader from '../MatchesHeader/MatchesHeader';
 import Footer from '../Footer/Footer';
 import FadeInView from 'react-native-fade-in-view';
 
-import mustReadIcon from '../Link/images/mustread.png';
-import mustWatchIcon from '../Link/images/mustwatch.png';
 import MatchService from '../lib/matchservice';
 
 export default class Matches extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      links: [],
+      readWatch: [],
       dataSource: new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
           }),
@@ -89,9 +87,9 @@ updateListView() {
       });
       _this.setMatchDateRange();
     }).then(()=>{
-        MatchService.getLinks().then(function(links){
+        MatchService.getReadWatch().then(function(readWatch){
           _this.setState({
-            links: links,
+            readWatch: readWatch,
             isLoading: false
           });
         })
@@ -114,24 +112,11 @@ updateListView() {
   }
 
   _renderFooter(){
-    var links = this.state.links;
-
-    var mustRead;
-    var mustWatch;
-    for(var i = 0, numResults = links.length; i < numResults; i++){
-        if(links[i].shortCode === 'READ'){
-          mustRead = links[i];
-        }
-        else if(links[i].shortCode === 'WATCH')
-        {
-          mustWatch = links[i];
-        }
-    }
-
+    var readWatch = this.state.readWatch;
     return (
           <View>
-            <Link link={mustRead} header="MUST READ" icon={mustReadIcon} />
-            <Link link={mustWatch} header="MUST WATCH" icon={mustWatchIcon} />
+            <MustReadWatch link={readWatch[0]} />
+            <MustReadWatch link={readWatch[1]} />
           </View>
     );
   }

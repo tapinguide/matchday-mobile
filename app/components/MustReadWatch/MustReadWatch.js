@@ -2,18 +2,26 @@ import React, { Component } from 'react';
 import {Text, View, Image, StyleSheet, TouchableHighlight, Linking } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import sidearrow from './images/sidearrow.png';
+import mustReadIcon from './images/mustread.png'
+import mustWatchIcon from './images/mustwatch.png'
 
-export default class Link extends Component {
+export default class MustReadWatch extends Component {
 
     openWindow(){
         var url = this.props.link.url;
         Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
     render(){
-        var link = this.props.link;
-        var header = this.props.header;
-        var icon = this.props.icon;
-        var htmlContent = "<htmlcontent>" + link.text + "</htmlcontent>";
+        var mustReadLink = this.props.link;
+        var header = mustReadLink.header;
+        var icon;
+        if(mustReadLink.mustType === 'read'){
+            icon = mustReadIcon;
+        }
+        else{
+            icon = mustWatchIcon;
+        }
+        var htmlContent = "<htmlcontent>" + mustReadLink.text + "</htmlcontent>";
         var content = (
             <TouchableHighlight onPress={this.openWindow.bind(this)}>
                 <View style={{

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 
 export default class MatchService
 {
+  //static domain = "http://localhost:8000";
+  static domain = "https://api.tapinguide.com";
+
   static getMatches(){
    var _this = this;
-   // var matchesUrl = 'https://api.tapinguide.demo.nordicdev.io/api/activematches/';
-   var matchesUrl = 'https://api.tapinguide.com/api/activematches/';
+   var matchesUrl = this.domain + '/activematches/';
 
    return fetch(matchesUrl)
       .then((response) => response.json())
@@ -36,8 +38,8 @@ export default class MatchService
       });
   }
 
-  static getLinks(){
-    var linksUrl = 'https://api.tapinguide.com/api/links/';
+  static getReadWatch(){
+    var linksUrl = this.domain + '/mustreadwatch/';
     return fetch(linksUrl)
         .then((response) => response.json())
         .then((responseData) => {
