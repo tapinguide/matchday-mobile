@@ -30,12 +30,13 @@ export default class InProgressMatch extends Component {
     if(events.length === 0){
      return (
         <Text style={{
+          color: '#868686',
           fontFamily: 'poppins-regular',
-          paddingLeft:0,
-          fontSize: 12,
+          fontSize: 11,
+          letterSpacing: 1.5,
           lineHeight: 18,
-          fontWeight: '300'
-        }}>Live match data to come</Text>
+          textAlign: 'center'
+        }}>LIVE MATCH DATA TO COME</Text>
       );
     }
     else{

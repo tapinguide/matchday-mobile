@@ -28,7 +28,20 @@ export default class ScheduledMatch extends Component {
     var tvDetails = this.props.tvDetails;
     var venue = this.props.venue;
     var preMatchDetails = match.preMatchDetails;
-    var matchDate = moment.utc(match.matchTime).local().format('ddd M/D h:mma').toUpperCase();
+    var todaysDate = moment().format('MM/DD/YYYY');
+    var tomorrowsDate = moment().add(1, 'days').format('MM/DD/YYYY');
+
+    var matchDate = '';
+    var localMatchDate = moment.utc(match.matchTime).local();
+    if(localMatchDate.format('MM/DD/YYYY') === todaysDate){
+      matchDate = 'TODAY ' + localMatchDate.format('h:mma').toUpperCase();
+    }
+    else if(localMatchDate.format('MM/DD/YYYY') === tomorrowsDate){
+      matchDate = 'TOMORROW ' + localMatchDate.format('h:mma').toUpperCase();
+    }
+    else{
+      matchDate = localMatchDate.format('ddd M/D h:mma').toUpperCase();
+    }
 
     var htmlContent = "<htmlcontent>" + preMatchDetails + "</htmlcontent>";
     return (
@@ -73,7 +86,7 @@ export default class ScheduledMatch extends Component {
               <View style={styles.panel}>
                 <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
                   <TVVenueDetails tvDetails={tvDetails} venue={venue}/>
-                  <Text style={styles.liveMatchData}>Live match data to come</Text>
+                  <Text style={styles.liveMatchData}>LIVE MATCH DATA TO COME</Text>
                 </Panel>
               </View>
           </View>
@@ -166,9 +179,12 @@ const styles = StyleSheet.create({
     marginLeft:35
   },
   liveMatchData: {
+    color: '#868686',
     fontFamily: 'poppins-regular',
-    fontSize: 12,
-    lineHeight: 18
+    fontSize: 11,
+    letterSpacing: 1.5,
+    lineHeight: 18,
+    textAlign: 'center'
   },
   b: {
     fontFamily: 'poppins-bold'
