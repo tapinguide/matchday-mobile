@@ -82,6 +82,8 @@ render() {
       htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
     }
 
+    let penaltyKicks = match.homeClubPenalties || match.visitorClubPenalties ? true : false;
+
     return (
       <TouchableHighlight
         onPress={() => this._onPressButton()}
@@ -117,34 +119,31 @@ render() {
           paddingRight: 60,
           paddingLeft:60
         }}>
-          <Text style={{
-            fontSize: 32,
-            fontWeight: '700',
-            fontFamily: 'poppins-semi-bold'
-          }}>{match.homeClubScore}</Text>
+          <Text style={penaltyKicks ? [styles.scorePens, styles.scorePensHome] : styles.scoreFormatting}>
+            {match.homeClubScore}{penaltyKicks ? '(' + match.homeClubPenalties + ')' : '' }
+          </Text>
           <View style={{
             justifyContent: 'space-around',
-          alignItems: 'center',
+            alignItems: 'center',
           }}>
-            <Image
-              style={{width: 40, height: 40}}
-              source={{uri: match.homeClub.crest}} />
-              <Text style={styles.shortName}>{match.homeClub.shortName}</Text>
-            </View>
-          <Text style={{
-              fontFamily: 'poppins-semi-bold',
-              fontSize: 14
-            }}>FT</Text>
+              <Image
+                style={{width: 40, height: 40}}
+                source={{uri: match.homeClub.crest}}
+              />
+              <Text style={styles.shortName}>
+                {match.homeClub.shortName}
+              </Text>
+          </View>
+          <Text style={penaltyKicks ? styles.FTPens : styles.FT}>FT</Text>
             <View>
           <Image
             style={{width: 40, height: 40}}
             source={{uri: match.visitorClub.crest}} />
             <Text style={styles.shortName}>{match.visitorClub.shortName}</Text>
           </View>
-          <Text style={{
-            fontSize: 32,
-            fontFamily: 'poppins-semi-bold'
-          }}>{match.visitorClubScore}</Text>
+          <Text style={penaltyKicks ? [styles.scorePens, styles.scorePensVisitor] : styles.scoreFormatting}>
+            {match.visitorClubScore}{penaltyKicks ? '(' + match.visitorClubPenalties + ')' : '' }
+          </Text>
         </View>
         <View
           style={{
@@ -182,6 +181,32 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     zIndex: 1
+  },
+  scorePens: {
+    fontSize: 26,
+    fontWeight: '700',
+    fontFamily: 'poppins-semi-bold'
+  },
+  scorePensHome: {
+    marginRight: 10
+  },
+  scorePensVisitor: {
+    marginLeft: 10
+  },
+  scoreFormatting: {
+    fontSize: 32,
+    fontWeight: '700',
+    fontFamily: 'poppins-semi-bold'
+  },
+  FT: {
+    fontFamily: 'poppins-semi-bold',
+    fontSize: 14,
+  },
+  FTPens: {
+    fontFamily: 'poppins-semi-bold',
+    fontSize: 14,
+    marginRight: 20,
+    marginLeft: 20
   },
   matchNumber: {
     backgroundColor: 'rgba(255, 255, 255, 0)',
