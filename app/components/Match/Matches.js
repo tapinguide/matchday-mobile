@@ -17,7 +17,6 @@ import Loading from '../Loading/Loading';
 import HeaderBar from '../HeaderBar/HeaderBar';
 import MatchesHeader from '../MatchesHeader/MatchesHeader';
 import Footer from '../Footer/Footer';
-import FadeInView from 'react-native-fade-in-view';
 
 import MatchService from '../lib/matchservice';
 
@@ -66,7 +65,7 @@ export default class Matches extends Component {
     var lastMatchDate = moment.utc(sortedMatches[sortedMatches.length - 1].matchTime).local();
 
     //check if the matches are in the same month; else display different months
-    if(firstMatchDate.month === lastMatchDate.month){
+    if(firstMatchDate.format('M') === lastMatchDate.format('M')){
       matchDateRange = firstMatchDate.format('MMMM D').toUpperCase() + '-' + lastMatchDate.local().format('D, YYYY').toUpperCase();
     }
     else{
@@ -135,8 +134,7 @@ updateListView() {
     }
 
     return (
-      <FadeInView
-        duration={900}
+      <View
         style={{flex: 1, flexDirection: 'column'}}
       >
         <HeaderBar />
@@ -154,7 +152,7 @@ updateListView() {
           />
           <Footer navigation={this.props.navigation}/>
         </ScrollView>
-      </FadeInView>
+      </View>
     );
   }
 }
