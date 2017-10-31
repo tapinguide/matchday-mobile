@@ -109,16 +109,7 @@ render() {
           <Image source={require('./images/rectangle.png')} style={styles.numberbg}>
           </Image>
         </View>
-        <View style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          paddingTop: 20,
-          paddingBottom:20,
-          paddingRight: 60,
-          paddingLeft:60
-        }}>
+        <View style={penaltyKicks ? [styles.cardHeader, styles.cardHeaderPenalties] : styles.cardHeader}>
           <Text style={penaltyKicks ? [styles.scorePens, styles.scorePensHome] : styles.scoreFormatting}>
             {match.homeClubScore}{penaltyKicks ? '(' + match.homeClubPenalties + ')' : '' }
           </Text>
@@ -134,7 +125,9 @@ render() {
                 {match.homeClub.shortName}
               </Text>
           </View>
-          <Text style={penaltyKicks ? styles.FTPens : styles.FT}>FT</Text>
+          <Text style={penaltyKicks ? styles.FTPens : styles.FT}>
+            {penaltyKicks ? 'FT (P)' : 'FT'}
+          </Text>
             <View>
           <Image
             style={{width: 40, height: 40}}
@@ -174,6 +167,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 18
   },
+  cardHeader: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingTop: 20,
+    paddingBottom:20,
+    paddingRight: 60,
+    paddingLeft:60
+  },
+  cardHeaderPenalties: {
+    paddingRight: 40,
+    paddingLeft: 40
+  },
   numberbg: {
     height: 48,
     width: 43,
@@ -188,10 +195,10 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins-semi-bold'
   },
   scorePensHome: {
-    marginRight: 10
+    marginRight: 20
   },
   scorePensVisitor: {
-    marginLeft: 10
+    marginLeft: 20
   },
   scoreFormatting: {
     fontSize: 32,
