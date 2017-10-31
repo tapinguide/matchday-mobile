@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    width: '30%'
+    width: '30%',
+    marginTop: 22
   },
   infoContainer: {
     flexDirection: 'column',
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     height: 48,
     width: 43,
     position: 'absolute',
-    top: 0, 
+    top: 0,
     left: 0,
     zIndex: 1
   },
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0)',
     color: '#FFFFFF',
     position: 'absolute',
-    top: 6, 
+    top: 6,
     left: 6,
     zIndex: 2
   },
