@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView, TouchableHighlight } from 'react-native';
+import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView, TouchableHighlight, TouchableOpacity, Linking } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 import Event from '../Event/Event';
 import Panel from '../Panel/Panel';
 import TVVenueDetails from './TVVenueDetails';
+import { LinearGradient } from 'expo';
 
 export default class CompletedMatch extends Component {
   constructor(props){
       super(props);
       this.state = {
-          panelExpanded: false
+          panelExpanded: false,
+          highlightsUrl: ''
       };
+  }
+
+  componentDidMount() {
+
+    this.setState(state => ({
+      ...state,
+      highlightsUrl: this.props.match.highlightsUrl
+    }))
   }
 
   _onPressButton = (event) => {
@@ -27,16 +37,21 @@ export default class CompletedMatch extends Component {
         console.log('Y offset to page: ' + py)
     })
 
+    this.setState(state => ({
+      ...state,
+      panelExpanded: !this.state.panelExpanded
+    }))
 
-    this.setState(
-      {
-        panelExpanded: !this.state.panelExpanded
-      }
-    );
   }
 
   onLayout = (event) => {
     console.log('on layout: ', event.nativeEvent.layout);
+  }
+
+  handleHighlightsPress = () => {
+    let { highlightsUrl } = this.state;
+
+    Linking.openURL(highlightsUrl).catch(err => console.error('An error occurred', err));
   }
 
 render() {
@@ -75,12 +90,7 @@ render() {
 
     //For some reason the HTMLView component needs to have the content wrapped otherwise it will add a line break for
     //each tag.
-    var htmlContent = '';
-    if(match.highlightsUrl) {
-      htmlContent = "<htmlcontent>" + '<a href="' + match.highlightsUrl + '" style="color:#00c6e7;" target="_blank" rel="noopener">Highlights</a>. ' + postMatchDetails + "</htmlcontent>";
-    } else {
-      htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
-    }
+    var htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
 
     let penaltyKicks = match.homeClubPenalties || match.visitorClubPenalties ? true : false;
 
@@ -143,11 +153,33 @@ render() {
           flex:1,
           alignItems:'center'
         }}>
-          <View style={{width:'84%'}}>
-            <HTMLView
-              value={htmlContent}
-              stylesheet={styles}
-              />
+          <View style={{width:'94%'}}>
+            <View style={styles.postMatchSummary}>
+              <View style={styles.highlightsColumn}>
+                <TouchableOpacity
+                  onPress={(event) => this.handleHighlightsPress(event)}
+                  style={styles.highlightsButton}
+                >
+                  <LinearGradient
+                    colors={['#27E8CD', '#23D3EA']}
+                    style={styles.highlightsIconContainer}
+                  >
+                    <Image
+                      style={{width: 16, height: 11}}
+                      source={require('./images/video-camera.png')}
+                    />
+                  </LinearGradient>
+                  <Text style={styles.highlightsButtonText}>
+                    Highlights
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <HTMLView
+                value={htmlContent}
+                stylesheet={styles}
+                style={styles.postMatchSummaryHTML}
+                />
+            </View>
             <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
               <TVVenueDetails tvDetails={tvDetails} venue={venue}/>
               {events}
@@ -166,6 +198,41 @@ const styles = StyleSheet.create({
     paddingTop: 7,
     fontSize: 14,
     lineHeight: 18
+  },
+  postMatchSummary: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  highlightsColumn: {
+    width: 75,
+    marginRight: '5%'
+  },
+  postMatchSummaryHTML: {
+    width: '70%',
+  },
+  highlightsButton: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  highlightsButtonText: {
+    fontSize: 10,
+    textAlign: 'center',
+  },
+  highlightsIconContainer: {
+    backgroundColor: 'transparent',
+    borderRadius: 3,
+    padding: 5,
+    borderColor: 'transparent',
+    width: 30,
+    flex: 1,
+    alignItems: 'center',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginBottom: 5
   },
   cardHeader: {
     flex: 1,
