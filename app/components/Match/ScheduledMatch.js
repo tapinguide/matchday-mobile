@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     width: '30%',
-    marginTop: 22
+    marginTop: 34
   },
   infoContainer: {
     flexDirection: 'column',
