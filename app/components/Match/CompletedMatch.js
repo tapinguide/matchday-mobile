@@ -57,6 +57,7 @@ export default class CompletedMatch extends Component {
 render() {
 
     let { match, matchIndex, tvDetails, venue } = this.props;
+    let { highlightsUrl } = this.state;
 
     var sortedEvents = match.events.sort((a,b) => {
       return a.id - b.id
@@ -153,31 +154,33 @@ render() {
           flex:1,
           alignItems:'center'
         }}>
-          <View style={{width:'94%'}}>
+          <View style={highlightsUrl ? {width:'94%'} : {width:'84%'}}>
             <View style={styles.postMatchSummary}>
-              <View style={styles.highlightsColumn}>
-                <TouchableOpacity
-                  onPress={(event) => this.handleHighlightsPress(event)}
-                  style={styles.highlightsButton}
-                >
-                  <LinearGradient
-                    colors={['#27E8CD', '#23D3EA']}
-                    style={styles.highlightsIconContainer}
+              {highlightsUrl && (
+                <View style={styles.highlightsColumn}>
+                  <TouchableOpacity
+                    onPress={(event) => this.handleHighlightsPress(event)}
+                    style={styles.highlightsButton}
                   >
-                    <Image
-                      style={{width: 16, height: 11}}
-                      source={require('./images/video-camera.png')}
-                    />
-                  </LinearGradient>
-                  <Text style={styles.highlightsButtonText}>
-                    Highlights
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                    <LinearGradient
+                      colors={['#27E8CD', '#23D3EA']}
+                      style={styles.highlightsIconContainer}
+                    >
+                      <Image
+                        style={{width: 16, height: 11}}
+                        source={require('./images/video-camera.png')}
+                      />
+                    </LinearGradient>
+                    <Text style={styles.highlightsButtonText}>
+                      Highlights
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              )}
               <HTMLView
                 value={htmlContent}
                 stylesheet={styles}
-                style={styles.postMatchSummaryHTML}
+                style={highlightsUrl ? styles.postMatchSummaryTextWithHighlights : styles.postMatchSummaryText}
                 />
             </View>
             <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
@@ -207,8 +210,11 @@ const styles = StyleSheet.create({
     width: 75,
     marginRight: '5%'
   },
-  postMatchSummaryHTML: {
+  postMatchSummaryTextWithHighlights: {
     width: '70%',
+  },
+  postMatchSummaryText: {
+    width: '100%',
   },
   highlightsButton: {
     paddingLeft: 10,
@@ -217,6 +223,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     borderWidth: 1,
     borderColor: '#E0E0E0',
+    marginTop: 8,
   },
   highlightsButtonText: {
     fontSize: 10,
