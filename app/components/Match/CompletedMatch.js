@@ -94,7 +94,31 @@ render() {
     var htmlContent = "<htmlcontent>" + postMatchDetails + "</htmlcontent>";
 
     let penaltyKicks = match.homeClubPenalties || match.visitorClubPenalties ? true : false;
-
+    let highlights = null;
+    if (highlightsUrl){
+      highlights = (<View style={styles.highlightsColumn}>
+        <TouchableOpacity
+          onPress={(event) => this.handleHighlightsPress(event)}
+          style={styles.highlightsButton}
+        >
+          <LinearGradient
+            colors={['#27E8CD', '#23D3EA']}
+            style={styles.highlightsIconContainer}
+          >
+            <Image
+              style={{width: 16, height: 11}}
+              source={require('./images/video-camera.png')}
+            />
+          </LinearGradient>
+          <Text style={styles.highlightsButtonText}>
+            Highlights
+          </Text>
+        </TouchableOpacity>
+      </View>);
+    }
+    else{
+      highlights = <View></View>;
+    }
     return (
       <TouchableHighlight
         onPress={() => this._onPressButton()}
@@ -156,27 +180,7 @@ render() {
         }}>
           <View style={highlightsUrl ? {width:'94%'} : {width:'84%'}}>
             <View style={styles.postMatchSummary}>
-              {highlightsUrl && (
-                <View style={styles.highlightsColumn}>
-                  <TouchableOpacity
-                    onPress={(event) => this.handleHighlightsPress(event)}
-                    style={styles.highlightsButton}
-                  >
-                    <LinearGradient
-                      colors={['#27E8CD', '#23D3EA']}
-                      style={styles.highlightsIconContainer}
-                    >
-                      <Image
-                        style={{width: 16, height: 11}}
-                        source={require('./images/video-camera.png')}
-                      />
-                    </LinearGradient>
-                    <Text style={styles.highlightsButtonText}>
-                      Highlights
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              )}
+              {highlights}
               <HTMLView
                 value={htmlContent}
                 stylesheet={styles}
