@@ -86,7 +86,7 @@ export default class NotificationButton extends Component {
   }
 
   render() {
-    const {notificationId} = this.state
+    const { notificationId } = this.state
     return (
       <TouchableOpacity style={styles.button} onPress={this._onNotificationPress} activeOpacity={1}>
         <Text>{notificationId ? 'unsubscribe' : 'subscribe'}</Text>
@@ -100,12 +100,12 @@ NotificationButton.PropTypes = {
     id: PropTypes.string,
     matchTime: PropTypes.string,
     homeClub: PropTypes.shape({
-      name: PropTypes.string
+      name: PropTypes.string,
     }),
     visitorClub: PropTypes.shape({
-      name: PropTypes.string
-    })
-  }).isRequired
+      name: PropTypes.string,
+    }),
+  }).isRequired,
 }
 
 const styles = StyleSheet.create({

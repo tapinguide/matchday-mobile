@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Alert, AsyncStorage, ListView, Text, View, StyleSheet, Image, WebView, TouchableHighlight } from 'react-native';
+import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView,TouchableHighlight } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 import Panel from '../Panel/Panel';
