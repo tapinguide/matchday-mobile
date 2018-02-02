@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView,TouchableHighlight } from 'react-native';
+import { ActivityIndicator, Alert, AsyncStorage, ListView, Text, View, StyleSheet, Image, WebView, TouchableHighlight } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 import Panel from '../Panel/Panel';
 import TVVenueDetails from './TVVenueDetails';
+import NotificationButton from './NotificationButton';
 
 export default class ScheduledMatch extends Component {
     constructor(props){
@@ -50,6 +51,7 @@ export default class ScheduledMatch extends Component {
         activeOpacity={1}
       >
          <View style={styles.match}>
+              <NotificationButton match={match} tvDetails={tvDetails} />
               <View style={styles.contentContainer}>
                 <View style={styles.matchNumberContainer}>
                   <Text style={styles.matchNumber}>{matchIndex}</Text>
@@ -108,6 +110,7 @@ const styles = StyleSheet.create({
     borderLeftColor: '#e7e7e7',
   },
   contentContainer:{
+    backgroundColor: 'transparent',
     flex: 1,
     flexDirection: 'row',
     width: '90%',
