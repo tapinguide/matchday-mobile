@@ -119,9 +119,9 @@ export default class NotificationButton extends Component {
   }
 }
 
-NotificationButton.PropTypes = {
+NotificationButton.propTypes = {
   match: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.int,
     matchTime: PropTypes.string,
     homeClub: PropTypes.shape({
       name: PropTypes.string,
