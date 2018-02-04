@@ -6,6 +6,9 @@ import {
   View
 } from 'react-native';
 
+import { ifIphoneX } from 'react-native-iphone-x-helper'
+
+// Assets
 import tapinLogo from './images/logo_full.png';
 
 class MatchesHeader extends Component{
@@ -26,7 +29,7 @@ class MatchesHeader extends Component{
 
 const styles = StyleSheet.create({
   matchesHeaderContainer: {
-    paddingTop: 8,
+    paddingTop: 15,
     paddingBottom: 8,
     paddingRight: 10,
     paddingLeft: 10,
