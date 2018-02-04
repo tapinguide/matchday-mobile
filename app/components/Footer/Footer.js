@@ -11,21 +11,26 @@ import {
 import facebookLogo from './images/facebook-logo.png';
 import twitterLogo from './images/twitter-logo.png';
 
+import NewsletterSubscribeForm from '../NewsletterSubscribeForm';
+
 class Footer extends Component{
   constructor(props) {
     super(props);
   }
+
   handlePress(url){
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
+
   handleAboutPress = () => {
     this.props.navigation.navigate('About');
   }
+
   render(){
 
     return (
       <View style={styles.footerContainer}>
-
+        <NewsletterSubscribeForm/>
         <Text
           onPress={() => this.handleAboutPress()}
           style={styles.footerLink}>
