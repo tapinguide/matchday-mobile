@@ -9,7 +9,8 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Form
 } from 'react-native';
 
 const getAjaxUrl = url => url.replace('/post?', '/post-json?')
@@ -24,63 +25,132 @@ class NewsletterSubscribeForm extends Component {
     action: "https://tapinguide.us14.list-manage.com/subscribe/post?u=14e98619ae4c42af11b4222bb&id=8e0497d99f"
   }
 
-  onSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = () => {
+    const { email } = this.state.input;
+
 
     // Check field for properly formatted email
-    if (!this.input.value || this.input.value.length < 5 || this.input.value.indexOf("@") === -1) {
-      this.setState({
-        status: "error"
-      })
-      return
-    }
+    // if (!email || email.length < 5 || email.indexOf("@") === -1) {
+    //   this.setState({
+    //     status: "error"
+    //   })
+    //   return;
+    // }
+    console.log('email: ', email)
 
-    const url = getAjaxUrl(this.state.action) + `&EMAIL=${encodeURIComponent(this.input.value)}`;
+    console.log('hmm...', this.getMoviesFromApiAsync());
 
-    this.setState(
-      {
-        status: "sending",
-        msg: null
-      }, () => jsonp(url, {
-        param: "c"
-      }, (error, data) => {
-        if (error) {
-          console.log('error: ', error);
-          this.setState({
-            status: 'error',
-            msg: error
-          })
-        } else if (data.result !== 'success') {
-          this.setState({
-            status: 'error',
-            msg: data.msg
-          })
-        } else {
-          this.setState({
-            status: 'success',
-            formIsShown: false,
-            msg: data.msg
-          })
-        }
-      })
-    ) // End this.setState()
+    const url = getAjaxUrl(this.state.action) + `&EMAIL=${encodeURIComponent(email)}`;
+
+    this.sendMailchimpThing(url);
+
+    // this.setState({
+    //     status: "sending",
+    //     msg: null
+    //   }, () => jsonp(url, {
+    //     param: "c"
+    //   }, (error, data) => {
+    //     if (error) {
+    //       console.log('error: ', error);
+    //       this.setState({
+    //         status: 'error',
+    //         msg: error
+    //       })
+    //     } else if (data.result !== 'success') {
+    //       console.log('ERROR')
+    //       this.setState({
+    //         status: 'error',
+    //         msg: data.msg
+    //       })
+    //     } else {
+    //       this.setState({
+    //         status: 'success',
+    //         formIsShown: false,
+    //         msg: data.msg
+    //       })
+    //     }
+    //   })
+    // ) // End this.setState()
   } // End onSubmit()
 
-  renderForm() {
-    let { status } = this.state;
+  sendMailchimpThing(url) {
 
-    if (true
-      // this.state.formIsShown
-      ) {
+    // payload is your post data
+   const payload = {param: 'c'};
+   const options = {
+     method: 'POST',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify(payload),
+     cors: true, // allow cross-origin HTTP request
+     credentials: 'same-origin' // This is similar to XHR’s withCredentials flag
+   };
+
+   // SEND REQUEST
+   fetch(url, options).then((response) => {
+     // TODO
+     console.log('response: ', response)
+   }).catch((error) => {
+     // TODO
+   });
+
+
+
+    // jsonp(url, {
+    //     param: "c"
+    //   }, (error, data) => {
+    //     if (error) {
+    //       console.log('error: ', error);
+    //       // this.setState({
+    //       //   status: 'error',
+    //       //   msg: error
+    //       // })
+    //     } else if (data.result !== 'success') {
+    //       console.log('ERROR')
+    //       // this.setState({
+    //       //   status: 'error',
+    //       //   msg: data.msg
+    //       // })
+    //     } else {
+    //       console.log('scuccjcu')
+    //       // this.setState({
+    //       //   status: 'success',
+    //       //   formIsShown: false,
+    //       //   msg: data.msg
+    //       // })
+    //     }
+    //   })
+  }
+
+  getMoviesFromApiAsync() {
+    return fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log('response: ', responseJson)
+        return responseJson.movies;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  renderForm() {
+    let { status, input, formIsShown } = this.state;
+
+    if (formIsShown) {
       return(
         <View>
           <TextInput
             style={styles.input}
             placeholder="Newsletter"
+            onChangeText={(text) => this.handleInputChange({email: text})}
+            value={input.email}
           />
           <TouchableOpacity
-            // disabled={this.state.status === "sending" || this.state.status === "success"}
-            onPress={this.onSubmit}
+            disabled={status === "sending" || status === "success"}
+            onPress={this.handleSubmit}
             style={styles.button}
           >
             <Text style={styles.buttonText}>
@@ -115,32 +185,31 @@ class NewsletterSubscribeForm extends Component {
     }
   }
 
-  // renderMessage() {
-  //   let { status } = this.state;
+  renderMessage() {
+    let { status } = this.state;
 
-  //   if (status === "success") {
-  //     return (
-  //       <div className="message message-confirmation">
-  //         Thanks for subscribing to Tap In!
-  //       </div>
-  //     )
-  //   } else if (status === "error") {
-  //     return(
-  //       <p className="message message-error">
-  //         {this.renderErrorMessage()}
-  //       </p>
-  //     )
-  //   }
-  // }
+    if (status === "success") {
+      return (
+        <Text style={styles.errorMessage}>
+          Thanks for subscribing to Tap In!
+        </Text>
+      )
+    } else if (status === "error") {
+      return(
+        <Text style={styles.errorMessage}>
+          {this.renderErrorMessage()}
+        </Text>
+      )
+    }
+  }
 
   render() {
     return (
       <View
-
         style={styles.form}
-
       >
         {this.renderForm()}
+        {this.renderMessage()}
       </View>
     )
   }
@@ -162,6 +231,9 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#FFFFFF',
     padding: 10,
+  },
+  errorMessage: {
+    color: '#FF0000'
   }
 });
 

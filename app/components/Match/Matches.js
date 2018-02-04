@@ -140,14 +140,15 @@ updateListView() {
         style={{flex: 1, flexDirection: 'column'}}
       >
         <HeaderBar />
-        <ScrollView
-          onScroll={this.handleScroll}
-          scrollEventThrottle={16}
-          style={{flex: 1, flexDirection: 'column'}}
+        <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset={50}
+          style={{ flex: 1 }}
         >
-          <KeyboardAvoidingView
-            behavior='height'
-            keyboardVerticalOffset={65}
+          <ScrollView
+            onScroll={this.handleScroll}
+            scrollEventThrottle={16}
+            style={{flex: 1, flexDirection: 'column'}}
           >
             <MatchesHeader dateRange={this.state.matchDateRange}/>
             <ListView
@@ -158,8 +159,8 @@ updateListView() {
             />
             <NewsletterSubscribeForm/>
             <Footer navigation={this.props.navigation}/>
-          </KeyboardAvoidingView>
-        </ScrollView>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     );
   }
