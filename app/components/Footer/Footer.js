@@ -11,8 +11,6 @@ import {
 import facebookLogo from './images/facebook-logo.png';
 import twitterLogo from './images/twitter-logo.png';
 
-import NewsletterSubscribeForm from '../NewsletterSubscribeForm';
-
 class Footer extends Component{
   constructor(props) {
     super(props);
@@ -30,7 +28,6 @@ class Footer extends Component{
 
     return (
       <View style={styles.footerContainer}>
-        <NewsletterSubscribeForm/>
         <Text
           onPress={() => this.handleAboutPress()}
           style={styles.footerLink}>

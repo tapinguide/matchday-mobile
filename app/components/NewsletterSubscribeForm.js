@@ -3,7 +3,14 @@
 
 import React, { Component } from "react";
 import jsonp from "jsonp";
-import { View, StyleSheet, TextInput, Button } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  KeyboardAvoidingView
+} from 'react-native';
 
 const getAjaxUrl = url => url.replace('/post?', '/post-json?')
 
@@ -67,12 +74,19 @@ class NewsletterSubscribeForm extends Component {
       ) {
       return(
         <View>
-          <TextInput/>
-          <Button
-            disabled={this.state.status === "sending" || this.state.status === "success"}
-            onPress={this.onSubmit}
-            title="Subscribe"
+          <TextInput
+            style={styles.input}
+            placeholder="Newsletter"
           />
+          <TouchableOpacity
+            // disabled={this.state.status === "sending" || this.state.status === "success"}
+            onPress={this.onSubmit}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>
+              Subscribe
+            </Text>
+          </TouchableOpacity>
         </View>
       )
     }
@@ -121,11 +135,34 @@ class NewsletterSubscribeForm extends Component {
 
   render() {
     return (
-      <View className="newsletter-subscribe-form">
+      <View
+
+        style={styles.form}
+
+      >
         {this.renderForm()}
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  form: {
+    padding: 20
+  },
+  button: {
+    backgroundColor: '#3FEDC7',
+    padding: 10
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontFamily: 'poppins-semi-bold'
+  },
+  input: {
+    backgroundColor: '#FFFFFF',
+    padding: 10,
+  }
+});
 
 export default NewsletterSubscribeForm
