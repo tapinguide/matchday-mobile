@@ -2,7 +2,6 @@
 // https://github.com/revolunet/react-mailchimp-subscribe
 
 import React, { Component } from "react";
-import jsonp from "jsonp";
 import {
   View,
   StyleSheet,
@@ -30,54 +29,22 @@ class NewsletterSubscribeForm extends Component {
 
 
     // Check field for properly formatted email
-    // if (!email || email.length < 5 || email.indexOf("@") === -1) {
-    //   this.setState({
-    //     status: "error"
-    //   })
-    //   return;
-    // }
-    console.log('email: ', email)
-
-    console.log('hmm...', this.getMoviesFromApiAsync());
-
+    if (!email || email.length < 5 || email.indexOf("@") === -1) {
+      this.setState({
+        status: "error"
+      })
+      return;
+    }
     const url = getAjaxUrl(this.state.action) + `&EMAIL=${encodeURIComponent(email)}`;
 
-    this.sendMailchimpThing(url);
-
-    // this.setState({
-    //     status: "sending",
-    //     msg: null
-    //   }, () => jsonp(url, {
-    //     param: "c"
-    //   }, (error, data) => {
-    //     if (error) {
-    //       console.log('error: ', error);
-    //       this.setState({
-    //         status: 'error',
-    //         msg: error
-    //       })
-    //     } else if (data.result !== 'success') {
-    //       console.log('ERROR')
-    //       this.setState({
-    //         status: 'error',
-    //         msg: data.msg
-    //       })
-    //     } else {
-    //       this.setState({
-    //         status: 'success',
-    //         formIsShown: false,
-    //         msg: data.msg
-    //       })
-    //     }
-    //   })
-    // ) // End this.setState()
+    this.submitToMailchimp(url);
   } // End onSubmit()
 
-  sendMailchimpThing(url) {
+  submitToMailchimp(url) {
 
     // payload is your post data
-   const payload = {param: 'c'};
-   const options = {
+    const payload = {param: 'c'};
+    const options = {
      method: 'POST',
      headers: {
        'Accept': 'application/json',
@@ -86,54 +53,26 @@ class NewsletterSubscribeForm extends Component {
      body: JSON.stringify(payload),
      cors: true, // allow cross-origin HTTP request
      credentials: 'same-origin' // This is similar to XHR’s withCredentials flag
-   };
+    };
 
-   // SEND REQUEST
-   fetch(url, options).then((response) => {
-     // TODO
-     console.log('response: ', response)
-   }).catch((error) => {
-     // TODO
-   });
-
-
-
-    // jsonp(url, {
-    //     param: "c"
-    //   }, (error, data) => {
-    //     if (error) {
-    //       console.log('error: ', error);
-    //       // this.setState({
-    //       //   status: 'error',
-    //       //   msg: error
-    //       // })
-    //     } else if (data.result !== 'success') {
-    //       console.log('ERROR')
-    //       // this.setState({
-    //       //   status: 'error',
-    //       //   msg: data.msg
-    //       // })
-    //     } else {
-    //       console.log('scuccjcu')
+    // SEND REQUEST
+    fetch(url, options).then((response) => {
+    // TODO
+    // Set success message if successful
     //       // this.setState({
     //       //   status: 'success',
     //       //   formIsShown: false,
     //       //   msg: data.msg
     //       // })
-    //     }
-    //   })
-  }
-
-  getMoviesFromApiAsync() {
-    return fetch('https://facebook.github.io/react-native/movies.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log('response: ', responseJson)
-        return responseJson.movies;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    console.log('response: ', response)
+    }).catch((error) => {
+     // TODO
+     // Set error state if error is returned
+     // this.setState({
+     //   status: 'error',
+     //   msg: error
+     // })
+    });
   }
 
   renderForm() {
