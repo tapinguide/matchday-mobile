@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  KeyboardAvoidingView
 } from 'react-native';
 import moment from 'moment';
 
@@ -16,6 +17,7 @@ import MustReadWatch from '../MustReadWatch/MustReadWatch';
 import Loading from '../Loading/Loading';
 import HeaderBar from '../HeaderBar/HeaderBar';
 import MatchesHeader from '../MatchesHeader/MatchesHeader';
+import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
 import Footer from '../Footer/Footer';
 
 import MatchService from '../lib/matchservice';
@@ -138,20 +140,27 @@ updateListView() {
         style={{flex: 1, flexDirection: 'column'}}
       >
         <HeaderBar />
-        <ScrollView
-          onScroll={this.handleScroll}
-          scrollEventThrottle={16}
-          style={{flex: 1, flexDirection: 'column'}}
+        <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset={50}
+          style={{ flex: 1 }}
         >
-          <MatchesHeader dateRange={this.state.matchDateRange}/>
-          <ListView
-            initialListSize={10}
-            dataSource={this.state.matches}
-            renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
-            renderFooter={this._renderFooter.bind(this)}
-          />
-          <Footer navigation={this.props.navigation}/>
-        </ScrollView>
+          <ScrollView
+            onScroll={this.handleScroll}
+            scrollEventThrottle={16}
+            style={{flex: 1, flexDirection: 'column'}}
+          >
+            <MatchesHeader dateRange={this.state.matchDateRange}/>
+            <ListView
+              initialListSize={10}
+              dataSource={this.state.matches}
+              renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
+              renderFooter={this._renderFooter.bind(this)}
+            />
+            <NewsletterSubscribeForm/>
+            <Footer navigation={this.props.navigation}/>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     );
   }
