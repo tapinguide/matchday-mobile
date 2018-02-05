@@ -80,7 +80,7 @@ export default class Matches extends Component {
           style={{ flex: 1 }}
           data={matches}
           keyExtractor={item => item.id}
-          renderItem={({ item, index }) => <Match match={item} matchIndex={index} />}
+          renderItem={({ item, index }) => <Match match={item} matchIndex={index + 1} />}
           ListEmptyComponent={<Loading />}
           ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
           ListFooterComponent={
