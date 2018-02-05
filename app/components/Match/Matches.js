@@ -13,20 +13,18 @@ import MatchService from '../lib/matchservice'
 
 export default class Matches extends Component {
   state = {
-    readWatch: [],
     matches: [],
     matchIndex: 1,
-    isLoading: true,
+    readWatch: [],
   }
+  timerID = null
 
   componentDidMount() {
-    this.timerID = setInterval(() => this.updateListView(), 5000)
-
-    this.updateListView()
+    this.updateMatches()
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID)
+    clearTimeout(this.timerID)
   }
 
   setMatchDateRange = () => {
@@ -49,30 +47,31 @@ export default class Matches extends Component {
     })
   }
 
-  updateListView() {
-    MatchService.getMatches()
-      .then(matches => {
-        this.setState({ matches }, this.setMatchDateRange)
-      })
-      .then(() => {
-        MatchService.getReadWatch().then(readWatch => {
-          this.setState({
-            readWatch,
-            isLoading: false,
-          })
-        })
-      })
+  updateMatches = () => {
+    clearTimeout(this.timerID)
+    Promise.all([
+      MatchService.getMatches().then(matches => this.setState({ matches }, this.setMatchDateRange)),
+      MatchService.getReadWatch().then(readWatch => this.setState({ readWatch })),
+    ])
       .catch(error => {
         console.log('There has been a problem with your fetch operation: ' + error.message)
-        // ADD THIS THROW error
         throw error
       })
-      .done()
+      .finally(() => {
+        this.timerID = setTimeout(this.updateMatches, 5000)
+      })
   }
 
   render() {
     const { matchDateRange, matches, readWatch } = this.state
     const { navigation } = this.props
+
+    const readWatchComponent = readWatch.length ? (
+      <View>
+        <MustReadWatch link={readWatch[0]} />
+        <MustReadWatch link={readWatch[1]} />
+      </View>
+    ) : null
 
     return (
       <View style={{ flex: 1 }}>
@@ -82,23 +81,16 @@ export default class Matches extends Component {
           data={matches}
           keyExtractor={item => item.id}
           renderItem={({ item, index }) => <Match match={item} matchIndex={index} />}
-          ListEmptyComponent={() => <Loading />}
-          ListHeaderComponent={() => (matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null)}
-          ListFooterComponent={() => {
-            const readWatchComponent = readWatch.length ? (
-              <View>
-                <MustReadWatch link={readWatch[0]} />
-                <MustReadWatch link={readWatch[1]} />
-              </View>
-            ) : null
-
-            return matches.length ? (
+          ListEmptyComponent={<Loading />}
+          ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
+          ListFooterComponent={
+            matches.length ? (
               <View>
                 {readWatchComponent}
                 <Footer navigation={navigation} />
               </View>
             ) : null
-          }}
+          }
         />
       </View>
     )

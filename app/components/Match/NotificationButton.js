@@ -4,6 +4,9 @@ import { Alert, AsyncStorage, Image, Linking, StyleSheet, TouchableOpacity } fro
 import { Constants, Notifications, Permissions } from 'expo'
 import moment from 'moment'
 
+import notificationOn from './images/notification-on.png'
+import notificationOff from './images/notification-off.png'
+
 export default class NotificationButton extends Component {
   static propTypes = {
     match: PropTypes.shape({
@@ -17,7 +20,7 @@ export default class NotificationButton extends Component {
       }),
     }).isRequired,
   }
-  
+
   state = {
     notificationId: null,
   }
@@ -119,10 +122,7 @@ export default class NotificationButton extends Component {
     const { notificationId } = this.state
     return (
       <TouchableOpacity style={styles.button} onPress={this._onNotificationPress} activeOpacity={1}>
-        <Image
-          source={notificationId ? require('./images/notification-on.png') : require('./images/notification-off.png')}
-          style={styles.icon}
-        />
+        <Image source={notificationId ? notificationOn : notificationOff} style={styles.icon} />
       </TouchableOpacity>
     )
   }
