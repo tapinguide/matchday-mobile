@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, FlatList, StatusBar, StyleSheet, View } from 'react-native'
+import { FlatList, StatusBar, StyleSheet, View } from 'react-native'
 import moment from 'moment'
 
 import Match from './Match'

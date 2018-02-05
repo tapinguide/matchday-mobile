@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { Font } from 'expo'
 
 import Matches from '../../components/Match/Matches'
@@ -18,23 +18,14 @@ export default class Home extends Component {
       'poppins-semi-bold': require('../../.././assets/fonts/Poppins-SemiBold.ttf'),
     })
 
-    this.setState({
-      fontLoaded: true,
-    })
+    this.setState({ fontLoaded: true })
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{ flex: 1, backgroundColor: '#f0f0f0' }}>
         {this.state.fontLoaded ? <Matches navigation={this.props.navigation} /> : null}
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-  },
-})
