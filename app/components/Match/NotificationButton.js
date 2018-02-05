@@ -5,12 +5,21 @@ import { Constants, Notifications, Permissions } from 'expo'
 import moment from 'moment'
 
 export default class NotificationButton extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      notificationId: null,
-    }
+  static propTypes = {
+    match: PropTypes.shape({
+      id: PropTypes.int,
+      matchTime: PropTypes.string,
+      homeClub: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+      visitorClub: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+    }).isRequired,
+  }
+  
+  state = {
+    notificationId: null,
   }
 
   getStorageKey() {
@@ -46,12 +55,12 @@ export default class NotificationButton extends Component {
     }
   }
 
-  cancelNotification = () => {
+  cancelNotification = async () => {
     const { notificationId } = this.state
     if (notificationId) {
       Notifications.cancelScheduledNotificationAsync(notificationId)
+      await AsyncStorage.removeItem(this.getStorageKey())
       this.setState({ notificationId: null })
-      AsyncStorage.removeItem(this.getStorageKey())
     }
   }
 
@@ -81,8 +90,8 @@ export default class NotificationButton extends Component {
             time: localMatchTime.valueOf(),
           }
         )
+        await AsyncStorage.setItem(this.getStorageKey(), notificationId)
         this.setState({ notificationId })
-        AsyncStorage.setItem(this.getStorageKey(), notificationId)
       } else if (status === 'denied' || status == 'undetermined') {
         Alert.alert(
           'Uh oh',
@@ -117,19 +126,6 @@ export default class NotificationButton extends Component {
       </TouchableOpacity>
     )
   }
-}
-
-NotificationButton.propTypes = {
-  match: PropTypes.shape({
-    id: PropTypes.int,
-    matchTime: PropTypes.string,
-    homeClub: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-    visitorClub: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-  }).isRequired,
 }
 
 const styles = StyleSheet.create({
