@@ -3,9 +3,15 @@
     "sdkVersion": "25.0.0",
     "name": "Tap In Guide",
     "slug": "tap-in-guide",
-    "description": "Tap In is a simple dashboard guide to world football’s most essential matches. All the daily info you need to know to stay on top of the beautiful game.",
+    "description":
+      "Tap In is a simple dashboard guide to world football’s most essential matches. All the daily info you need to know to stay on top of the beautiful game.",
     "icon": "./assets/images/tapin-appicon.png",
     "version": "1.6.0",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#f0f0f0"
+    },
     "ios": {
       "bundleIdentifier": "com.tapinguide.matchday",
       "buildNumber": "12",
@@ -13,13 +19,15 @@
     },
     "android": {
       "package": "com.tapinguide.matchday",
-      "versionCode":  12,
-      "permissions":[]
+      "versionCode": 12,
+      "permissions": []
     },
     "orientation": "portrait",
     "loading": {
       "icon": "./assets/images/placeholder.png",
-      "backgroundColor": "#f0f0f0"
+      "backgroundColor": "#f0f0f0",
+      "backgroundImage": "./assets/images/splash.png",
+      "hideExponentText": true
     }
   }
 }
