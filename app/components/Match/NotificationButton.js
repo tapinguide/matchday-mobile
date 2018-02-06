@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Alert, AsyncStorage, Image, Linking, StyleSheet, TouchableOpacity } from 'react-native'
-import { Constants, Notifications, Permissions } from 'expo'
+import { Alert, AsyncStorage, Image, Linking, Platform, StyleSheet, TouchableOpacity } from 'react-native'
+import { Notifications, Permissions } from 'expo'
 import moment from 'moment'
 
 import notificationOn from './images/notification-on.png'
@@ -30,8 +30,10 @@ export default class NotificationButton extends Component {
   }
 
   async componentWillMount() {
-    const notificationId = await AsyncStorage.getItem(this.getStorageKey())
-    this.setState({ notificationId })
+    const notificationString = await AsyncStorage.getItem(this.getStorageKey())
+    if (notificationString && notificationString !== '') {
+      this.setState({ notificationId: Platform.OS === 'ios' ? notificationString : notificationString * 1 })
+    }
   }
 
   _onNotificationPress = () => {
@@ -72,49 +74,47 @@ export default class NotificationButton extends Component {
     const matchTime = moment.utc(match.matchTime).subtract(5, 'minutes')
     const localMatchTime = matchTime.local()
 
-    if (Constants.isDevice) {
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
-      if (status === 'granted') {
-        const notificationId = await Notifications.scheduleLocalNotificationAsync(
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
+    if (status === 'granted') {
+      const notificationId = await Notifications.scheduleLocalNotificationAsync(
+        {
+          title: 'Match Alert',
+          body: `${match.homeClub.name} - ${match.visitorClub.name} starts in 5 minutes on ${tvDetails}`,
+          data: {
+            matchId: match.id,
+          },
+          ios: {
+            sound: true,
+          },
+          android: {
+            sound: true,
+          },
+        },
+        {
+          time: localMatchTime.valueOf(),
+        }
+      )
+      await AsyncStorage.setItem(this.getStorageKey(), notificationId.toString())
+      this.setState({ notificationId })
+    } else if (status === 'denied' || status == 'undetermined') {
+      Alert.alert(
+        'Uh oh',
+        'You need to allow notifications in order to receive the match alert',
+        [
           {
-            title: 'Match Alert',
-            body: `${match.homeClub.name} - ${match.visitorClub.name} starts in 5 minutes on ${tvDetails}`,
-            data: {
-              matchId: match.id,
-            },
-            ios: {
-              sound: true,
-            },
-            android: {
-              sound: true,
-            },
+            text: 'Cancel',
+            onPress: () => {},
+            style: 'cancel',
           },
           {
-            time: localMatchTime.valueOf(),
-          }
-        )
-        await AsyncStorage.setItem(this.getStorageKey(), notificationId)
-        this.setState({ notificationId })
-      } else if (status === 'denied' || status == 'undetermined') {
-        Alert.alert(
-          'Uh oh',
-          'You need to allow notifications in order to receive the match alert',
-          [
-            {
-              text: 'Cancel',
-              onPress: () => {},
-              style: 'cancel',
+            text: 'Go to Settings',
+            onPress: () => {
+              Linking.openURL('app-settings:')
             },
-            {
-              text: 'Go to Settings',
-              onPress: () => {
-                Linking.openURL('app-settings:')
-              },
-            },
-          ],
-          { cancelable: false }
-        )
-      }
+          },
+        ],
+        { cancelable: false }
+      )
     }
   }
 
