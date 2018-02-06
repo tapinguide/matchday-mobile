@@ -6,7 +6,7 @@
     "description":
       "Tap In is a simple dashboard guide to world football’s most essential matches. All the daily info you need to know to stay on top of the beautiful game.",
     "icon": "./assets/images/tapin-appicon.png",
-    "version": "1.6.1",
+    "version": "1.6.0",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "cover",
@@ -14,12 +14,12 @@
     },
     "ios": {
       "bundleIdentifier": "com.tapinguide.matchday",
-      "buildNumber": "12",
+      "buildNumber": "13",
       "supportsTablet": false
     },
     "android": {
       "package": "com.tapinguide.matchday",
-      "versionCode": 12,
+      "versionCode": 13,
       "permissions": []
     },
     "orientation": "portrait",
