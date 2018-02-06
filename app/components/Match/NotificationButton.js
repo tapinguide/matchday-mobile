@@ -75,7 +75,7 @@ export default class NotificationButton extends Component {
     const localMatchTime = matchTime.local()
 
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
-    if (status === 'granted' || status === 'undetermined') {
+    if (status === 'granted') {
       const notificationId = await Notifications.scheduleLocalNotificationAsync(
         {
           title: 'Match Alert',
