@@ -7,7 +7,7 @@ import CompletedMatch from './CompletedMatch'
 
 export default class Match extends Component {
   render() {
-    const { match, matchIndex, handleMatchPress } = this.props
+    const { match, matchIndex, handleMatchPress, onMatchCollapse } = this.props
     const status = match.status.description
 
     var returnMatch
@@ -16,9 +16,11 @@ export default class Match extends Component {
         <InProgressMatch
           match={match}
           key={match.id}
-          matchIndex={matchIndex}
+          index={matchIndex}
+          matchIndex={matchIndex + 1}
           tvDetails={match.tvDetails}
           venue={match.venue}
+          onMatchCollapse={onMatchCollapse}
           handleMatchPress={handleMatchPress}
         />
       )
@@ -27,9 +29,11 @@ export default class Match extends Component {
         <ScheduledMatch
           match={match}
           key={match.id}
-          matchIndex={matchIndex}
+          index={matchIndex}
+          matchIndex={matchIndex + 1}
           tvDetails={match.tvDetails}
           venue={match.venue}
+          onMatchCollapse={onMatchCollapse}
           handleMatchPress={handleMatchPress}
         />
       )
@@ -44,9 +48,11 @@ export default class Match extends Component {
         <CompletedMatch
           match={match}
           key={match.id}
-          matchIndex={matchIndex}
+          index={matchIndex}
+          matchIndex={matchIndex + 1}
           tvDetails={match.tvDetails}
           venue={match.venue}
+          onMatchCollapse={onMatchCollapse}
           handleMatchPress={handleMatchPress}
         />
       )
@@ -60,7 +66,9 @@ Match.propTypes = {
   handleMatchPress: PropTypes.func,
   matchIndex: PropTypes.number.isRequired,
   match: PropTypes.object.isRequired,
+  onMatchCollapse: PropTypes.func,
 }
 Match.defaultProps = {
   handleMatchPress: () => {},
+  onMatchCollapse: () => {},
 }

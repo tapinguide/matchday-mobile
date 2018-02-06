@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import {
-  FlatList,
-  StatusBar,
-  StyleSheet,
-  View,
-  KeyboardAvoidingView
-} from 'react-native'
+import { FlatList, StatusBar, StyleSheet, View, KeyboardAvoidingView } from 'react-native'
 import moment from 'moment'
 
 import Match from './Match'
@@ -24,6 +18,7 @@ export default class Matches extends Component {
     matchIndex: 1,
     readWatch: [],
   }
+  flatList = null
   timerID = null
 
   componentDidMount() {
@@ -69,6 +64,12 @@ export default class Matches extends Component {
       })
   }
 
+  _onMatchCollapse = (index = -1) => {
+    if (this.flatList && index > -1) {
+      this.flatList.scrollToIndex({ index })
+    }
+  }
+
   render() {
     const { matchDateRange, matches, readWatch } = this.state
     const { navigation } = this.props
@@ -81,23 +82,23 @@ export default class Matches extends Component {
     ) : null
 
     return (
-      <KeyboardAvoidingView
-        behavior='padding'
-        style={{ flex: 1 }}
-      >
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <HeaderBar />
         <FlatList
+          ref={component => (this.flatList = component)}
           style={{ flex: 1 }}
           data={matches}
           keyExtractor={item => item.id}
-          renderItem={({ item, index }) => <Match match={item} matchIndex={index + 1} />}
+          renderItem={({ item, index }) => (
+            <Match match={item} matchIndex={index} onMatchCollapse={this._onMatchCollapse} />
+          )}
           ListEmptyComponent={<Loading />}
           ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
           ListFooterComponent={
             matches.length ? (
               <View>
                 {readWatchComponent}
-                <NewsletterSubscribeForm/>
+                <NewsletterSubscribeForm />
                 <Footer navigation={navigation} />
               </View>
             ) : null
