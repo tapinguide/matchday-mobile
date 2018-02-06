@@ -76,12 +76,15 @@ export default class NotificationButton extends Component {
 
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
     if (status === 'granted') {
+      const notificationContent = {
+        title: 'Match Alert',
+        body: `${match.homeClub.name} - ${match.visitorClub.name} starts in 5 minutes on ${tvDetails}`,
+      }
       const notificationId = await Notifications.scheduleLocalNotificationAsync(
         {
-          title: 'Match Alert',
-          body: `${match.homeClub.name} - ${match.visitorClub.name} starts in 5 minutes on ${tvDetails}`,
+          ...notificationContent,
           data: {
-            matchId: match.id,
+            ...notificationContent,
           },
           ios: {
             sound: true,
