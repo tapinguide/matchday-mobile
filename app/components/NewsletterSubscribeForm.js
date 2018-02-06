@@ -26,16 +26,17 @@ class NewsletterSubscribeForm extends Component {
 
   handleSubmit = () => {
     const { email } = this.state.input;
-
+    const { action } = this.state;
 
     // Check field for properly formatted email
     if (!email || email.length < 5 || email.indexOf("@") === -1) {
       this.setState({
-        status: "error"
+        status: "error",
+        msg: 'Please enter a valid email'
       })
       return;
     }
-    const url = getAjaxUrl(this.state.action) + `&EMAIL=${encodeURIComponent(email)}`;
+    const url = getAjaxUrl(action) + `&EMAIL=${encodeURIComponent(email)}`;
 
     this.submitToMailchimp(url);
   } // End onSubmit()
@@ -55,23 +56,32 @@ class NewsletterSubscribeForm extends Component {
      credentials: 'same-origin' // This is similar to XHR’s withCredentials flag
     };
 
+    this.setState({
+      status: 'sending',
+    })
+
     // SEND REQUEST
     fetch(url, options).then((response) => {
-    // TODO
-    // Set success message if successful
-    //       // this.setState({
-    //       //   status: 'success',
-    //       //   formIsShown: false,
-    //       //   msg: data.msg
-    //       // })
-    console.log('response: ', response)
+      // Set success message if successful
+      let result = JSON.parse(response._bodyText);
+      console.log('response: ', response)
+      if(result.result === 'success') {
+        this.setState({
+          status: 'success',
+          formIsShown: false,
+        })
+      } else {
+        this.setState({
+         status: 'error',
+         msg: result.msg
+        })
+      }
     }).catch((error) => {
-     // TODO
-     // Set error state if error is returned
-     // this.setState({
-     //   status: 'error',
-     //   msg: error
-     // })
+      // Set error state if error is returned
+      this.setState({
+       status: 'error',
+       msg: error
+      })
     });
   }
 
@@ -83,14 +93,19 @@ class NewsletterSubscribeForm extends Component {
         <View>
           <TextInput
             style={styles.input}
-            placeholder="Newsletter"
+            placeholder="Newsletter – Enter Your Email"
             onChangeText={(text) => this.handleInputChange({email: text})}
             value={input.email}
+            returnKeyType='send'
+            onSubmitEditing={() => this.handleSubmit()}
           />
           <TouchableOpacity
             disabled={status === "sending" || status === "success"}
-            onPress={this.handleSubmit}
-            style={styles.button}
+            onPress={() => this.handleSubmit()}
+            style={[
+              styles.button,
+              status === "sending" ? styles.buttonDisabled : ''
+            ]}
           >
             <Text style={styles.buttonText}>
               Subscribe
@@ -102,7 +117,6 @@ class NewsletterSubscribeForm extends Component {
   }
 
   handleInputChange = (newPartialInput) => {
-    console.log('handle')
     this.setState(state => ({
       ...state,
       input: {
@@ -119,8 +133,10 @@ class NewsletterSubscribeForm extends Component {
       if(msg.includes('already subscribed')) {
         return 'This email has already been subscribed to our newsletter';
       } else {
-        return "Oops, there's been an error. Please try again."
+        return msg
       }
+    } else {
+      return "Oops, there's been an error. Please try again."
     }
   }
 
@@ -129,7 +145,7 @@ class NewsletterSubscribeForm extends Component {
 
     if (status === "success") {
       return (
-        <Text style={styles.errorMessage}>
+        <Text style={styles.successMessage}>
           Thanks for subscribing to Tap In!
         </Text>
       )
@@ -160,7 +176,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#3FEDC7',
-    padding: 10
+    padding: 10,
+  },
+  buttonDisabled: {
+    backgroundColor: 'rgba(63, 237, 199, 0.2)',
   },
   buttonText: {
     color: '#FFFFFF',
@@ -169,10 +188,20 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#FFFFFF',
+    fontFamily: 'poppins-regular',
+    fontSize: 16,
     padding: 10,
   },
   errorMessage: {
-    color: '#FF0000'
+    color: '#FF0000',
+    marginTop: 10,
+  },
+  successMessage: {
+    color: '#3FEDC7',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    fontFamily: 'poppins-semi-bold',
+    padding: 10,
   }
 });
 

@@ -4,13 +4,25 @@ import { Alert, AsyncStorage, Image, Linking, StyleSheet, TouchableOpacity } fro
 import { Constants, Notifications, Permissions } from 'expo'
 import moment from 'moment'
 
-export default class NotificationButton extends Component {
-  constructor(props) {
-    super(props)
+import notificationOn from './images/notification-on.png'
+import notificationOff from './images/notification-off.png'
 
-    this.state = {
-      notificationId: null,
-    }
+export default class NotificationButton extends Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      id: PropTypes.int,
+      matchTime: PropTypes.string,
+      homeClub: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+      visitorClub: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+    }).isRequired,
+  }
+
+  state = {
+    notificationId: null,
   }
 
   getStorageKey() {
@@ -46,12 +58,12 @@ export default class NotificationButton extends Component {
     }
   }
 
-  cancelNotification = () => {
+  cancelNotification = async () => {
     const { notificationId } = this.state
     if (notificationId) {
       Notifications.cancelScheduledNotificationAsync(notificationId)
+      await AsyncStorage.removeItem(this.getStorageKey())
       this.setState({ notificationId: null })
-      AsyncStorage.removeItem(this.getStorageKey())
     }
   }
 
@@ -81,8 +93,8 @@ export default class NotificationButton extends Component {
             time: localMatchTime.valueOf(),
           }
         )
+        await AsyncStorage.setItem(this.getStorageKey(), notificationId)
         this.setState({ notificationId })
-        AsyncStorage.setItem(this.getStorageKey(), notificationId)
       } else if (status === 'denied' || status == 'undetermined') {
         Alert.alert(
           'Uh oh',
@@ -110,26 +122,10 @@ export default class NotificationButton extends Component {
     const { notificationId } = this.state
     return (
       <TouchableOpacity style={styles.button} onPress={this._onNotificationPress} activeOpacity={1}>
-        <Image
-          source={notificationId ? require('./images/notification-on.png') : require('./images/notification-off.png')}
-          style={styles.icon}
-        />
+        <Image source={notificationId ? notificationOn : notificationOff} style={styles.icon} />
       </TouchableOpacity>
     )
   }
-}
-
-NotificationButton.propTypes = {
-  match: PropTypes.shape({
-    id: PropTypes.int,
-    matchTime: PropTypes.string,
-    homeClub: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-    visitorClub: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-  }).isRequired,
 }
 
 const styles = StyleSheet.create({

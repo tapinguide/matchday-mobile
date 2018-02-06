@@ -1,174 +1,109 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
-  ActivityIndicator,
-  ListView,
-  NetInfo,
-  ScrollView,
+  FlatList,
   StatusBar,
   StyleSheet,
-  Text,
   View,
   KeyboardAvoidingView
-} from 'react-native';
-import moment from 'moment';
+} from 'react-native'
+import moment from 'moment'
 
-import Match from './Match';
-import MustReadWatch from '../MustReadWatch/MustReadWatch';
-import Loading from '../Loading/Loading';
-import HeaderBar from '../HeaderBar/HeaderBar';
-import MatchesHeader from '../MatchesHeader/MatchesHeader';
+import Match from './Match'
+import MustReadWatch from '../MustReadWatch/MustReadWatch'
+import Loading from '../Loading/Loading'
+import HeaderBar from '../HeaderBar/HeaderBar'
+import MatchesHeader from '../MatchesHeader/MatchesHeader'
 import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
-import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer'
 
-import MatchService from '../lib/matchservice';
+import MatchService from '../lib/matchservice'
 
 export default class Matches extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      readWatch: [],
-      dataSource: new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-          }),
-      matches: [],
-      matchIndex: 1,
-      isLoading: true
-    }
+  state = {
+    matches: [],
+    matchIndex: 1,
+    readWatch: [],
   }
+  timerID = null
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.updateListView(),
-      5000
-    );
-
-    this.updateListView();
+    this.updateMatches()
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    clearTimeout(this.timerID)
   }
-
-  handleScroll = (event) => {
-   // console.log(event.nativeEvent.contentOffset.y);
-  }
-
 
   setMatchDateRange = () => {
-    var matches = JSON.parse(JSON.stringify(this.state.matches));
-    var sortedMatches = matches._dataBlob.s1;
+    const { matches } = this.state
+    const matchDates = matches.map(match => match.matchTime)
 
-    sortedMatches.sort(function(a,b){
-      return new Date(a.matchTime) - new Date(b.matchTime);
-    });
+    matchDates.sort((a, b) => new Date(a) - new Date(b))
 
-    var matchDateRange = ''
-    var firstMatchDate = moment.utc(sortedMatches[0].matchTime).local();
-    var lastMatchDate = moment.utc(sortedMatches[sortedMatches.length - 1].matchTime).local();
+    const firstMatchDate = moment.utc(matchDates[0]).local()
+    const lastMatchDate = moment.utc(matchDates[matchDates.length - 1]).local()
 
     //check if the matches are in the same month; else display different months
-    if(firstMatchDate.format('M') === lastMatchDate.format('M')){
-      matchDateRange = firstMatchDate.format('MMMM D').toUpperCase() + '-' + lastMatchDate.local().format('D, YYYY').toUpperCase();
-    }
-    else{
-      matchDateRange = firstMatchDate.format('MMMM D').toUpperCase() + '-' + lastMatchDate.local().format('MMMM D, YYYY').toUpperCase();
-    }
+    const format = firstMatchDate.format('M') === lastMatchDate.format('M') ? 'D, YYYY' : 'MMMM D, YYYY'
 
     this.setState({
-      matchDateRange: matchDateRange
-    });
+      matchDateRange: `${firstMatchDate.format('MMMM D').toUpperCase()}-${lastMatchDate
+        .local()
+        .format(format)
+        .toUpperCase()}`,
+    })
   }
 
-updateListView() {
-  var _this = this;
-  MatchService.getMatches().then(function(matches){
-    var ds = _this.state.dataSource.cloneWithRows(matches);
-      _this.setState({
-        matches: ds
-      });
-      _this.setMatchDateRange();
-    }).then(()=>{
-        MatchService.getReadWatch().then(function(readWatch){
-          _this.setState({
-            readWatch: readWatch,
-            isLoading: false
-          });
-        })
-     })
-    .catch(function(error) {
-        console.log('There has been a problem with your fetch operation: ' + error.message);
-        // ADD THIS THROW error
-          throw error;
-        }).done();
+  updateMatches = () => {
+    clearTimeout(this.timerID)
+    Promise.all([
+      MatchService.getMatches().then(matches => this.setState({ matches }, this.setMatchDateRange)),
+      MatchService.getReadWatch().then(readWatch => this.setState({ readWatch })),
+    ])
+      .catch(error => {
+        console.log('There has been a problem with your fetch operation: ' + error.message)
+        throw error
+      })
+      .finally(() => {
+        this.timerID = setTimeout(this.updateMatches, 5000)
+      })
   }
 
-  getMatchIndex() {
-    return this.state.matchIndex;
-  }
-
-  _renderRow(rowData, sectionID, rowID){
-
-    let index = parseInt(rowID) + 1;
-    return <Match match={rowData} key={rowData.id} matchIndex={index} handleMatchPress={() => this.handleMatchPress()}/>;
-  }
-
-  _renderFooter(){
-    var readWatch = this.state.readWatch;
-    return (
-          <View>
-            <MustReadWatch link={readWatch[0]} />
-            <MustReadWatch link={readWatch[1]} />
-          </View>
-    );
-  }
-
-  handleMatchPress = () => {
-    console.log('match pressed');
-  }
   render() {
-    if (this.state.isLoading) {
-      return (
-        <View style={{flex: 1, paddingTop: 20}}>
-          <StatusBar hidden={true} />
-          <Loading />
-        </View>
-      );
-    }
+    const { matchDateRange, matches, readWatch } = this.state
+    const { navigation } = this.props
+
+    const readWatchComponent = readWatch.length ? (
+      <View>
+        <MustReadWatch link={readWatch[0]} />
+        <MustReadWatch link={readWatch[1]} />
+      </View>
+    ) : null
 
     return (
-      <View
-        style={{flex: 1, flexDirection: 'column'}}
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={{ flex: 1 }}
       >
         <HeaderBar />
-        <KeyboardAvoidingView
-          behavior='padding'
-          keyboardVerticalOffset={50}
+        <FlatList
           style={{ flex: 1 }}
-        >
-          <ScrollView
-            onScroll={this.handleScroll}
-            scrollEventThrottle={16}
-            style={{flex: 1, flexDirection: 'column'}}
-          >
-            <MatchesHeader dateRange={this.state.matchDateRange}/>
-            <ListView
-              initialListSize={10}
-              dataSource={this.state.matches}
-              renderRow={(rowData, sectionID, rowID) => this._renderRow(rowData, sectionID, rowID)}
-              renderFooter={this._renderFooter.bind(this)}
-            />
-            <NewsletterSubscribeForm/>
-            <Footer navigation={this.props.navigation}/>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </View>
-    );
+          data={matches}
+          keyExtractor={item => item.id}
+          renderItem={({ item, index }) => <Match match={item} matchIndex={index + 1} />}
+          ListEmptyComponent={<Loading />}
+          ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
+          ListFooterComponent={
+            matches.length ? (
+              <View>
+                {readWatchComponent}
+                <NewsletterSubscribeForm/>
+                <Footer navigation={navigation} />
+              </View>
+            ) : null
+          }
+        />
+      </KeyboardAvoidingView>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-    statusBarContainer: {
-      height:20,
-      backgroundColor: '#1B1E2C'
-    }
-});

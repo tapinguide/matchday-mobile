@@ -1,25 +1,14 @@
-import React from 'react';
-import {
-  Dimensions,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Font } from 'expo'
 
-import Matches from '../../components/Match/Matches';
-import NoData from '../../components/NoData/NoData';
+import Matches from '../../components/Match/Matches'
 
-import { Font } from 'expo';
-//import { ConnectivityRenderer } from 'react-native-offline';
-export default class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fontLoaded: false
-    }
+export default class Home extends Component {
+  state = {
+    fontLoaded: false,
   }
+
   async componentDidMount() {
     await Font.loadAsync({
       'poppins-bold': require('../../.././assets/fonts/Poppins-Bold.ttf'),
@@ -27,35 +16,16 @@ export default class Home extends React.Component {
       'poppins-medium': require('../../.././assets/fonts/Poppins-Medium.ttf'),
       'poppins-regular': require('../../.././assets/fonts/Poppins-Regular.ttf'),
       'poppins-semi-bold': require('../../.././assets/fonts/Poppins-SemiBold.ttf'),
-    });
+    })
 
-
-    this.setState(
-      {
-        fontLoaded: true
-      });
-  } // End componentDidMount()
+    this.setState({ fontLoaded: true })
+  }
 
   render() {
     return (
-      <View style={styles.container}>
-      {
-        this.state.fontLoaded ? (
-          <View style={styles.container}>
-
-        <View style={styles.container}>
-          <Matches navigation={this.props.navigation}/>
-        </View>
+      <View style={{ flex: 1, backgroundColor: '#f0f0f0' }}>
+        {this.state.fontLoaded ? <Matches navigation={this.props.navigation} /> : null}
       </View>
-        ) : null
-      }
-    </View>
-    );
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0'  },
-})
