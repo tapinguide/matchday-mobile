@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { FlatList, StatusBar, StyleSheet, View } from 'react-native'
+import {
+  FlatList,
+  StatusBar,
+  StyleSheet,
+  View,
+  KeyboardAvoidingView
+} from 'react-native'
 import moment from 'moment'
 
 import Match from './Match'
@@ -7,6 +13,7 @@ import MustReadWatch from '../MustReadWatch/MustReadWatch'
 import Loading from '../Loading/Loading'
 import HeaderBar from '../HeaderBar/HeaderBar'
 import MatchesHeader from '../MatchesHeader/MatchesHeader'
+import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
 import Footer from '../Footer/Footer'
 
 import MatchService from '../lib/matchservice'
@@ -74,7 +81,10 @@ export default class Matches extends Component {
     ) : null
 
     return (
-      <View style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={{ flex: 1 }}
+      >
         <HeaderBar />
         <FlatList
           style={{ flex: 1 }}
@@ -87,12 +97,13 @@ export default class Matches extends Component {
             matches.length ? (
               <View>
                 {readWatchComponent}
+                <NewsletterSubscribeForm/>
                 <Footer navigation={navigation} />
               </View>
             ) : null
           }
         />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

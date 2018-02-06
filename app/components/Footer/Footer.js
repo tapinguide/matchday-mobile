@@ -15,17 +15,19 @@ class Footer extends Component{
   constructor(props) {
     super(props);
   }
+
   handlePress(url){
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
+
   handleAboutPress = () => {
     this.props.navigation.navigate('About');
   }
+
   render(){
 
     return (
       <View style={styles.footerContainer}>
-
         <Text
           onPress={() => this.handleAboutPress()}
           style={styles.footerLink}>
