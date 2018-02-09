@@ -5,7 +5,6 @@ import moment from 'moment'
 import Match from './Match'
 import MustReadWatch from '../MustReadWatch/MustReadWatch'
 import Loading from '../Loading/Loading'
-import HeaderBar from '../HeaderBar/HeaderBar'
 import MatchesHeader from '../MatchesHeader/MatchesHeader'
 import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
 import Footer from '../Footer/Footer'
@@ -21,8 +20,10 @@ export default class Matches extends Component {
   flatList = null
   timerID = null
 
-  componentDidMount() {
-    this.updateMatches()
+  componentWillMount() {
+    this.setState({ matches: MatchService.matches, readWatch: MatchService.readWatch }, () => {
+      this.updateMatches()
+    })
   }
 
   componentWillUnmount() {
@@ -64,7 +65,7 @@ export default class Matches extends Component {
       })
   }
 
-  _onMatchCollapse = (index = -1) => {
+  _onMatchToggle = (index = -1) => {
     if (this.flatList && index > -1) {
       this.flatList.scrollToIndex({ index })
     }
@@ -83,14 +84,13 @@ export default class Matches extends Component {
 
     return (
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        <HeaderBar />
         <FlatList
           ref={component => (this.flatList = component)}
           style={{ flex: 1 }}
           data={matches}
           keyExtractor={item => item.id}
           renderItem={({ item, index }) => (
-            <Match match={item} matchIndex={index} onMatchCollapse={this._onMatchCollapse} />
+            <Match match={item} matchIndex={index} onMatchToggle={this._onMatchToggle} />
           )}
           ListEmptyComponent={<Loading />}
           ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}

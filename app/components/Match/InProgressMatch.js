@@ -23,9 +23,7 @@ export default class InProgressMatch extends Component {
         panelExpanded: !this.state.panelExpanded,
       },
       () => {
-        if (!this.state.panelExpanded) {
-          this.props.onMatchCollapse(this.props.index)
-        }
+        this.props.onMatchToggle(this.props.index)
       }
     )
   }

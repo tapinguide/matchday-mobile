@@ -1,56 +1,40 @@
-import React, { Component } from 'react';
-import {
-  Image,
-  Linking,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import React, { Component } from 'react'
+import { Image, Linking, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 
-import facebookLogo from './images/facebook-logo.png';
-import twitterLogo from './images/twitter-logo.png';
+import facebookLogo from './images/facebook-logo.png'
+import twitterLogo from './images/twitter-logo.png'
 
-class Footer extends Component{
+export default class Footer extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
-  handlePress(url){
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  handlePress = url => {
+    Linking.openURL(url).catch(err => console.error('An error occurred', err))
   }
 
   handleAboutPress = () => {
-    this.props.navigation.navigate('About');
+    this.props.navigation.navigate('About')
   }
 
-  render(){
-
+  render() {
     return (
       <View style={styles.footerContainer}>
-        <Text
-          onPress={() => this.handleAboutPress()}
-          style={styles.footerLink}>
-          About
-        </Text>
+        <TouchableHighlight onPress={() => this.handleAboutPress()}>
+          <Text style={styles.footerLink}>About</Text>
+        </TouchableHighlight>
         <View style={styles.socialIcons}>
           <TouchableHighlight
             onPress={() => this.handlePress('https://www.facebook.com/tapindesign')}
-            underlayColor='#F0F0F0'
+            underlayColor="#F0F0F0"
           >
-            <Image
-              source={facebookLogo}
-              style={styles.socialIconFacebook}
-            />
+            <Image source={facebookLogo} style={styles.socialIconFacebook} />
           </TouchableHighlight>
           <TouchableHighlight
             onPress={() => this.handlePress('https://twitter.com/tapinguide')}
-            underlayColor='#F0F0F0'
+            underlayColor="#F0F0F0"
           >
-            <Image
-              source={twitterLogo}
-              style={styles.socialIconTwitter}
-            />
+            <Image source={twitterLogo} style={styles.socialIconTwitter} />
           </TouchableHighlight>
         </View>
       </View>
@@ -65,31 +49,29 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 30,
-    paddingRight: 30
+    paddingRight: 30,
   },
 
   footerLink: {
     fontSize: 16,
     fontFamily: 'poppins-semi-bold',
-    fontWeight: '700'
+    fontWeight: '700',
   },
 
   socialIcons: {
     marginLeft: 'auto',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 
   socialIconFacebook: {
     height: 30,
-    width: 30
+    width: 30,
   },
 
   socialIconTwitter: {
     height: 24,
     width: 28.420800004,
     marginLeft: 15,
-    marginTop: 3
-  }
-});
-
-export default Footer;
+    marginTop: 3,
+  },
+})
