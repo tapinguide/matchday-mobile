@@ -36,7 +36,7 @@ export default class App extends Component {
   closeMenu = () => {
     this.setState({ menuIsOpen: false })
   }
-  
+
   toggleMenu = () => {
     this.setState({ menuIsOpen: !this.state.menuIsOpen })
   }
@@ -52,9 +52,9 @@ export default class App extends Component {
         <View style={{ flex: 1 }}>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
-          
-          <FloatingButton onPress={this.toggleMenu} />
+
           <Menu isOpen={menuIsOpen} closeMenu={this.closeMenu} />
+          <FloatingButton menuIsOpen={menuIsOpen} onPress={this.toggleMenu} />
         </View>
       </Router>
     )

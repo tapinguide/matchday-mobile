@@ -13,16 +13,9 @@ export default class Footer extends Component {
     Linking.openURL(url).catch(err => console.error('An error occurred', err))
   }
 
-  handleAboutPress = () => {
-    this.props.navigation.navigate('About')
-  }
-
   render() {
     return (
       <View style={styles.footerContainer}>
-        <TouchableHighlight onPress={() => this.handleAboutPress()}>
-          <Text style={styles.footerLink}>About</Text>
-        </TouchableHighlight>
         <View style={styles.socialIcons}>
           <TouchableHighlight
             onPress={() => this.handlePress('https://www.facebook.com/tapindesign')}

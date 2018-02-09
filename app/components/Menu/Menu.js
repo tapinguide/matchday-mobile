@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 import { Image, Modal, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { Link } from 'react-router-native'
 
+import Footer from '../Footer/Footer'
+import MatchService from '../lib/matchservice'
+import MustReadWatch from '../MustReadWatch/MustReadWatch'
+import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
+
 import tapinLogo from './images/logo_full.png'
 
 export default class Menu extends Component {
@@ -15,8 +20,33 @@ export default class Menu extends Component {
     isOpen: false,
   }
 
+  state = {
+    readWatch: [],
+  }
+
+  componentDidMount() {
+    this.setState({ readWatch: MatchService.readWatch }, this.updateReadWatch)
+  }
+
+  updateReadWatch = () => {
+    MatchService.getReadWatch()
+      .then(readWatch => this.setState({ readWatch }))
+      .catch(error => {
+        console.log('There has been a problem with your fetch operation: ' + error.message)
+        throw error
+      })
+  }
+
   render() {
     const { closeMenu, isOpen } = this.props
+    const { readWatch } = this.state
+
+    const readWatchComponent = readWatch.length ? (
+      <View>
+        <MustReadWatch link={readWatch[0]} />
+        <MustReadWatch link={readWatch[1]} />
+      </View>
+    ) : null
 
     return (
       <Modal visible={isOpen} animationType={'slide'} presentationStyle="fullScreen">
@@ -32,6 +62,11 @@ export default class Menu extends Component {
             <Link to="/about" onPress={closeMenu} style={styles.menuItem}>
               <Text>about</Text>
             </Link>
+          </View>
+          <View>
+            {readWatchComponent}
+            <NewsletterSubscribeForm />
+            <Footer />
           </View>
         </View>
       </Modal>
@@ -57,6 +92,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     padding: 10,
+    paddingTop: 0,
   },
   menuItem: {
     backgroundColor: '#ffffff',

@@ -3,11 +3,8 @@ import { FlatList, StatusBar, StyleSheet, View, KeyboardAvoidingView } from 'rea
 import moment from 'moment'
 
 import Match from './Match'
-import MustReadWatch from '../MustReadWatch/MustReadWatch'
 import Loading from '../Loading/Loading'
 import MatchesHeader from '../MatchesHeader/MatchesHeader'
-import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
-import Footer from '../Footer/Footer'
 
 import MatchService from '../lib/matchservice'
 
@@ -15,22 +12,24 @@ export default class Matches extends Component {
   state = {
     matches: [],
     matchIndex: 1,
-    readWatch: [],
   }
+
   flatList = null
+  mounted = false
   timerID = null
 
   componentWillMount() {
-    this.setState({ matches: MatchService.matches, readWatch: MatchService.readWatch }, () => {
-      this.updateMatches()
-    })
+    this.mounted = true
+    this.setState({ matches: MatchService.matches }, this.updateMatches)
   }
 
   componentWillUnmount() {
+    this.mounted = false
     clearTimeout(this.timerID)
   }
 
   setMatchDateRange = () => {
+    if (!this.mounted) return
     const { matches } = this.state
     const matchDates = matches.map(match => match.matchTime)
 
@@ -52,10 +51,9 @@ export default class Matches extends Component {
 
   updateMatches = () => {
     clearTimeout(this.timerID)
-    Promise.all([
-      MatchService.getMatches().then(matches => this.setState({ matches }, this.setMatchDateRange)),
-      MatchService.getReadWatch().then(readWatch => this.setState({ readWatch })),
-    ])
+    if (!this.mounted) return
+    MatchService.getMatches()
+      .then(matches => this.setState({ matches }, this.setMatchDateRange))
       .catch(error => {
         console.log('There has been a problem with your fetch operation: ' + error.message)
         throw error
@@ -72,15 +70,8 @@ export default class Matches extends Component {
   }
 
   render() {
-    const { matchDateRange, matches, readWatch } = this.state
+    const { matchDateRange, matches } = this.state
     const { navigation } = this.props
-
-    const readWatchComponent = readWatch.length ? (
-      <View>
-        <MustReadWatch link={readWatch[0]} />
-        <MustReadWatch link={readWatch[1]} />
-      </View>
-    ) : null
 
     return (
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
@@ -94,15 +85,6 @@ export default class Matches extends Component {
           )}
           ListEmptyComponent={<Loading />}
           ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
-          ListFooterComponent={
-            matches.length ? (
-              <View>
-                {readWatchComponent}
-                <NewsletterSubscribeForm />
-                <Footer navigation={navigation} />
-              </View>
-            ) : null
-          }
         />
       </KeyboardAvoidingView>
     )
