@@ -1,30 +1,32 @@
-import React, { Component } from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { ifIphoneX } from 'react-native-iphone-x-helper'
 
-// Assets
-import tapinLogo from './images/logo_full.png';
+import tapinLogo from './images/logo_full.png'
 
-class MatchesHeader extends Component{
-    render(){
-        return (
-          <View style={styles.matchesHeaderContainer}>
-            <View style={styles.matchesHeaderInnerContent}>
-              <Image source={tapinLogo} style={styles.headerLogo} />
-              <View style={styles.matchesHeaderTextContainer} >
-                <Text style={styles.bigText} >Essential Matches</Text>
-                <Text style={styles.dateRangeText} >{this.props.dateRange}</Text>
-              </View>
-            </View>
+export default class MatchesHeader extends Component {
+  static propTypes = {
+    dateRange: PropTypes.string,
+  }
+  static defaultProps = {
+    dateRange: '',
+  }
+
+  render() {
+    const { dateRange } = this.props
+    return (
+      <View style={styles.matchesHeaderContainer}>
+        <View style={styles.matchesHeaderInnerContent}>
+          <Image source={tapinLogo} style={styles.headerLogo} />
+          <View style={styles.matchesHeaderTextContainer}>
+            <Text style={styles.bigText}>Essential Matches</Text>
+            <Text style={styles.dateRangeText}>{dateRange}</Text>
           </View>
-        )
-    }
+        </View>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -36,8 +38,8 @@ const styles = StyleSheet.create({
   },
   matchesHeaderInnerContent: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "center"
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   headerLogo: {
     height: 30,
@@ -45,22 +47,19 @@ const styles = StyleSheet.create({
     marginTop: 3,
   },
   matchesHeaderTextContainer: {
-    marginLeft: "auto",
-
+    marginLeft: 'auto',
   },
   bigText: {
-    textAlign: "right",
-    fontFamily: "poppins-bold",
+    textAlign: 'right',
+    fontFamily: 'poppins-bold',
     letterSpacing: 0,
     marginBottom: 0,
     height: 18,
   },
   dateRangeText: {
-    fontFamily: "poppins-regular",
+    fontFamily: 'poppins-regular',
     fontSize: 11,
-    textAlign: "right",
-    letterSpacing: 1
+    textAlign: 'right',
+    letterSpacing: 1,
   },
-});
-
-export default MatchesHeader;
+})

@@ -13,6 +13,7 @@
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
+    "android-emulator": "/Users/$USER/Library/Android/sdk/tools/emulator -avd Pixel_API_26 & npm run android",
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
@@ -30,7 +31,7 @@
     "react-native-htmlview": "^0.12.1",
     "react-native-iphone-x-helper": "^1.0.2",
     "react-native-simple-expand": "^0.1.3",
-    "react-navigation": "^1.0.0-beta.27",
+    "react-router-native": "^4.2.0",
     "sentry-expo": "~1.7.0"
   },
   "rnpm": {
