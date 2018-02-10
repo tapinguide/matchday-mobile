@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Image, StyleSheet, Text, View } from 'react-native'
-
 import { ifIphoneX } from 'react-native-iphone-x-helper'
 
-// Assets
 import tapinLogo from './images/logo_full.png'
 
-class MatchesHeader extends Component {
+export default class MatchesHeader extends Component {
+  static propTypes = {
+    dateRange: PropTypes.string,
+  }
+  static defaultProps = {
+    dateRange: '',
+  }
+
   render() {
+    const { dateRange } = this.props
     return (
       <View style={styles.matchesHeaderContainer}>
         <View style={styles.matchesHeaderInnerContent}>
           <Image source={tapinLogo} style={styles.headerLogo} />
           <View style={styles.matchesHeaderTextContainer}>
             <Text style={styles.bigText}>Essential Matches</Text>
-            <Text style={styles.dateRangeText}>{this.props.dateRange}</Text>
+            <Text style={styles.dateRangeText}>{dateRange}</Text>
           </View>
         </View>
       </View>
@@ -56,5 +63,3 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 })
-
-export default MatchesHeader

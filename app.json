@@ -14,12 +14,12 @@
     },
     "ios": {
       "bundleIdentifier": "com.tapinguide.matchday",
-      "buildNumber": "13",
+      "buildNumber": "14",
       "supportsTablet": false
     },
     "android": {
       "package": "com.tapinguide.matchday",
-      "versionCode": 13,
+      "versionCode": 14,
       "permissions": []
     },
     "orientation": "portrait",

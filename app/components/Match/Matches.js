@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, StatusBar, StyleSheet, View, KeyboardAvoidingView } from 'react-native'
+import { FlatList, Image, StatusBar, StyleSheet, View } from 'react-native'
 import moment from 'moment'
 
 import Match from './Match'
@@ -11,6 +11,7 @@ import MatchService from '../lib/matchservice'
 export default class Matches extends Component {
   state = {
     matches: [],
+    matchDateRange: '_',
     matchIndex: 1,
   }
 
@@ -53,7 +54,9 @@ export default class Matches extends Component {
     clearTimeout(this.timerID)
     if (!this.mounted) return
     MatchService.getMatches()
-      .then(matches => this.setState({ matches }, this.setMatchDateRange))
+      .then(matches => {
+        return this.mounted ? this.setState({ matches }, this.setMatchDateRange) : false
+      })
       .catch(error => {
         console.log('There has been a problem with your fetch operation: ' + error.message)
         throw error
@@ -74,19 +77,15 @@ export default class Matches extends Component {
     const { navigation } = this.props
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        <FlatList
-          ref={component => (this.flatList = component)}
-          style={{ flex: 1 }}
-          data={matches}
-          keyExtractor={item => item.id}
-          renderItem={({ item, index }) => (
-            <Match match={item} matchIndex={index} onMatchToggle={this._onMatchToggle} />
-          )}
-          ListEmptyComponent={<Loading />}
-          ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
-        />
-      </KeyboardAvoidingView>
+      <FlatList
+        ref={component => (this.flatList = component)}
+        style={{ flex: 1 }}
+        data={matches}
+        keyExtractor={item => item.id}
+        renderItem={({ item, index }) => <Match match={item} matchIndex={index} onMatchToggle={this._onMatchToggle} />}
+        ListEmptyComponent={<Loading />}
+        ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
+      />
     )
   }
 }

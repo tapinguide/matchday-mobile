@@ -13,6 +13,7 @@
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
+    "android-emulator": "/Users/$USER/Library/Android/sdk/tools/emulator -avd Pixel_API_26 & npm run android",
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
@@ -34,8 +35,6 @@
     "sentry-expo": "~1.7.0"
   },
   "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
+    "assets": ["./assets/fonts"]
   }
 }
