@@ -116,6 +116,10 @@ export default class CompletedMatch extends Component {
     } else {
       highlights = <View />
     }
+
+    var localMatchDate = moment.utc(match.matchTime).local()
+    var matchDate = localMatchDate.format('ddd M/D h:mma').toUpperCase()
+
     return (
       <TouchableHighlight onPress={() => this._onPressButton()} activeOpacity={1} ref="mycomponent">
         <View
@@ -175,7 +179,7 @@ export default class CompletedMatch extends Component {
                 />
               </View>
               <Panel underlayColor="#f5f5f5" panelExpanded={this.state.panelExpanded}>
-                <TVVenueDetails tvDetails={tvDetails} venue={venue} />
+                <TVVenueDetails matchTime={matchDate} tvDetails={tvDetails} venue={venue} />
                 {events}
               </Panel>
             </View>

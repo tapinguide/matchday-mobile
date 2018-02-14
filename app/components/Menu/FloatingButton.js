@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Animated, Easing, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
-import icon from '../../../assets/images/logo.png'
+import icon from './images/button.png'
 
 export default class FloatingButton extends Component {
   static propTypes = {
@@ -44,7 +44,7 @@ export default class FloatingButton extends Component {
     Animated.timing(this.state.position, {
       delay: 300,
       easing: Easing.exp.out,
-      toValue: 30,
+      toValue: 20,
       duration: 200,
     }).start()
   }
@@ -56,7 +56,7 @@ export default class FloatingButton extends Component {
     return (
       <Animated.View style={[styles.container, { bottom: position }]}>
         <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={1}>
-          <Image source={icon} style={{ height: 30, width: 30 }} />
+          <Image source={icon} style={{ height: 42, width: 42 }} />
         </TouchableOpacity>
       </Animated.View>
     )
@@ -66,23 +66,21 @@ export default class FloatingButton extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    right: 30,
+    right: 20,
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#ffffff',
     borderRadius: 50,
-    borderColor: '#18EFC6',
-    borderWidth: 1,
     height: 50,
     justifyContent: 'center',
-    elevation: 2,
-    shadowColor: '#000000',
+    elevation: 15,
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 11,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 1,
     shadowRadius: 10,
     width: 50,
     zIndex: 10,

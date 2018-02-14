@@ -14,41 +14,28 @@ import {
 
 import { width, height, totalSize } from 'react-native-dimension'
 
-import HeaderBar from '../../components/HeaderBar/HeaderBar'
-
 import tapinLogo from './images/logo_full.png'
 import clint from './images/clint.jpg'
 import curt from './images/curt.jpg'
 import mike from './images/mike.jpg'
-import exit from './images/exit.png'
 import twitterBtn from './images/twitter_button.png'
 
 export default class About extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  async componentDidMount() {}
-
-  handleLinkPress(url) {
+  handleLinkPress = url => {
     Linking.openURL(url).catch(err => console.error('An error occurred', err))
-  }
-
-  handleHomePress = () => {
-    this.props.navigation.goBack()
   }
 
   render() {
     return (
-      <View style={styles.aboutContainer}>
-        <HeaderBar />
+      <View style={styles.container}>
         <ScrollView>
           <View style={styles.content}>
             <Text style={styles.heading}>About</Text>
             <Text style={styles.intro}>
               There's more coverage of the beautiful game than ever, but even as football fanatics, we found ourselves
               having trouble keeping up. So, we created the latest version of Tap In. It’s a soccer calendar with
-              context that helps fans follow global soccer’s essential matches. Quick previews to get you prepped for
-              the weekend, live match data, and match recaps with highlights.
+              context that helps fans follow global soccer’s top matches. Quick previews to get you prepped for the
+              weekend, live match data, and match recaps with highlights.
             </Text>
             <Text style={styles.paragraph}>
               We’d love to hear what you think and what would make Tap In better. Drop us a line:
@@ -142,37 +129,16 @@ export default class About extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  aboutContainer: {
+  container: {
     backgroundColor: '#FFFFFF',
     flex: 1,
   },
   content: {
     flex: 1,
-    paddingTop: 56,
+    paddingTop: 34,
     paddingLeft: 28,
     paddingRight: 28,
     paddingBottom: 56,
-  },
-  exit: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 22,
-    width: 40,
-    height: 40,
-    position: 'absolute',
-    top: 20,
-    right: 20,
-    zIndex: 5,
-  },
-  exitImage: {
-    height: 22,
-    width: 22,
-    position: 'absolute',
-    top: 8.9,
-    left: 8.9,
-  },
-  statusBarBackground: {
-    height: 20,
-    backgroundColor: '#f0f0f0',
   },
   heading: {
     fontFamily: 'poppins-bold',
