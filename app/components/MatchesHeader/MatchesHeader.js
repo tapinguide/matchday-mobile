@@ -20,7 +20,7 @@ export default class MatchesHeader extends Component {
         <View style={styles.matchesHeaderInnerContent}>
           <Image source={tapinLogo} style={styles.headerLogo} />
           <View style={styles.matchesHeaderTextContainer}>
-            <Text style={styles.bigText}>Essential Matches</Text>
+            <Text style={styles.bigText}>Top Matches</Text>
             <Text style={styles.dateRangeText}>{dateRange}</Text>
           </View>
         </View>

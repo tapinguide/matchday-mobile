@@ -22,11 +22,11 @@ import MatchService from '../lib/matchservice'
 import MustReadWatch from '../MustReadWatch/MustReadWatch'
 import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
 
-import badgeIcon from './images/badge.png'
+import crestIcon from './images/crest.png'
 import tapinLogo from './images/logo_full.png'
-import tableIcon from './images/table.png'
-import essentialIcon from './images/top.png'
-import aboutIcon from '../../../assets/images/logo.png'
+import tableIcon from './images/tables.png'
+import topMatchesIcon from './images/top.png'
+import aboutIcon from './images/logo.png'
 
 export default class Menu extends Component {
   static propTypes = {
@@ -97,13 +97,6 @@ export default class Menu extends Component {
     const { position, readWatch } = this.state
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 20 : 0
 
-    const readWatchComponent = readWatch.length ? (
-      <View>
-        <MustReadWatch link={readWatch[0]} />
-        <MustReadWatch link={readWatch[1]} />
-      </View>
-    ) : null
-
     return (
       <Animated.View style={[styles.container, { top: position }]}>
         <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} keyboardVerticalOffset={keyboardVerticalOffset}>
@@ -114,21 +107,33 @@ export default class Menu extends Component {
             <View style={styles.menuItems}>
               <Link to="/" onPress={closeMenu} style={styles.menuItem} component={TouchableOpacity} activeOpacity={1}>
                 <View style={styles.menuImage}>
-                  <Image source={essentialIcon} />
+                  <Image source={topMatchesIcon} />
                 </View>
-                <Text style={styles.menuText}>Essential Matches</Text>
+                <Text style={styles.menuText}>Top Matches</Text>
               </Link>
-              {/* <Link to="/" onPress={closeMenu} style={styles.menuItem} component={TouchableOpacity} activeOpacity={1}>
+              {/* <Link
+                to="/tables"
+                onPress={closeMenu}
+                style={styles.menuItem}
+                component={TouchableOpacity}
+                activeOpacity={1}
+              >
                 <View style={styles.menuImage}>
                   <Image source={tableIcon} />
                 </View>
                 <Text style={styles.menuText}>League Tables</Text>
               </Link>
-              <Link to="/" onPress={closeMenu} style={styles.menuItem} component={TouchableOpacity} activeOpacity={1}>
+              <Link
+                to="/crest"
+                onPress={closeMenu}
+                style={styles.menuItem}
+                component={TouchableOpacity}
+                activeOpacity={1}
+              >
                 <View style={styles.menuImage}>
-                  <Image source={badgeIcon} />
+                  <Image source={crestIcon} />
                 </View>
-                <Text style={styles.menuText}>Badge of the Week</Text>
+                <Text style={styles.menuText}>Crest of the Week</Text>
               </Link> */}
               <Link
                 to="/about"
@@ -140,13 +145,17 @@ export default class Menu extends Component {
                 <View style={styles.menuImage}>
                   <Image source={aboutIcon} style={{ width: 80, height: 80 }} />
                 </View>
-                <Text style={styles.menuText}>about</Text>
+                <Text style={styles.menuText}>About</Text>
               </Link>
             </View>
             <View>
-              {readWatchComponent}
+              {!!readWatch.length && (
+                <View style={styles.shadow}>
+                  {readWatch.map((item, index) => <MustReadWatch key={index} link={item} />)}
+                </View>
+              )}
               <NewsletterSubscribeForm />
-              <Footer />
+              <Footer closeMenu={closeMenu} />
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
@@ -183,6 +192,8 @@ const styles = StyleSheet.create({
   menuItem: {
     alignItems: 'center',
     backgroundColor: '#ffffff',
+    borderColor: '#C5C5C5',
+    borderWidth: 1,
     flex: 1,
     flexBasis: '40%',
     flexDirection: 'column',
@@ -192,18 +203,28 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     paddingHorizontal: 12,
     paddingVertical: 18,
-    elevation: 2,
-    shadowColor: '#000000',
+    elevation: 16,
+    shadowColor: 'rgba(0, 0, 0, 0.08)',
     shadowOffset: {
       width: 0,
       height: 5,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 1,
     shadowRadius: 10,
   },
   menuImage: { alignItems: 'center', flex: 1, justifyContent: 'center' },
   menuText: {
     fontSize: 13,
     fontFamily: 'poppins-semi-bold',
+  },
+  shadow: {
+    elevation: 16,
+    shadowColor: 'rgba(0, 0, 0, 0.08)',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 10,
   },
 })

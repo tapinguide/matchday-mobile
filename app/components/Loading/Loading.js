@@ -1,18 +1,39 @@
-import React, { Component } from 'react';
-import {Text, View, Image, StyleSheet, } from 'react-native';
-import { width, height, totalSize } from 'react-native-dimension';
+import React, { Component } from 'react'
+import { Text, TouchableHighlight, Image, StyleSheet, View } from 'react-native'
+import { DangerZone } from 'expo'
+import { width, height, totalSize } from 'react-native-dimension'
 
-import tapinLogo from './images/tapin_logo_text.png';
-import loadingIndicator from './images/tapin-loading-animation.gif';
+import tapinLogo from './images/tapin_logo_text.png'
+import loadingIndicator from './images/tapin-loading-animation.gif'
+
+const { Lottie } = DangerZone
+
+import animationData from '../../../assets/animations/loading.json'
 
 export default class Loading extends Component {
-
-  render(){
+  render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: height(100), marginTop: -50 }}>
-          <Image source={loadingIndicator} style={{width: 100, height: 100}} />
-          <Image source={tapinLogo} style={{width:235, height: 91}} />
-          <Text style={{
+        {/* <Lottie
+          ref={animation => {
+            this.animation = animation
+          }}
+          loop={true}
+          source={animationData}
+        />
+        <TouchableHighlight
+          onPress={() => {
+            this.animation.reset()
+            this.animation.play()
+            console.log('play')
+          }}
+        >
+          <Text>reset</Text>
+        </TouchableHighlight> */}
+        <Image source={loadingIndicator} style={{ width: 100, height: 100 }} />
+        <Image source={tapinLogo} style={{ width: 235, height: 91 }} />
+        <Text
+          style={{
             color: '#757575',
             fontFamily: 'poppins-regular',
             fontSize: 16,
@@ -21,11 +42,12 @@ export default class Loading extends Component {
             lineHeight: 25,
             marginLeft: 2,
             marginTop: 30,
-            textAlign: 'center'
-          }}>
-            LOADING
-          </Text>
+            textAlign: 'center',
+          }}
+        >
+          LOADING
+        </Text>
       </View>
-    );
+    )
   }
 }

@@ -1,27 +1,34 @@
 import React, { Component } from 'react'
 import { Alert, View } from 'react-native'
-import { Font, Notifications } from 'expo'
+import { AppLoading, Font, Notifications } from 'expo'
 
-import { NativeRouter as Router, Route, Link } from 'react-router-native'
+import { NativeRouter, Route, Link } from 'react-router-native'
 
-import Home from './app/screens/home/Home'
 import About from './app/screens/about/About'
-import Menu from './app/components/Menu/Menu'
+import Crest from './app/screens/crest/Crest'
+import Home from './app/screens/home/Home'
+import Tables from './app/screens/tables/Tables'
+
 import FloatingButton from './app/components/Menu/FloatingButton'
+import HeaderBar from './app/components/HeaderBar/HeaderBar'
+import Menu from './app/components/Menu/Menu'
 
 export default class App extends Component {
   state = {
-    fontLoaded: false,
+    isReady: false,
     menuIsOpen: false,
     navigator: null,
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     Notifications.addListener(({ origin, data, remote }) => {
       if (!remote && origin === 'received') {
         Alert.alert(data.title, data.body, { cancelable: false })
       }
     })
+  }
+
+  async _cacheResourcesAsync() {
     await Font.loadAsync({
       'poppins-bold': require('./assets/fonts/Poppins-Bold.ttf'),
       'poppins-light': require('./assets/fonts/Poppins-Light.ttf'),
@@ -30,7 +37,7 @@ export default class App extends Component {
       'poppins-semi-bold': require('./assets/fonts/Poppins-SemiBold.ttf'),
     })
 
-    this.setState({ fontLoaded: true })
+    return true
   }
 
   closeMenu = () => {
@@ -42,21 +49,30 @@ export default class App extends Component {
   }
 
   render() {
-    const { fontLoaded, menuIsOpen } = this.state
+    const { isReady, menuIsOpen } = this.state
 
-    if (!fontLoaded) {
-      return <View />
+    if (!isReady) {
+      return (
+        <AppLoading
+          startAsync={this._cacheResourcesAsync}
+          onFinish={() => this.setState({ isReady: true })}
+          onError={console.warn}
+        />
+      )
     }
     return (
-      <Router>
+      <NativeRouter>
         <View style={{ flex: 1 }}>
+          <HeaderBar />
           <Route path="/" exact component={Home} />
+          <Route path="/crest" component={Crest} />
+          <Route path="/tables" component={Tables} />
           <Route path="/about" component={About} />
 
           <Menu isOpen={menuIsOpen} closeMenu={this.closeMenu} />
           <FloatingButton menuIsOpen={menuIsOpen} onPress={this.toggleMenu} />
         </View>
-      </Router>
+      </NativeRouter>
     )
   }
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Image, Linking, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Link } from 'react-router-native'
 
-import facebookLogo from './images/facebook-logo.png'
-import twitterLogo from './images/twitter-logo.png'
+import facebookLogo from './images/FB.png'
+import twitterLogo from './images/Twit.png'
 
 export default class Footer extends Component {
   constructor(props) {
@@ -14,21 +15,19 @@ export default class Footer extends Component {
   }
 
   render() {
+    const { closeMenu } = this.props
     return (
       <View style={styles.footerContainer}>
+        <Link to="/about" onPress={closeMenu} component={TouchableOpacity}>
+          <Text style={styles.footerLink}>About</Text>
+        </Link>
         <View style={styles.socialIcons}>
-          <TouchableHighlight
-            onPress={() => this.handlePress('https://www.facebook.com/tapindesign')}
-            underlayColor="#F0F0F0"
-          >
-            <Image source={facebookLogo} style={styles.socialIconFacebook} />
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={() => this.handlePress('https://twitter.com/tapinguide')}
-            underlayColor="#F0F0F0"
-          >
-            <Image source={twitterLogo} style={styles.socialIconTwitter} />
-          </TouchableHighlight>
+          <TouchableOpacity onPress={() => this.handlePress('https://www.facebook.com/tapindesign')}>
+            <Image source={facebookLogo} style={styles.socialIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.handlePress('https://twitter.com/tapinguide')}>
+            <Image source={twitterLogo} style={styles.socialIcon} />
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -54,15 +53,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  socialIconFacebook: {
+  socialIcon: {
     height: 30,
-    width: 30,
-  },
-
-  socialIconTwitter: {
-    height: 24,
-    width: 28.420800004,
     marginLeft: 15,
-    marginTop: 3,
+    width: 30,
   },
 })
