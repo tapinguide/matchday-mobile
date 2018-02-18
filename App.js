@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Alert, View } from 'react-native'
-import { AppLoading, Font, Notifications } from 'expo'
+import { AppLoading, Asset, Font, Notifications } from 'expo'
 
 import { NativeRouter, Route, Link } from 'react-router-native'
 

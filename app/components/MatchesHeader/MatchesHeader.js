@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Asset } from 'expo'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { ifIphoneX } from 'react-native-iphone-x-helper'
 
-import tapinLogo from './images/logo_full.png'
+const tapinLogo = require('./images/logo_full.png')
 
 export default class MatchesHeader extends Component {
   static propTypes = {
@@ -11,6 +12,10 @@ export default class MatchesHeader extends Component {
   }
   static defaultProps = {
     dateRange: '',
+  }
+
+  async componentWillMount() {
+    await Asset.loadAsync([tapinLogo])
   }
 
   render() {

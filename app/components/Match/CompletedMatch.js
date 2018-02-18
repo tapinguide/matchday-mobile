@@ -16,7 +16,10 @@ import moment from 'moment'
 import Event from '../Event/Event'
 import Panel from '../Panel/Panel'
 import TVVenueDetails from './TVVenueDetails'
-import { LinearGradient } from 'expo'
+import { Asset, LinearGradient } from 'expo'
+
+const videoCameraIcon = require('./images/video-camera.png')
+const rectangleIcon = require('./images/rectangle.png')
 
 export default class CompletedMatch extends Component {
   constructor(props) {
@@ -25,6 +28,10 @@ export default class CompletedMatch extends Component {
       panelExpanded: false,
       highlightsUrl: '',
     }
+  }
+
+  async componentWillMount() {
+    await Asset.loadAsync([rectangleIcon, videoCameraIcon])
   }
 
   componentDidMount() {
@@ -107,7 +114,7 @@ export default class CompletedMatch extends Component {
         <View style={styles.highlightsColumn}>
           <TouchableOpacity onPress={event => this.handleHighlightsPress(event)} style={styles.highlightsButton}>
             <LinearGradient colors={['#27E8CD', '#23D3EA']} style={styles.highlightsIconContainer}>
-              <Image style={{ width: 16, height: 11 }} source={require('./images/video-camera.png')} />
+              <Image style={{ width: 16, height: 11 }} source={videoCameraIcon} />
             </LinearGradient>
             <Text style={styles.highlightsButtonText}>Highlights</Text>
           </TouchableOpacity>
@@ -137,7 +144,7 @@ export default class CompletedMatch extends Component {
         >
           <View style={styles.matchNumberContainer}>
             <Text style={styles.matchNumber}>{matchIndex}</Text>
-            <Image source={require('./images/rectangle.png')} style={styles.numberbg} />
+            <Image source={rectangleIcon} style={styles.numberbg} />
           </View>
           <View style={penaltyKicks ? [styles.cardHeader, styles.cardHeaderPenalties] : styles.cardHeader}>
             <Text style={penaltyKicks ? [styles.scorePens, styles.scorePensHome] : styles.scoreFormatting}>

@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
+import { Asset } from 'expo'
 import { Text, View, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native'
 import HTMLView from 'react-native-htmlview'
-import sidearrow from './images/sidearrow.png'
-import mustReadIcon from './images/mustread.png'
-import mustWatchIcon from './images/mustwatch.png'
+
+const sidearrow = require('./images/sidearrow.png')
+const mustReadIcon = require('./images/mustread.png')
+const mustWatchIcon = require('./images/mustwatch.png')
 
 export default class MustReadWatch extends Component {
   openWindow = () => {
     const { url } = this.props.link
 
     Linking.openURL(url).catch(err => console.error('An error occurred', err))
+  }
+
+  async componentWillMount() {
+    await Asset.loadAsync([sidearrow, mustReadIcon, mustWatchIcon])
   }
 
   render() {

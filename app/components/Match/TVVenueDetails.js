@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Asset } from 'expo'
 import { Text, View, StyleSheet, Image } from 'react-native'
 
-import tvIcon from './images/TV.png'
-import pitchIcon from './images/pitch.png'
+const tvIcon = require('./images/TV.png')
+const pitchIcon = require('./images/pitch.png')
 
 export default class TVVenueDetails extends Component {
   static propTypes = {
     matchTime: PropTypes.string,
     tvDetails: PropTypes.string,
     venue: PropTypes.string,
+  }
+
+  async componentWillMount() {
+    await Asset.loadAsync([tvIcon, pitchIcon])
   }
 
   render() {

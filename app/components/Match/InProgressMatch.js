@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView, TouchableHighlight } from 'react-native'
+import { Asset } from 'expo'
 import HTMLView from 'react-native-htmlview'
 import Panel from '../Panel/Panel'
 import Event from '../Event/Event'
 import TVVenueDetails from './TVVenueDetails'
 
 import moment from 'moment'
-import seconds from './images/secs.gif'
+
+const rectangleIcon = require('./images/rectangle.png')
+const secondsIcon = require('./images/secs.gif')
 
 export default class InProgressMatch extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      panelExpanded: false,
-    }
+  state = {
+    panelExpanded: false,
   }
+
+  async componentWillMount() {
+    await Asset.loadAsync([rectangleIcon, secondsIcon])
+  }
+
   _onPressButton = () => {
     console.log('panel expanded pre update: ', this.state.panelExpanded)
     this.setState(
@@ -56,7 +60,7 @@ export default class InProgressMatch extends Component {
       return (
         <View>
           <Text style={{ fontFamily: 'poppins-semi-bold', fontSize: 14 }}>{match.timer}'</Text>
-          <Image source={seconds} style={{ height: 12, width: 20 }} />
+          <Image source={secondsIcon} style={{ height: 12, width: 20 }} />
         </View>
       )
     }
@@ -125,7 +129,7 @@ export default class InProgressMatch extends Component {
         >
           <View style={styles.matchNumberContainer}>
             <Text style={styles.matchNumber}>{matchIndex}</Text>
-            <Image source={require('./images/rectangle.png')} style={styles.numberbg} />
+            <Image source={rectangleIcon} style={styles.numberbg} />
           </View>
           <View
             style={{

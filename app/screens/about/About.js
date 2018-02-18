@@ -11,16 +11,21 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native'
+import { Asset } from 'expo'
 
 import { width, height, totalSize } from 'react-native-dimension'
 
-import tapinLogo from './images/logo_full.png'
-import clint from './images/clint.jpg'
-import curt from './images/curt.jpg'
-import mike from './images/mike.jpg'
-import twitterBtn from './images/twitter_button.png'
+const tapinLogo = require('./images/logo_full.png')
+const clint = require('./images/clint.jpg')
+const curt = require('./images/curt.jpg')
+const mike = require('./images/mike.jpg')
+const twitterBtn = require('./images/twitter_button.png')
 
 export default class About extends React.Component {
+  async componentWillMount() {
+    await Asset.loadAsync([tapinLogo, clint, curt, mike, twitterBtn])
+  }
+
   handleLinkPress = url => {
     Linking.openURL(url).catch(err => console.error('An error occurred', err))
   }

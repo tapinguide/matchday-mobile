@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import { Asset } from 'expo'
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Link } from 'react-router-native'
 
-import facebookLogo from './images/FB.png'
-import twitterLogo from './images/Twit.png'
+const facebookLogo = require('./images/FB.png')
+const twitterLogo = require('./images/Twit.png')
 
 export default class Footer extends Component {
-  constructor(props) {
-    super(props)
+  async componentWillMount() {
+    await Asset.loadAsync([facebookLogo, twitterLogo])
   }
 
   handlePress = url => {

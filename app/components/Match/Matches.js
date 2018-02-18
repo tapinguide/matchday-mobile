@@ -19,9 +19,11 @@ export default class Matches extends Component {
   mounted = false
   timerID = null
 
-  componentWillMount() {
+  async componentWillMount() {
+    const matches = await MatchService.getStoredMatches()
+
     this.mounted = true
-    this.setState({ matches: MatchService.matches }, this.updateMatches)
+    this.setState({ matches }, this.updateMatches)
   }
 
   componentWillUnmount() {

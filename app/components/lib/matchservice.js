@@ -1,10 +1,25 @@
+import React from 'react'
+import { AsyncStorage } from 'react-native'
+
 const matchIsComplete = status => status === 'ft' || status === 'aet' || status === 'pen.' || status === 'cancl.'
 const domain = `https://api.tapinguide.com`
 export default class MatchService {
-  static crest = null
-  static matches = []
-  static readWatch = []
-  static tables = []
+  static async getStoredMatches() {
+    const matches = await AsyncStorage.getItem('@TapIn:matches')
+    return matches && matches !== '' ? JSON.parse(matches) : []
+  }
+  static async getStoredReadWatch() {
+    const readWatch = await AsyncStorage.getItem('@TapIn:readWatch')
+    return readWatch && readWatch !== '' ? JSON.parse(readWatch) : []
+  }
+  static async getStoredCrest() {
+    const crest = await AsyncStorage.getItem('@TapIn:crest')
+    return crest && crest !== '' ? JSON.parse(crest) : null
+  }
+  static async getStoredTables() {
+    const tables = await AsyncStorage.getItem('@TapIn:tables')
+    return tables && tables !== '' ? JSON.parse(tables) : []
+  }
 
   static async getMatches() {
     const url = `${domain}/activematches/`
@@ -22,7 +37,7 @@ export default class MatchService {
 
     const orderedMatches = [...notCompleted, ...completed]
 
-    this.matches = orderedMatches
+    await AsyncStorage.setItem('@TapIn:matches', JSON.stringify(orderedMatches))
     return orderedMatches
   }
 
@@ -32,7 +47,7 @@ export default class MatchService {
     const response = await fetch(url)
     const readWatch = response.json()
 
-    this.readWatch = readWatch
+    await AsyncStorage.setItem('@TapIn:readWatch', JSON.stringify(readWatch))
     return readWatch
   }
 
@@ -42,7 +57,7 @@ export default class MatchService {
     const response = await fetch(url)
     const crest = await response.json()
 
-    this.crest = crest
+    await AsyncStorage.setItem('@TapIn:crest', JSON.stringify(crest))
     return crest
   }
 
@@ -52,7 +67,7 @@ export default class MatchService {
     const response = await fetch(url)
     const tables = await response.json()
 
-    this.tables = tables
+    await AsyncStorage.setItem('@TapIn:tables', JSON.stringify(tables))
     return tables
   }
 }

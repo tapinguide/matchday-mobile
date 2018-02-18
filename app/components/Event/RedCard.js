@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
+import { Asset } from 'expo'
 import { Text, View, StyleSheet, Image } from 'react-native'
 
-export default class RedCard extends React.Component {
+const cardIcon = require('./images/card.png')
+
+export default class RedCard extends Component {
+  async componentWillMount() {
+    await Asset.loadAsync([cardIcon])
+  }
+
   render() {
     var event = this.props.event
     var minute = parseInt(event.minute, 10) + parseInt(event.extraMinute, 10)
@@ -75,7 +82,7 @@ export default class RedCard extends React.Component {
               style={{
                 height: 20,
               }}
-              source={require('./images/card.png')}
+              source={cardIcon}
             />
           </View>
           <View style={{ width: '80%' }}>

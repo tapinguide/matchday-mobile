@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView, TouchableHighlight } from 'react-native'
+import { Asset } from 'expo'
 import HTMLView from 'react-native-htmlview'
 import moment from 'moment'
 import Panel from '../Panel/Panel'
 import TVVenueDetails from './TVVenueDetails'
 import NotificationButton from './NotificationButton'
 
-export default class ScheduledMatch extends Component {
-  constructor(props) {
-    super(props)
+const rectangleIcon = require('./images/rectangle.png')
 
-    this.state = {
-      panelExpanded: false,
-    }
+export default class ScheduledMatch extends Component {
+  state = {
+    panelExpanded: false,
   }
+
+  async componentWillMount() {
+    await Asset.loadAsync([rectangleIcon])
+  }
+
   _onPressButton = () => {
     this.setState(
       {
@@ -54,7 +58,7 @@ export default class ScheduledMatch extends Component {
           <View style={styles.contentContainer}>
             <View style={styles.matchNumberContainer}>
               <Text style={styles.matchNumber}>{matchIndex}</Text>
-              <Image source={require('./images/rectangle.png')} style={styles.numberbg} />
+              <Image source={rectangleIcon} style={styles.numberbg} />
             </View>
             <View style={styles.crestContainer}>
               <View style={styles.homeCrest}>

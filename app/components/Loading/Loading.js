@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { Text, TouchableHighlight, Image, StyleSheet, View } from 'react-native'
-import { DangerZone } from 'expo'
+import { Asset, DangerZone } from 'expo'
 import { width, height, totalSize } from 'react-native-dimension'
 
-import tapinLogo from './images/tapin_logo_text.png'
-import loadingIndicator from './images/tapin-loading-animation.gif'
+const tapinLogo = require('./images/tapin_logo_text.png')
+const loadingIndicator = require('./images/tapin-loading-animation.gif')
 
 const { Lottie } = DangerZone
 
 import animationData from '../../../assets/animations/loading.json'
 
 export default class Loading extends Component {
+  async componentWillMount() {
+    await Asset.loadAsync([tapinLogo, loadingIndicator])
+  }
+
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: height(100), marginTop: -50 }}>

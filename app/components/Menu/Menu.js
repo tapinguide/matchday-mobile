@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import { Asset } from 'expo'
 import { Link } from 'react-router-native'
 
 import { isIphoneX } from 'react-native-iphone-x-helper'
@@ -22,11 +23,14 @@ import MatchService from '../lib/matchservice'
 import MustReadWatch from '../MustReadWatch/MustReadWatch'
 import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
 
-import crestIcon from './images/crest.png'
-import tapinLogo from './images/logo_full.png'
-import tableIcon from './images/tables.png'
-import topMatchesIcon from './images/top.png'
-import aboutIcon from './images/logo.png'
+const crestIcon = require('./images/crest.png')
+const exitIcon = require('./images/exit.png')
+const tapinLogo = require('./images/logo_full.png')
+const tableIcon = require('./images/tables.png')
+const topMatchesIcon = require('./images/top.png')
+const aboutIcon = require('./images/logo.png')
+
+const { height } = Dimensions.get('window')
 
 export default class Menu extends Component {
   static propTypes = {
@@ -39,15 +43,16 @@ export default class Menu extends Component {
   }
 
   state = {
-    height: 0,
     position: new Animated.Value(0),
     readWatch: [],
   }
 
-  componentDidMount() {
-    const { height } = Dimensions.get('window')
+  async componentWillMount() {
+    const readWatch = await MatchService.getStoredReadWatch()
 
-    this.setState({ height, readWatch: MatchService.readWatch }, () => {
+    await Asset.loadAsync([crestIcon, exitIcon, tapinLogo, tableIcon, topMatchesIcon, aboutIcon])
+
+    this.setState({ readWatch }, () => {
       this._hide(0)
       this.updateReadWatch()
     })
@@ -73,7 +78,7 @@ export default class Menu extends Component {
   }
 
   _hide(duration = 300) {
-    const { height, position } = this.state
+    const { position } = this.state
 
     Animated.timing(position, {
       easing: Easing.exp.out,
@@ -103,6 +108,23 @@ export default class Menu extends Component {
           <ScrollView style={{ flex: 1 }}>
             <View style={styles.header}>
               <Image source={tapinLogo} style={styles.logo} />
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={closeMenu}
+                style={{
+                  position: 'absolute',
+                  top: 26,
+                  right: 20,
+                }}
+              >
+                <Image
+                  source={exitIcon}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              </TouchableOpacity>
             </View>
             <View style={styles.menuItems}>
               <Link to="/" onPress={closeMenu} style={styles.menuItem} component={TouchableOpacity} activeOpacity={1}>

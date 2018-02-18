@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Asset } from 'expo'
 import { Animated, Easing, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
-import icon from './images/button.png'
+const icon = require('./images/button.png')
 
 export default class FloatingButton extends Component {
   static propTypes = {
@@ -16,6 +17,10 @@ export default class FloatingButton extends Component {
 
   state = {
     position: new Animated.Value(-50),
+  }
+
+  async componentWillMount() {
+    await Asset.loadAsync([icon])
   }
 
   componentDidMount() {

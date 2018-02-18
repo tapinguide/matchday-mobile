@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Alert, AsyncStorage, Image, Linking, Platform, StyleSheet, TouchableOpacity } from 'react-native'
-import { Notifications, Permissions } from 'expo'
+import { Asset, Notifications, Permissions } from 'expo'
 import moment from 'moment'
 
-import notificationOn from './images/notification-on.png'
-import notificationOff from './images/notification-off.png'
+const notificationOn = require('./images/notification-on.png')
+const notificationOff = require('./images/notification-off.png')
 
 export default class NotificationButton extends Component {
   static propTypes = {
@@ -30,6 +30,8 @@ export default class NotificationButton extends Component {
   }
 
   async componentWillMount() {
+    await Asset.loadAsync([notificationOn, notificationOff])
+
     const notificationString = await AsyncStorage.getItem(this.getStorageKey())
     if (notificationString && notificationString !== '') {
       this.setState({ notificationId: Platform.OS === 'ios' ? notificationString : notificationString * 1 })
