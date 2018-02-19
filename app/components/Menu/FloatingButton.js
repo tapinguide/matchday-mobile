@@ -23,10 +23,12 @@ export default class FloatingButton extends Component {
     inputRange: [0, 180],
     outputRange: ['0deg', '180deg'],
   })
+  frontOpacity = this.animatedValue.interpolate({ inputRange: [89, 90], outputRange: [1, 0] })
   backInterpolate = this.animatedValue.interpolate({
     inputRange: [0, 180],
     outputRange: ['180deg', '360deg'],
   })
+  backOpacity = this.animatedValue.interpolate({ inputRange: [89, 90], outputRange: [0, 1] })
 
   async componentWillMount() {
     await Asset.loadAsync([menuIcon, closeIcon])
@@ -77,12 +79,12 @@ export default class FloatingButton extends Component {
 
     return (
       <View style={styles.container}>
-        <Animated.View style={[frontAnimatedStyle, styles.button]}>
+        <Animated.View style={[frontAnimatedStyle, styles.button, { opacity: this.frontOpacity }]}>
           <TouchableOpacity onPress={onPress} activeOpacity={1}>
             <Image source={menuIcon} style={{ height: 42, width: 42 }} />
           </TouchableOpacity>
         </Animated.View>
-        <Animated.View style={[backAnimatedStyle, styles.button]}>
+        <Animated.View style={[backAnimatedStyle, styles.button, { opacity: this.backOpacity }]}>
           <TouchableOpacity onPress={onPress} activeOpacity={1}>
             <Image source={closeIcon} style={{ height: 42, width: 42 }} />
           </TouchableOpacity>
