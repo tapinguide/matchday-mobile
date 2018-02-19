@@ -14,7 +14,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.tapinguide.matchday",
-      "buildNumber": 18,
+      "buildNumber": "18",
       "supportsTablet": false
     },
     "android": {
