@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Asset } from 'expo'
-import { Animated, Easing, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { Animated, Easing, Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 
-const icon = require('./images/button.png')
+const menuIcon = require('./images/button.png')
+const closeIcon = require('./images/closeIcon.png')
 
 export default class FloatingButton extends Component {
   static propTypes = {
@@ -15,71 +16,99 @@ export default class FloatingButton extends Component {
     onPress: () => {},
   }
 
-  state = {
-    position: new Animated.Value(-50),
-  }
+  animatedValue = new Animated.Value(0)
+  value = 0
+
+  frontInterpolate = this.animatedValue.interpolate({
+    inputRange: [0, 180],
+    outputRange: ['0deg', '180deg'],
+  })
+  backInterpolate = this.animatedValue.interpolate({
+    inputRange: [0, 180],
+    outputRange: ['180deg', '360deg'],
+  })
 
   async componentWillMount() {
-    await Asset.loadAsync([icon])
-  }
+    await Asset.loadAsync([menuIcon, closeIcon])
 
-  componentDidMount() {
-    this._show()
+    this.animatedValue.addListener(({ value }) => {
+      this.value = value
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.menuIsOpen !== nextProps.menuIsOpen) {
       if (nextProps.menuIsOpen) {
-        this._hide()
-      } else {
         this._show()
+      } else {
+        this._hide()
       }
     }
   }
 
   _hide() {
-    Animated.timing(this.state.position, {
-      easing: Easing.exp.out,
-      toValue: -50,
+    Animated.spring(this.animatedValue, {
+      toValue: 0,
+      friction: 8,
+      tension: 10,
       duration: 300,
+      easing: Easing.exp.out,
     }).start()
   }
 
   _show() {
-    Animated.timing(this.state.position, {
-      delay: 300,
-      easing: Easing.exp.out,
-      toValue: 20,
+    Animated.spring(this.animatedValue, {
+      toValue: 180,
+      friction: 8,
+      tension: 10,
       duration: 200,
+      easing: Easing.exp.out,
     }).start()
   }
 
   render() {
     const { onPress } = this.props
-    const { position } = this.state
+    const frontAnimatedStyle = {
+      transform: [{ rotateY: this.frontInterpolate }],
+    }
+    const backAnimatedStyle = {
+      transform: [{ rotateY: this.backInterpolate }],
+    }
 
     return (
-      <Animated.View style={[styles.container, { bottom: position }]}>
-        <TouchableOpacity onPress={onPress} style={styles.button} activeOpacity={1}>
-          <Image source={icon} style={{ height: 42, width: 42 }} />
-        </TouchableOpacity>
-      </Animated.View>
+      <View style={styles.container}>
+        <Animated.View style={[frontAnimatedStyle, styles.button]}>
+          <TouchableOpacity onPress={onPress} activeOpacity={1}>
+            <Image source={menuIcon} style={{ height: 42, width: 42 }} />
+          </TouchableOpacity>
+        </Animated.View>
+        <Animated.View style={[backAnimatedStyle, styles.button]}>
+          <TouchableOpacity onPress={onPress} activeOpacity={1}>
+            <Image source={closeIcon} style={{ height: 42, width: 42 }} />
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    bottom: 20,
     position: 'absolute',
     right: 20,
   },
   button: {
     alignItems: 'center',
+    backfaceVisibility: 'hidden',
     backgroundColor: '#ffffff',
     borderRadius: 50,
+    bottom: 0,
+    elevation: 15,
     height: 50,
     justifyContent: 'center',
-    elevation: 15,
+    position: 'absolute',
+    right: 0,
     shadowColor: 'rgba(0, 0, 0, 0.5)',
     shadowOffset: {
       width: 0,

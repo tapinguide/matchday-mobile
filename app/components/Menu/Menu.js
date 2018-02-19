@@ -24,7 +24,6 @@ import MustReadWatch from '../MustReadWatch/MustReadWatch'
 import NewsletterSubscribeForm from '../NewsletterSubscribeForm'
 
 const crestIcon = require('./images/crest.png')
-const exitIcon = require('./images/exit.png')
 const tapinLogo = require('./images/logo_full.png')
 const tableIcon = require('./images/tables.png')
 const topMatchesIcon = require('./images/top.png')
@@ -50,7 +49,7 @@ export default class Menu extends Component {
   async componentWillMount() {
     const readWatch = await MatchService.getStoredReadWatch()
 
-    await Asset.loadAsync([crestIcon, exitIcon, tapinLogo, tableIcon, topMatchesIcon, aboutIcon])
+    await Asset.loadAsync([crestIcon, tapinLogo, tableIcon, topMatchesIcon, aboutIcon])
 
     this.setState({ readWatch }, () => {
       this._hide(0)
@@ -103,28 +102,11 @@ export default class Menu extends Component {
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 20 : 0
 
     return (
-      <Animated.View style={[styles.container, { top: position }]}>
+      <Animated.View style={[styles.container, { transform: [{ translateY: position }] }]}>
         <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} keyboardVerticalOffset={keyboardVerticalOffset}>
           <ScrollView style={{ flex: 1 }}>
             <View style={styles.header}>
               <Image source={tapinLogo} style={styles.logo} />
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={closeMenu}
-                style={{
-                  position: 'absolute',
-                  top: 26,
-                  right: 20,
-                }}
-              >
-                <Image
-                  source={exitIcon}
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                />
-              </TouchableOpacity>
             </View>
             <View style={styles.menuItems}>
               <Link to="/" onPress={closeMenu} style={styles.menuItem} component={TouchableOpacity} activeOpacity={1}>

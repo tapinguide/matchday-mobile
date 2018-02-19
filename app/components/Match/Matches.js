@@ -86,7 +86,7 @@ export default class Matches extends Component {
         keyExtractor={item => item.id}
         renderItem={({ item, index }) => <Match match={item} matchIndex={index} onMatchToggle={this._onMatchToggle} />}
         ListEmptyComponent={<Loading />}
-        ListHeaderComponent={matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
+        ListHeaderComponent={!!matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
       />
     )
   }

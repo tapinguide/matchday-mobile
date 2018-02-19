@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, View } from 'react-native'
+import { Alert, Animated, StyleSheet, View } from 'react-native'
 import { AppLoading, Asset, Font, Notifications } from 'expo'
 
 import { NativeRouter, Route, Link } from 'react-router-native'
@@ -51,24 +51,20 @@ export default class App extends Component {
   render() {
     const { isReady, menuIsOpen } = this.state
 
-    if (!isReady) {
-      return (
-        <AppLoading
-          startAsync={this._cacheResourcesAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />
-      )
-    }
-    return (
+    return !isReady ? (
+      <AppLoading
+        startAsync={this._cacheResourcesAsync}
+        onFinish={() => this.setState({ isReady: true })}
+        onError={console.warn}
+      />
+    ) : (
       <NativeRouter>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#f0f0f0' }}>
           <HeaderBar />
           <Route path="/" exact component={Home} />
           <Route path="/crest" component={Crest} />
           <Route path="/tables" component={Tables} />
           <Route path="/about" component={About} />
-
           <Menu isOpen={menuIsOpen} closeMenu={this.closeMenu} />
           <FloatingButton menuIsOpen={menuIsOpen} onPress={this.toggleMenu} />
         </View>
@@ -76,3 +72,13 @@ export default class App extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 20,
+  },
+})
