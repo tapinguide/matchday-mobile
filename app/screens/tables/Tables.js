@@ -1,35 +1,25 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 
-import MatchService from '../../components/lib/matchservice'
+import Table from './Table'
 
 export default class Tables extends Component {
   state = {
-    tables: [],
-  }
-
-  componentDidMount() {
-    this.setState({ tables: MatchService.tables }, () => {
-      this.updateTables()
-    })
-  }
-
-  updateTables = () => {
-    MatchService.getTables()
-      .then(tables => this.setState({ tables }))
-      .catch(error => {
-        console.log('There has been a problem with your fetch operation: ' + error.message)
-        throw error
-      })
+    tables: [{ id: 33 }, { id: 34 }],
   }
 
   render() {
     const { tables } = this.state
 
     return (
-      <ScrollView style={styles.content}>
-        <Text style={styles.heading}>League Tables</Text>
-      </ScrollView>
+      <FlatList
+        style={styles.content}
+        data={tables}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => <Table competitionId={item.id} />}
+        ListHeaderComponent={<Text style={styles.heading}>League Tables</Text>}
+        ListFooterComponent={<View style={{ height: 30 }} />}
+      />
     )
   }
 }
@@ -41,8 +31,8 @@ const styles = StyleSheet.create({
     paddingVertical: 34,
   },
   heading: {
-    fontFamily: 'poppins-bold',
-    fontSize: 40,
-    fontWeight: '600',
+    fontFamily: 'poppins-semi-bold',
+    fontSize: 32,
+    marginBottom: 10,
   },
 })

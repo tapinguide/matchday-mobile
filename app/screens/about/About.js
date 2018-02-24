@@ -146,12 +146,11 @@ const styles = StyleSheet.create({
     paddingBottom: 56,
   },
   heading: {
-    fontFamily: 'poppins-bold',
-    fontSize: 40,
-    fontWeight: '600',
+    fontFamily: 'poppins-semi-bold',
+    fontSize: 32,
   },
   intro: {
-    fontFamily: 'poppins-bold',
+    fontFamily: 'poppins-regular',
     fontSize: 20,
     fontWeight: '600',
     lineHeight: 25,
@@ -160,7 +159,6 @@ const styles = StyleSheet.create({
   paragraph: {
     fontFamily: 'poppins-regular',
     fontSize: 13,
-    fontWeight: '400',
     lineHeight: 19,
   },
   hr: {

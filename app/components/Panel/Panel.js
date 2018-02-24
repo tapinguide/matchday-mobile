@@ -74,6 +74,6 @@ var styles = StyleSheet.create({
   },
   body: {
     paddingTop: 0,
-    paddingBottom: 10,
+    paddingBottom: 0,
   },
 })

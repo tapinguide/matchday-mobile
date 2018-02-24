@@ -115,7 +115,7 @@ export default class Menu extends Component {
                 </View>
                 <Text style={styles.menuText}>Top Matches</Text>
               </Link>
-              {/* <Link
+              <Link
                 to="/tables"
                 onPress={closeMenu}
                 style={styles.menuItem}
@@ -138,7 +138,7 @@ export default class Menu extends Component {
                   <Image source={crestIcon} />
                 </View>
                 <Text style={styles.menuText}>Crest of the Week</Text>
-              </Link> */}
+              </Link>
               <Link
                 to="/about"
                 onPress={closeMenu}
