@@ -140,9 +140,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: 34,
-    paddingLeft: 28,
-    paddingRight: 28,
+    paddingHorizontal: 16,
+    paddingVertical: 32,
     paddingBottom: 56,
   },
   heading: {

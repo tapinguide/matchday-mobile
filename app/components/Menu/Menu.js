@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   menuItems: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 10,
+    padding: 8,
     paddingTop: 0,
   },
   menuItem: {
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 185,
     justifyContent: 'space-between',
-    marginHorizontal: 10,
+    marginHorizontal: 8,
     marginBottom: 24,
     paddingHorizontal: 12,
     paddingVertical: 18,

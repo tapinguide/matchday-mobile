@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    padding: 16,
     paddingTop: 0,
+    marginBottom: 80,
   },
 
   footerLink: {
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
 
   socialIcon: {
     height: 30,
-    marginLeft: 15,
+    marginLeft: 16,
     width: 30,
   },
 })

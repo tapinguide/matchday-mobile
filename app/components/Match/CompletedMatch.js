@@ -176,7 +176,7 @@ export default class CompletedMatch extends Component {
               alignItems: 'center',
             }}
           >
-            <View style={highlightsUrl ? { width: '94%' } : { width: '84%' }}>
+            <View style={{ flex: 1, paddingHorizontal: 16 }}>
               <View style={styles.postMatchSummary}>
                 {highlights}
                 <HTMLView
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   },
   highlightsColumn: {
     width: 75,
-    marginRight: '5%',
+    marginRight: 16,
   },
   postMatchSummaryTextWithHighlights: {
     width: '70%',

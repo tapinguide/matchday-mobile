@@ -151,7 +151,7 @@ class NewsletterSubscribeForm extends Component {
 
 const styles = StyleSheet.create({
   form: {
-    padding: 20,
+    padding: 16,
   },
   button: {
     backgroundColor: '#3FEDC7',

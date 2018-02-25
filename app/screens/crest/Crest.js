@@ -95,9 +95,9 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 28,
-    paddingVertical: 34,
-    paddingBottom: 50,
+    paddingHorizontal: 16,
+    paddingVertical: 32,
+    paddingBottom: 80,
   },
   heading: {
     fontFamily: 'poppins-semi-bold',

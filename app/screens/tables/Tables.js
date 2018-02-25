@@ -27,8 +27,9 @@ export default class Tables extends Component {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    paddingHorizontal: 28,
-    paddingVertical: 34,
+    paddingHorizontal: 16,
+    paddingTop: 32,
+    paddingBottom: 80,
   },
   heading: {
     fontFamily: 'poppins-semi-bold',

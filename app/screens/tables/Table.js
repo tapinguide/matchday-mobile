@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Asset, LinearGradient } from 'expo'
+import { Table as DataTable, Row } from 'react-native-table-component'
 
 import Panel from '../../components/Panel/Panel'
 import MatchService from '../../components/lib/matchservice'
@@ -20,7 +21,6 @@ export default class Table extends Component {
 
   async componentWillMount() {
     const { competitionId } = this.props
-    console.log(competitionId)
     const table = null //await MatchService.getStoredTables(competitionId)
 
     await Asset.loadAsync([tapInLogo])
@@ -48,6 +48,9 @@ export default class Table extends Component {
     const topFive = teams.slice(0, 5)
     const rest = teams.slice(5)
 
+    const topFiveRows = getItems(topFive)
+    const restRows = getItems(rest)
+
     return (
       <TouchableOpacity
         style={styles.table}
@@ -57,50 +60,83 @@ export default class Table extends Component {
         <LinearGradient style={{ padding: 5 }} colors={['#18EFC6', '#18D0EF']} start={[0, 0]} end={[1, 0]}>
           <Text style={styles.headerText}>{competition.name}</Text>
         </LinearGradient>
-        <View style={styles.row}>
-          <Text style={[styles.statText, styles.bold, { textAlign: 'left', width: 40 }]} />
-          <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row' }}>
-            <Text style={[styles.clubText, styles.bold, { marginLeft: 0 }]}>Team</Text>
-          </View>
-          <Text style={[styles.statText, styles.bold]}>GD</Text>
-          <Text style={[styles.statText, styles.bold]}>PTS</Text>
-        </View>
-        {topFive.map((row, index) => <Row key={row.club.id} row={row} index={index} />)}
-        <Panel title={''} underlayColor={'#ffffff'} panelExpanded={panelExpanded}>
-          {rest.map((row, index) => <Row key={row.club.id} row={row} index={index + 5} />)}
-        </Panel>
+        <DataTable borderStyle={{ borderWidth: 0 }}>
+          <Row
+            style={styles.row}
+            data={['#', getLeft('Team'), 'GP', 'W', 'D', 'L', 'GD', 'PTS']}
+            textStyle={[styles.statText, styles.bold]}
+            flexArr={[1, 3, 1, 1, 1, 1, 1, 1]}
+          />
+          {topFiveRows.map((data, i) => (
+            <Row
+              key={i}
+              data={data}
+              style={[styles.row, i % 2 === 0 && { backgroundColor: '#F5F5F5' }]}
+              borderStyle={{ borderWidth: 0 }}
+              flexArr={[1, 3, 1, 1, 1, 1, 1, 1]}
+              textStyle={styles.statText}
+            />
+          ))}
+
+          <Panel title={''} underlayColor={'#ffffff'} panelExpanded={panelExpanded}>
+            {restRows.map((data, i) => (
+              <Row
+                key={i}
+                data={data}
+                style={[styles.row, (i + 5) % 2 === 0 && { backgroundColor: '#F5F5F5' }]}
+                borderStyle={{ borderWidth: 0 }}
+                flexArr={[1, 3, 1, 1, 1, 1, 1, 1]}
+                textStyle={styles.statText}
+              />
+            ))}
+          </Panel>
+        </DataTable>
       </TouchableOpacity>
     )
   }
 }
 
-const Row = props => {
-  const { row, index } = props
-  const crest = row.club.crest ? { uri: row.club.crest } : tapInLogo
-  const goalDiff = row.goalDifference === '+0' ? '0' : row.goalDifference
-  let goalDiffColor = '#28323F'
-  if (goalDiff.indexOf('+') === 0) {
-    goalDiffColor = 'green'
-  } else if (goalDiff.indexOf('-') === 0) {
-    goalDiffColor = 'red'
-  }
-  return (
-    <View style={[styles.row, { backgroundColor: index % 2 === 0 ? '#F5F5F5' : 'transparent' }]}>
-      <Text style={[styles.statText, styles.bold, { textAlign: 'left', width: 40 }]}>{row.position}.</Text>
-      <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row' }}>
-        <Image style={styles.crest} source={crest} />
-        <Text style={styles.clubText}>{row.club.name}</Text>
-      </View>
-      <Text style={[styles.statText, { color: goalDiffColor }]}>{goalDiff}</Text>
-      <Text style={[styles.statText, styles.bold]}>{row.points}</Text>
-    </View>
-  )
-}
+const getLeft = team => <Text style={[styles.statText, styles.bold, { textAlign: 'left' }]}>{team}</Text>
+const getItems = items =>
+  items.map((item, index) => {
+    const crest = item.club.crest ? { uri: item.club.crest } : tapInLogo
+    const shortName = item.club.shortName || ''
+    const goalDiff = item.goalDifference === '+0' ? '0' : item.goalDifference
+    let goalDiffColor = '#28323F'
+    if (goalDiff.indexOf('+') === 0) {
+      goalDiffColor = 'green'
+    } else if (goalDiff.indexOf('-') === 0) {
+      goalDiffColor = 'red'
+    }
+    return [
+      getPosition(`${item.position}.`),
+      imageCell(crest, shortName),
+      item.matchesPlayed,
+      item.matchesWon,
+      item.matchesDrew,
+      item.matchesLost,
+      getGoalDiff(goalDiff, goalDiffColor),
+      getPoints(item.points),
+    ]
+  })
+const getPosition = position => (
+  <Text style={[styles.statText, styles.bold, { paddingRight: 8, textAlign: 'right' }]}>{position}</Text>
+)
+const getGoalDiff = (goalDiff, goalDiffColor) => (
+  <Text style={[styles.statText, { color: goalDiffColor }]}>{goalDiff}</Text>
+)
+const getPoints = points => <Text style={[styles.statText, styles.bold]}>{points}</Text>
+const imageCell = (crest, name) => (
+  <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', height: 30, justifyContent: 'flex-start' }}>
+    <Image style={styles.crest} source={crest} />
+    <Text style={styles.statText}>{name}</Text>
+  </View>
+)
 
 const styles = StyleSheet.create({
   crest: {
     height: 20,
-    marginRight: 5,
+    marginRight: 8,
     width: 20,
   },
   table: {
@@ -117,8 +153,11 @@ const styles = StyleSheet.create({
   },
   row: {
     alignItems: 'center',
+    borderWidth: 0,
+    height: 30,
     flexDirection: 'row',
-    paddingVertical: 5,
+    justifyContent: 'center',
+    padding: 5,
   },
   headerText: {
     color: '#ffffff',
@@ -130,15 +169,12 @@ const styles = StyleSheet.create({
     color: '#28323F',
     fontFamily: 'poppins-regular',
     fontSize: 13,
-    paddingHorizontal: 5,
   },
   statText: {
     color: '#28323F',
     fontFamily: 'poppins-regular',
     fontSize: 13,
-    paddingHorizontal: 10,
     textAlign: 'center',
-    width: 50,
   },
   bold: {
     fontFamily: 'poppins-semi-bold',
