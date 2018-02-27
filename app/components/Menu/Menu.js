@@ -115,7 +115,7 @@ export default class Menu extends Component {
                 </View>
                 <Text style={styles.menuText}>Top Matches</Text>
               </Link>
-              {/* <Link
+              <Link
                 to="/tables"
                 onPress={closeMenu}
                 style={styles.menuItem}
@@ -138,7 +138,7 @@ export default class Menu extends Component {
                   <Image source={crestIcon} />
                 </View>
                 <Text style={styles.menuText}>Crest of the Week</Text>
-              </Link> */}
+              </Link>
               <Link
                 to="/about"
                 onPress={closeMenu}
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   menuItems: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 10,
+    padding: 8,
     paddingTop: 0,
   },
   menuItem: {
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 185,
     justifyContent: 'space-between',
-    marginHorizontal: 10,
+    marginHorizontal: 8,
     marginBottom: 24,
     paddingHorizontal: 12,
     paddingVertical: 18,

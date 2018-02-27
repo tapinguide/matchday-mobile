@@ -16,8 +16,8 @@ export default class MatchService {
     const crest = await AsyncStorage.getItem('@TapIn:crest')
     return crest && crest !== '' ? JSON.parse(crest) : null
   }
-  static async getStoredTables() {
-    const tables = await AsyncStorage.getItem('@TapIn:tables')
+  static async getStoredTables(comp) {
+    const tables = await AsyncStorage.getItem(`@TapIn:tables${comp ? `-${comp}` : ''}`)
     return tables && tables !== '' ? JSON.parse(tables) : []
   }
 
@@ -61,13 +61,21 @@ export default class MatchService {
     return crest
   }
 
-  static async getTables() {
-    const url = `${domain}/tables/`
+  static async getTables(comp) {
+    const url = `${domain}/tables/${comp ? `?competition_id=${comp}` : ''}`
 
     const response = await fetch(url)
-    const tables = await response.json()
+    const table = await response.json()
 
-    await AsyncStorage.setItem('@TapIn:tables', JSON.stringify(tables))
-    return tables
+    const orderedTable = [...table].sort((a, b) => a.position - b.position)
+    const [first] = orderedTable
+
+    const competition = {
+      competition: first.competition,
+      teams: orderedTable,
+    }
+
+    await AsyncStorage.setItem(`@TapIn:table${comp ? `-${comp}` : ''}`, JSON.stringify(competition))
+    return competition
   }
 }

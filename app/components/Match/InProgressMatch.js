@@ -184,7 +184,7 @@ export default class InProgressMatch extends Component {
               alignItems: 'center',
             }}
           >
-            <View style={{ width: '84%' }}>
+            <View style={{ flex: 1, paddingHorizontal: 16 }}>
               <HTMLView value={htmlContent} stylesheet={styles} />
               <Panel title="" underlayColor="#fff" panelExpanded={this.state.panelExpanded}>
                 <TVVenueDetails tvDetails={tvDetails} venue={venue} />
