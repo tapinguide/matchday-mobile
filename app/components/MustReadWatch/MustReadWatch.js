@@ -16,6 +16,12 @@ const getIcon = val => {
     case 'watch':
       icon = mustWatchIcon
       break
+    case 'wear':
+      icon = mustReadIcon
+      break
+    case 'listen':
+      icon = mustWatchIcon
+      break
     default:
       icon = mustReadIcon
       break
