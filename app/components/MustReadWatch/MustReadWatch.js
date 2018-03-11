@@ -7,6 +7,22 @@ const sidearrow = require('./images/sidearrow.png')
 const mustReadIcon = require('./images/mustread.png')
 const mustWatchIcon = require('./images/mustwatch.png')
 
+const getIcon = val => {
+  let icon
+  switch (val) {
+    case 'read':
+      icon = mustReadIcon
+      break
+    case 'watch':
+      icon = mustWatchIcon
+      break
+    default:
+      icon = mustReadIcon
+      break
+  }
+  return icon
+}
+
 export default class MustReadWatch extends Component {
   openWindow = () => {
     const { url } = this.props.link
@@ -20,8 +36,7 @@ export default class MustReadWatch extends Component {
 
   render() {
     const { link } = this.props
-    const { header, text } = link
-    let icon = link.mustType === 'read' ? mustReadIcon : mustWatchIcon
+    const { header, mustType, text } = link
 
     const htmlContent = `<htmlcontent>${text}</htmlcontent>`
 
@@ -55,7 +70,7 @@ export default class MustReadWatch extends Component {
             }}
           >
             <Image
-              source={icon}
+              source={getIcon(mustType)}
               style={{
                 height: 30,
                 paddingRight: 14,
