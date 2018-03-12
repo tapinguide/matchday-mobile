@@ -5,7 +5,7 @@ import Table from './Table'
 
 export default class Tables extends Component {
   state = {
-    tables: [{ id: 28 }, { id: 30 }, { id: 29 }, { id: 33 }], //, { id: 34 }],
+    tables: [{ id: 33 }, { id: 28 }, { id: 30 }, { id: 29 }], //, { id: 34 }],
   }
 
   render() {
