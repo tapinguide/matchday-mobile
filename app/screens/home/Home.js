@@ -6,7 +6,7 @@ import Analytics from '../../components/lib/analytics'
 
 export default class Home extends Component {
   componentDidMount() {
-    Analytics.trackPage('Top Matches')
+    Analytics.trackScreen('Top Matches')
   }
   render() {
     return (

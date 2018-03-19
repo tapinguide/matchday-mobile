@@ -1,11 +1,11 @@
-import { Analytics as GA, Event, PageHit } from 'expo-analytics'
+import { Analytics as GA, Event, ScreenHit } from 'expo-analytics'
 
 export default class Analytics {
   static service = new GA('UA-116049426-1')
 
-  static async trackPage(page) {
+  static async trackScreen(page) {
     try {
-      await this.service.hit(new PageHit(page))
+      await this.service.hit(new ScreenHit(page))
     } catch (err) {
       console.log('failed to track', page, err)
     }

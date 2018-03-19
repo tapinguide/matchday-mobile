@@ -28,7 +28,7 @@ export default class About extends React.Component {
     await Asset.loadAsync([tapinLogo, clint, curt, mike, twitterBtn])
   }
   componentDidMount() {
-    Analytics.trackPage('About')
+    Analytics.trackScreen('About')
   }
 
   handleLinkPress = url => {

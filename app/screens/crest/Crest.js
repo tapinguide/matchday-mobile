@@ -21,7 +21,7 @@ export default class Crest extends Component {
   }
 
   componentDidMount() {
-    Analytics.trackPage('Crest of the Week')
+    Analytics.trackScreen('Crest of the Week')
   }
 
   // componentDidMount() {

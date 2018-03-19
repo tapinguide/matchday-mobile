@@ -9,7 +9,7 @@ export default class Tables extends Component {
     tables: [{ id: 33 }, { id: 28 }, { id: 30 }, { id: 29 }], //, { id: 34 }],
   }
   componentDidMount() {
-    Analytics.trackPage('Tables')
+    Analytics.trackScreen('Tables')
   }
 
   render() {
