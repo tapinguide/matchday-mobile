@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Animated, StyleSheet, View } from 'react-native'
+import { Alert, Animated, Platform, StatusBar, StyleSheet, SafeAreaView } from 'react-native'
 import { AppLoading, Asset, Font, Notifications } from 'expo'
 
 import { NativeRouter, Route, Link } from 'react-router-native'
@@ -51,6 +51,8 @@ export default class App extends Component {
   render() {
     const { isReady, menuIsOpen } = this.state
 
+    const paddingTop = Platform.OS === 'android' ? StatusBar.currentHeight : 0
+
     return !isReady ? (
       <AppLoading
         startAsync={this._cacheResourcesAsync}
@@ -59,15 +61,15 @@ export default class App extends Component {
       />
     ) : (
       <NativeRouter>
-        <View style={{ flex: 1, backgroundColor: '#f0f0f0' }}>
-          <HeaderBar />
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#08E5E3', paddingTop }}>
+          <StatusBar barStyle="light-content" />
           <Route path="/" exact component={Home} />
           <Route path="/crest" component={Crest} />
           <Route path="/tables" component={Tables} />
           <Route path="/about" component={About} />
           <Menu isOpen={menuIsOpen} closeMenu={this.closeMenu} />
           <FloatingButton menuIsOpen={menuIsOpen} onPress={this.toggleMenu} />
-        </View>
+        </SafeAreaView>
       </NativeRouter>
     )
   }

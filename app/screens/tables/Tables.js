@@ -26,6 +26,7 @@ export default class Tables extends Component {
 
 const styles = StyleSheet.create({
   content: {
+    backgroundColor: '#f0f0f0',
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: 32,

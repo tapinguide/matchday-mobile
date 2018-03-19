@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins-bold',
   },
   content: {
+    backgroundColor: '#f0f0f0',
     flex: 1,
     paddingHorizontal: 16,
     paddingVertical: 32,

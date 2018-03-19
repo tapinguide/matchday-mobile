@@ -6,7 +6,7 @@ import Matches from '../../components/Match/Matches'
 export default class Home extends Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ backgroundColor: '#f0f0f0', flex: 1 }}>
         <Matches navigation={this.props.navigation} />
       </View>
     )
