@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 
 import Matches from '../../components/Match/Matches'
+import Analytics from '../../components/lib/analytics'
 
 export default class Home extends Component {
+  componentDidMount() {
+    Analytics.trackPage('Top Matches')
+  }
   render() {
     return (
       <View style={{ backgroundColor: '#f0f0f0', flex: 1 }}>

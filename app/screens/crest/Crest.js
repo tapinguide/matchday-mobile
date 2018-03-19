@@ -4,6 +4,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Asset } from 'expo'
 import HTMLView from 'react-native-htmlview'
 
+import Analytics from '../../components/lib/analytics'
 import MatchService from '../../components/lib/matchservice'
 
 const current = require('./images/image1.png')
@@ -17,6 +18,10 @@ export default class Crest extends Component {
 
   async componentWillMount() {
     await Asset.loadAsync([current, revised])
+  }
+
+  componentDidMount() {
+    Analytics.trackPage('Crest of the Week')
   }
 
   // componentDidMount() {

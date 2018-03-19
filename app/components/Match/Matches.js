@@ -6,6 +6,7 @@ import Match from './Match'
 import Loading from '../Loading/Loading'
 import MatchesHeader from '../MatchesHeader/MatchesHeader'
 
+import Analytics from '../lib/analytics'
 import MatchService from '../lib/matchservice'
 
 export default class Matches extends Component {
@@ -68,9 +69,14 @@ export default class Matches extends Component {
       })
   }
 
-  _onMatchToggle = (index = -1) => {
+  _onMatchToggle = (index = -1, match, isExpanded) => {
     if (this.flatList && index > -1) {
       this.flatList.scrollToIndex({ index })
+    }
+    if (isExpanded) {
+      Analytics.trackMatchExpand(match)
+    } else {
+      Analytics.trackMatchCollapse(match)
     }
   }
 

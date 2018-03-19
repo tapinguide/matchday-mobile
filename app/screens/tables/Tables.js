@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 
+import Analytics from '../../components/lib/analytics'
 import Table from './Table'
 
 export default class Tables extends Component {
   state = {
     tables: [{ id: 33 }, { id: 28 }, { id: 30 }, { id: 29 }], //, { id: 34 }],
+  }
+  componentDidMount() {
+    Analytics.trackPage('Tables')
   }
 
   render() {

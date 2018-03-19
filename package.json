@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "expo": "^25.0.0",
+    "expo-analytics": "^1.0.7",
     "moment": "^2.19.1",
     "native-base": "2.3.8",
     "prop-types": "^15.6.0",

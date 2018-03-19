@@ -24,7 +24,7 @@ export default class ScheduledMatch extends Component {
         panelExpanded: !this.state.panelExpanded,
       },
       () => {
-        this.props.onMatchToggle(this.props.index)
+        this.props.onMatchToggle(this.props.index, this.props.match, this.state.panelExpanded)
       }
     )
   }

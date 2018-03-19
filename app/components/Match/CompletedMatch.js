@@ -18,6 +18,8 @@ import Panel from '../Panel/Panel'
 import TVVenueDetails from './TVVenueDetails'
 import { Asset, LinearGradient } from 'expo'
 
+import Analytics from '../lib/analytics'
+
 const videoCameraIcon = require('./images/video-camera.png')
 const rectangleIcon = require('./images/rectangle.png')
 
@@ -50,7 +52,7 @@ export default class CompletedMatch extends Component {
         panelExpanded: !this.state.panelExpanded,
       }),
       () => {
-        this.props.onMatchToggle(this.props.index)
+        this.props.onMatchToggle(this.props.index, this.props.match, this.state.panelExpanded)
       }
     )
   }
@@ -58,6 +60,7 @@ export default class CompletedMatch extends Component {
   handleHighlightsPress = () => {
     let { highlightsUrl } = this.state
 
+    Analytics.trackHighlights(this.props.match, highlightsUrl)
     Linking.openURL(highlightsUrl).catch(err => console.error('An error occurred', err))
   }
 

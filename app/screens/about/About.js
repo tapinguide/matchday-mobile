@@ -15,6 +15,8 @@ import { Asset } from 'expo'
 
 import { width, height, totalSize } from 'react-native-dimension'
 
+import Analytics from '../../components/lib/analytics'
+
 const tapinLogo = require('./images/logo_full.png')
 const clint = require('./images/clint.jpg')
 const curt = require('./images/curt.jpg')
@@ -24,6 +26,9 @@ const twitterBtn = require('./images/twitter_button.png')
 export default class About extends React.Component {
   async componentWillMount() {
     await Asset.loadAsync([tapinLogo, clint, curt, mike, twitterBtn])
+  }
+  componentDidMount() {
+    Analytics.trackPage('About')
   }
 
   handleLinkPress = url => {
