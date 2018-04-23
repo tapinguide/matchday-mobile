@@ -85,15 +85,19 @@ export default class Matches extends Component {
     const { navigation } = this.props
 
     return (
-      <FlatList
-        ref={component => (this.flatList = component)}
-        style={{ flex: 1 }}
-        data={matches}
-        keyExtractor={item => item.id}
-        renderItem={({ item, index }) => <Match match={item} matchIndex={index} onMatchToggle={this._onMatchToggle} />}
-        ListEmptyComponent={<Loading />}
-        ListHeaderComponent={!!matches.length ? <MatchesHeader dateRange={matchDateRange} /> : null}
-      />
+      <View style={{ flex: 1 }}>
+        <MatchesHeader dateRange={matchDateRange} />
+        <FlatList
+          ref={component => (this.flatList = component)}
+          style={{ flex: 1 }}
+          data={matches}
+          keyExtractor={item => item.id}
+          renderItem={({ item, index }) => (
+            <Match match={item} matchIndex={index} onMatchToggle={this._onMatchToggle} />
+          )}
+          ListEmptyComponent={<Loading />}
+        />
+      </View>
     )
   }
 }

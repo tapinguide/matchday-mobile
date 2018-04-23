@@ -80,7 +80,7 @@ export default class Menu extends Component {
     const { position } = this.state
 
     Animated.timing(position, {
-      easing: Easing.exp.out,
+      easing: Easing.out(Easing.exp),
       toValue: height,
       duration,
     }).start()
@@ -90,7 +90,7 @@ export default class Menu extends Component {
     const { position } = this.state
 
     Animated.timing(position, {
-      easing: Easing.exp.out,
+      easing: Easing.out(Easing.exp),
       toValue: isIphoneX() ? 40 : 20,
       duration: 200,
     }).start()

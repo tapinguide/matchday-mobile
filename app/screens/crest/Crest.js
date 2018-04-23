@@ -7,9 +7,10 @@ import HTMLView from 'react-native-htmlview'
 import Analytics from '../../components/lib/analytics'
 import MatchService from '../../components/lib/matchservice'
 
-const current = require('./images/image1.png')
-const revised = require('./images/image2.png')
-const article = `<p><em>Editor's Note: Pertaining to this series, we at Tap In Guide wanted to find a way to give reverence to some of the world’s greatest soccer badges. The series will show the club’s badge, our very own original twist of the original design, and a brief explanation of the badge/club.</em></p><p>Kicking off Tap In Guide’s newest series “Crisp Crests” is none other than German third division side FC Carl Zeiss Jena. The Jena, Thuringia club’s sleek and minimalistic badge shines when compared to other teams due its bright blue, yellow, and white colors that are engulfed among bold black outlines. The badge does not contain any special design but the beauty of it lies within its simplicity. The team’s name is clearly the centerpiece at the top while the “FC” portion is given equal size to the badge’s tri-color stripe on the lower left.</p><p>Much like many other lower league tier teams in Northern Europe, FC Carl Zeiss Jena was created by a group of factory workers. Founded in May 1903, employees at the Carl Zeiss AG optics factory came together and created the then-called Fussball-Club der Firm Carl Zeiss. After finding much success in Northern Germany’s top division, the club came under extreme stress due to the Germany’s participation in two World Wars while also dealing with the separation and reunification of the country.</p><p>Following Germany’s reunification in 1990, Jena was thrown into the 2. Bundesliga. Since then, the club has jumped up and down from 3. Liga to the Regionalliga Nordost without ever gracing Germany’s top flight. Now, FC Carl Zeiss Jena is playing soccer in 3. Liga, where they sit comfortably at midtable.<p>A former notable Carl Zeiss player is American defender Brian Bliss, who spent time with the club from 1992-1996 before returning back to the United States to play for the Columbus Crew, MetroStars, and the Kansas City Wizards.</p>`
+const current = require('./images/nycc.png')
+const revised = require('./images/nycc-new.png')
+const teamName = 'New York Cosmos'
+const article = `<p>Since their inaugural season in 1970, life as a soccer franchise in the United States has not been easy for the New York Cosmos. The world renown team has endured club and league dissolvement twice since their birth and continue to fight through unfavorable conditions.</p><p>Most recent, the Cosmos dealt with the second collapse of the North American Soccer League (NASL). This turmoil resulted in New York losing its head coach Giovanni Savarese as well as its entire first team, which now leaves the organization without an active team in the country’s top two divisions.</p><p>For now, the team operates as New York Cosmos B. While the NASL works out its kinks in court, the Cosmos, for the time being, will live out its days as a reserve team playing in the National Premier Soccer League (NPSL).</p><p>While its future remains up in the air, New York has a few things going for itself. Firstly, the team will feature in this year’s U.S. Open Cup. Secondly, its fan base continues to support its team even with its lower division status. Lastly, the team’s age-old never-changing badge still stands as a historical reminder of the United State’s soccer past.</p><p>The iconic crest is simple in design with a total of five colors. The crest is a perfect circle with a soccer ball placed directly in the middle. Surrounding the ball is three stripes (yellow, blue, and green) used to create “movement from the soccer ball,” stated the creator Wayland Moore in an <a href="http://bleacherreport.com/articles/610739-new-york-cosmos-a-conversation-with-the-artist-behind-the-logo">interview with Bleacher Report</a>. The distinct colors were used “to include nationalities” as well as to help “cross boundaries…the font was simple and easy to read on a uniform.”</p><p>Since Moore’s initial creation, New York’s crest has undergone slight renditions. Notable changes include the addition of “New York” to the badge name and the simplification of the soccer ball.</p>`
 
 export default class Crest extends Component {
   state = {
@@ -50,7 +51,7 @@ export default class Crest extends Component {
           <Image style={{ marginHorizontal: 20 }} source={current} />
           <Image style={{ marginHorizontal: 20 }} source={revised} />
         </View>
-        <Text style={styles.intro}>FC Carl Zeiss Jena</Text>
+        <Text style={styles.intro}>{teamName}</Text>
         <HTMLView value={htmlContent} stylesheet={styles} />
       </ScrollView>
     )
@@ -85,6 +86,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 18,
     paddingBottom: 80,
+  },
+  a: {
+    textDecorationColor: '#08E5E3',
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
   },
   i: {
     fontFamily: 'poppins-light',

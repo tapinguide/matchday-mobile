@@ -54,7 +54,7 @@ export default class FloatingButton extends Component {
       friction: 8,
       tension: 10,
       duration: 300,
-      easing: Easing.exp.out,
+      easing: Easing.out(Easing.exp),
     }).start()
   }
 
@@ -64,7 +64,7 @@ export default class FloatingButton extends Component {
       friction: 8,
       tension: 10,
       duration: 200,
-      easing: Easing.exp.out,
+      easing: Easing.out(Easing.exp),
     }).start()
   }
 

@@ -36,6 +36,7 @@ export default class MatchesHeader extends Component {
 
 const styles = StyleSheet.create({
   matchesHeaderContainer: {
+    height: 56,
     paddingTop: 15,
     paddingBottom: 8,
     paddingRight: 10,
