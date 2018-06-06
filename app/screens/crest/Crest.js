@@ -1,11 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Asset } from 'expo'
+import { Component } from 'react'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
-
 import Analytics from '../../components/lib/analytics'
-import MatchService from '../../components/lib/matchservice'
 
 const current = require('./images/fcc.png')
 const revised = require('./images/fcc-new.png')
