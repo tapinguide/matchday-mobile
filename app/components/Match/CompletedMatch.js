@@ -72,7 +72,6 @@ export default class CompletedMatch extends Component {
       .sort((a, b) => {
         return a.id - b.id
       })
-      .reverse()
 
     var postMatchDetails = match.preMatchDetails
     if (match.inMatchDetails) {
