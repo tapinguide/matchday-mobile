@@ -2,8 +2,8 @@ import React from 'react'
 import { AsyncStorage } from 'react-native'
 
 const matchIsComplete = status => status === 'ft' || status === 'aet' || status === 'pen.' || status === 'cancl.'
-// const domain = `https://api.tapinguide.com`
-const domain = `https://api.tapinguide.demo.nordicdev.io/api/`
+const domain = `https://api.tapinguide.com`
+//const domain = `https://api.tapinguide.demo.nordicdev.io/api/`
 export default class MatchService {
   static async getStoredMatches() {
     const matches = await AsyncStorage.getItem('@TapIn:matches')
