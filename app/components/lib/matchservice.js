@@ -1,4 +1,3 @@
-import React from 'react'
 import { AsyncStorage } from 'react-native'
 
 const matchIsComplete = status => status === 'ft' || status === 'aet' || status === 'pen.' || status === 'cancl.'
@@ -53,11 +52,12 @@ export default class MatchService {
   }
 
   static async getCrest() {
-    const url = `${domain}/crest/`
+    const url = `${domain}/cotw/`
 
     const response = await fetch(url)
-    const crest = await response.json()
-
+    const crests = await response.json()
+    const crest = crests[crests.length - 1]
+    
     await AsyncStorage.setItem('@TapIn:crest', JSON.stringify(crest))
     return crest
   }
