@@ -75,7 +75,7 @@ const getLeft = team => <Text style={[styles.statText, styles.bold, { textAlign:
 const getItems = items =>
   items.map((item, index) => {
     const crest = item.club.crest ? { uri: item.club.crest } : tapInLogo
-    const shortName = item.club.shortName || ''
+    const shortName = item.club.shortName || item.club.clubName.substring(0,3).toUpperCase()
     const goalDiff = item.goalDifference === '+0' ? '0' : item.goalDifference
     let goalDiffColor = '#28323F'
     if (goalDiff.indexOf('+') === 0) {

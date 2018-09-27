@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Alert, Animated, Platform, StatusBar, StyleSheet, SafeAreaView } from 'react-native'
-import { AppLoading, Asset, Font, Notifications } from 'expo'
+import { Alert, Platform, StatusBar, View } from 'react-native'
+import { AppLoading, Font, Notifications } from 'expo'
+import { NativeRouter, Route } from 'react-router-native'
 
-import { NativeRouter, Route, Link } from 'react-router-native'
+import { getHeaderHeight } from './utils/deviceHelpers'
 
 import About from './app/screens/about/About'
 import Crest from './app/screens/crest/Crest'
@@ -10,7 +11,6 @@ import Home from './app/screens/home/Home'
 import Tables from './app/screens/tables/Tables'
 
 import FloatingButton from './app/components/Menu/FloatingButton'
-import HeaderBar from './app/components/HeaderBar/HeaderBar'
 import Menu from './app/components/Menu/Menu'
 
 export default class App extends Component {
@@ -18,6 +18,7 @@ export default class App extends Component {
     isReady: false,
     menuIsOpen: false,
     navigator: null,
+    canvasPaddingTop: 0
   }
 
   componentDidMount() {
@@ -26,6 +27,10 @@ export default class App extends Component {
         Alert.alert(data.title, data.body, { cancelable: false })
       }
     })
+
+    const canvasPaddingTop = Platform.OS === 'android' ? StatusBar.currentHeight : getHeaderHeight()
+
+    this.setState({ canvasPaddingTop })
   }
 
   async _cacheResourcesAsync() {
@@ -49,9 +54,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { isReady, menuIsOpen } = this.state
-
-    const paddingTop = Platform.OS === 'android' ? StatusBar.currentHeight : 0
+    const { isReady, menuIsOpen, canvasPaddingTop } = this.state
 
     return !isReady ? (
       <AppLoading
@@ -61,26 +64,16 @@ export default class App extends Component {
       />
     ) : (
       <NativeRouter>
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#08E5E3', paddingTop }}>
-          <StatusBar barStyle="light-content" />
+        <View style={{ flex: 1, backgroundColor: '#F0F0F0', paddingTop: canvasPaddingTop }}>
+          <StatusBar />
           <Route path="/" exact component={Home} />
           <Route path="/crest" component={Crest} />
           <Route path="/tables" component={Tables} />
           <Route path="/about" component={About} />
           <Menu isOpen={menuIsOpen} closeMenu={this.closeMenu} />
           <FloatingButton menuIsOpen={menuIsOpen} onPress={this.toggleMenu} />
-        </SafeAreaView>
+        </View>
       </NativeRouter>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 20,
-  },
-})

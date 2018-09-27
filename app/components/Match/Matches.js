@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { FlatList, Image, StatusBar, StyleSheet, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import moment from 'moment'
+
+import { getSafeBottomPadding } from '../../../utils/deviceHelpers'
 
 import Match from './Match'
 import Loading from '../Loading/Loading'
@@ -8,6 +10,8 @@ import MatchesHeader from '../MatchesHeader/MatchesHeader'
 
 import Analytics from '../lib/analytics'
 import MatchService from '../lib/matchservice'
+
+const paddingBottom = getSafeBottomPadding(0)
 
 export default class Matches extends Component {
   state = {
@@ -82,10 +86,9 @@ export default class Matches extends Component {
 
   render() {
     const { matchDateRange, matches } = this.state
-    const { navigation } = this.props
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingBottom }}>
         <MatchesHeader dateRange={matchDateRange} />
         <FlatList
           ref={component => (this.flatList = component)}
