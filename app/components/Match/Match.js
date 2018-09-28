@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ActivityIndicator, ListView, Text, View, StyleSheet, Image, WebView } from 'react-native'
+import { View } from 'react-native'
 import InProgressMatch from './InProgressMatch'
 import ScheduledMatch from './ScheduledMatch'
 import CompletedMatch from './CompletedMatch'
